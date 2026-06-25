@@ -140,3 +140,27 @@ In production, Sentinel runs as continuous background processes synchronizing st
 * **Macro Baselines Refresh Daemon**: `python scripts/macro_baselines_cli.py --limit all` (Runs weekly via cron schedule to synchronize rolling standard deviations. Script natively enforces 15-second delays between pulls to adhere to API limits).
 * **Sentiment Portfolio Orchestrator**: `python scripts/sentinel_orchestrator.py --background` (Hourly scans MongoDB Core ETFs and calculates sentiment).
   * *Note: Automatically sets holdings argument to `all` internally for Core ETFs.*
+
+---
+
+## ⚡ IntentCore API (Reflex Router)
+
+Sentinel includes a live FastAPI server powered by LangChain's Semantic Router. Instead of relying purely on cron jobs, you can hit the API directly via webhooks to instantly parse natural language or structured payloads. By default, **the Router prioritizes NVIDIA NIM models (`meta/llama-3.1-8b-instruct`) for blazing-fast edge inference**, falling back to OpenAI only if `NVIDIA_API_KEY` is missing.
+
+**Start the Server:**
+```bash
+uvicorn functions.api.server:app --reload --host 127.0.0.1 --port 8000
+```
+
+**Available Endpoints:**
+* `POST /execute/scheduler`: Triggers the Macro Scheduler via IntentCore.
+* `POST /execute/baselines`: Triggers Macro Baselines refresh via IntentCore.
+* `POST /webhooks/macro`: Send a natural language webhook payload. Sentinel will automatically classify the intent (`INTENT_UPDATE_MACRO`, `INTENT_SCORE_SECTOR`, etc.) and route it to the correct Graph node.
+* `GET /api/reviews/pending`: View all actions blocked by the Governor that require human validation.
+
+**Example Request:**
+```bash
+curl -X POST http://127.0.0.1:8000/webhooks/macro \
+     -H "Content-Type: application/json" \
+     -d '{"title": "CPI jumps 0.4% this morning"}'
+```

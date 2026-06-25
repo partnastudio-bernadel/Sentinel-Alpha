@@ -61,8 +61,7 @@ scripts_dir = project_root / "scripts"
 # Note: We are migrating away from SQLite. 
 # For now runtime is initialized to prevent breaking old UI code,
 # but new review queue goes to MongoDB.
-db_client, db_name = get_db_client()
-mongo_db = db_client[db_name]
+db_client, mongo_db = get_db_client()
 
 # Initialize Intent Router
 router = IntentRouter()

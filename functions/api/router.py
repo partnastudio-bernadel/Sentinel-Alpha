@@ -25,7 +25,15 @@ class IntentRouter:
     classifies the intent, and routes to the appropriate Sentinel execution graph or RAG fallback.
     """
     def __init__(self, llm=None):
-        self.llm = llm or ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        if llm:
+            self.llm = llm
+        elif os.environ.get("NVIDIA_API_KEY"):
+            from langchain_nvidia_ai_endpoints import ChatNVIDIA
+            model = os.environ.get("NVIDIA_BASE_MODEL", "meta/llama-3.1-8b-instruct")
+            base_url = os.environ.get("NVIDIA_API_ENDPOINT", "https://integrate.api.nvidia.com/v1")
+            self.llm = ChatNVIDIA(model=model, temperature=0, base_url=base_url)
+        else:
+            self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         self.parser = PydanticOutputParser(pydantic_object=IntentClassification)
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", "You are the Intent Router for Sentinel Alpha, an autonomous financial intelligence engine.\n\n"
