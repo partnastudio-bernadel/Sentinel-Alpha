@@ -1,0 +1,491 @@
+
+==================== TEST 1: CPI Surprise Ingestion ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/macro_ingestion_cli.py --event CPI m/m --indicator CPI
+
+Duration: 124.27s
+Exit Code: 0
+
+--- STDOUT ---
+Starting macro surprise calculation for 'CPI m/m' using indicator 'CPI'...
+[+] [forex_factory_node] Fetching ForexFactory economic calendar...
+[+] Error fetching ForexFactory events: [Scheduler] Timeout after 10.0s on 'forexfactory'.
+[+] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[CalibrationAgent] Unexpected error on attempt 1: Alpha Vantage MCP unexpected error: unhandled errors in a TaskGroup (1 sub-exception)
+[CalibrationAgent] Coercion fallback applied for 'CPI': std = 1.1410887363094182 (warning_flag=True)
+[+] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+
+================ MACRO INGESTION SURPRISE REPORT ================
+{
+  "overall_macro_surprise": 0.0,
+  "market_sentiment": "Neutral",
+  "key_drivers": [
+    "Data source timeout on ForexFactory"
+  ],
+  "detailed_analysis": "Scheduler fail-safe triggered: TIMEOUT on forexfactory. No actual or consensus values could be retrieved. The CPI indicator from Alpha Vantage returned a historical_std of 1.14 with warning_flag=true. Since the core ForexFactory data is unavailable, the macro_surprise_score defaults to 0.0 with warning_flag=true. The fallback was triggered at 2026-06-23T19:45:13.305969+00:00 with outage_duration_ms=0. This report reflects graceful degradation under data source unavailability.",
+  "warnings": [
+    "ForexFactory data is unavailable due to timeout"
+  ]
+}
+
+--- STDERR ---
+[06/23/26 15:45:06] INFO     Registering MCP             resource_manager.py:14
+                             resources...                                      
+                    INFO     Registering MCP prompts...    prompt_manager.py:30
+                    INFO     Registering MCP tools...       tools_manager.py:14
+                    INFO     All tools registered.          tools_manager.py:19
+[06/23/26 15:45:06] INFO     \U0001f680 Starting ForexFactory MCP server (transport=stdio) server.py:127
+                    INFO     \U0001f680 Starting ForexFactory MCP server  server.py:127
+                             (transport=stdio)                                 
+                    INFO     Processing request of type           server.py:727
+                             CallToolRequest                                   
+                    INFO     \U0001f310 Scraping              ff_scraper_service.py:137
+                             ForexFactory:                                     
+                             https://www.forexfactory                          
+                             .com/calendar?month=this                          
+                    INFO     \u23f1 Using timeout 5000ms   ff_scraper_service.py:148
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000231FF84D300>
+Traceback (most recent call last):
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\proactor_events.py", line 116, in __del__
+    _warn(f"unclosed transport {self!r}", ResourceWarning, source=self)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\proactor_events.py", line 80, in __repr__
+    info.append(f'fd={self._sock.fileno()}')
+                      ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\windows_utils.py", line 102, in fileno
+    raise ValueError("I/O operation on closed pipe")
+ValueError: I/O operation on closed pipe
+Exception ignored in: <function BaseSubprocessTransport.__del__ at 0x00000231FF81BB00>
+Traceback (most recent call last):
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\base_subprocess.py", line 125, in __del__
+    _warn(f"unclosed transport {self!r}", ResourceWarning, source=self)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\base_subprocess.py", line 70, in __repr__
+    info.append(f'stdin={stdin.pipe}')
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\proactor_events.py", line 80, in __repr__
+    info.append(f'fd={self._sock.fileno()}')
+                      ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\windows_utils.py", line 102, in fileno
+    raise ValueError("I/O operation on closed pipe")
+ValueError: I/O operation on closed pipe
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000231FF84D300>
+Traceback (most recent call last):
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\proactor_events.py", line 116, in __del__
+    _warn(f"unclosed transport {self!r}", ResourceWarning, source=self)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\proactor_events.py", line 80, in __repr__
+    info.append(f'fd={self._sock.fileno()}')
+                      ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\19178\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\windows_utils.py", line 102, in fileno
+    raise ValueError("I/O operation on closed pipe")
+ValueError: I/O operation on closed pipe
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+
+==================== TEST 2: GDP Ingestion ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/macro_ingestion_cli.py --event GDP q/q --indicator GDP
+
+Result: TIMEOUT (Exceeded 300s)
+
+==================== TEST 3: Unemployment Ingestion ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/macro_ingestion_cli.py --event Unemployment Rate --indicator UNEMPLOYMENT
+
+Result: TIMEOUT (Exceeded 300s)
+
+==================== TEST 4: Interest Rate Ingestion ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/macro_ingestion_cli.py --event Federal Funds Rate --indicator INTEREST_RATE
+
+Duration: 94.85s
+Exit Code: 0
+
+--- STDOUT ---
+Starting macro surprise calculation for 'Federal Funds Rate' using indicator 'INTEREST_RATE'...
+[+] [forex_factory_node] Fetching ForexFactory economic calendar...
+[+] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[CalibrationAgent] Unexpected error on attempt 1: Alpha Vantage MCP unexpected error: unhandled errors in a TaskGroup (1 sub-exception)
+[CalibrationAgent] Coercion fallback applied for 'INTEREST_RATE': std = 1.0 (warning_flag=True)
+[+] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+
+================ MACRO INGESTION SURPRISE REPORT ================
+{
+  "overall_macro_surprise": 0.0,
+  "market_sentiment": "Neutral",
+  "key_drivers": [
+    "Unavailable event data"
+  ],
+  "detailed_analysis": "The ForexFactory economic calendar tool returned an error ('Empty tool response'), making it impossible to retrieve actual values, consensus forecasts, or impact/priority tiers for the target event. The AlphaVantage historical standard deviation for INTEREST_RATE is available (historical_std = 1.0, warning_flag = true). Due to the missing forex calendar data, the macro_surprise_score cannot be calculated. A fallback report is compiled with macro_surprise_score = 0.0 and warning_flag = true to indicate the failure.",
+  "warnings": [
+    "Empty tool response from ForexFactory economic calendar",
+    "Unable to compute macro surprise due to missing event data",
+    "Fallback report used with macro_surprise_score set to 0.0",
+    "Historical standard deviation (1.0) indicates moderate data variability, but cannot be applied to calculate surprise."
+  ]
+}
+
+--- STDERR ---
+[06/23/26 16:00:20] INFO     Registering MCP             resource_manager.py:14
+                             resources...                                      
+                    INFO     Registering MCP prompts...    prompt_manager.py:30
+                    INFO     Registering MCP tools...       tools_manager.py:14
+                    INFO     All tools registered.          tools_manager.py:19
+[06/23/26 16:00:20] INFO     \U0001f680 Starting ForexFactory MCP server (transport=stdio) server.py:127
+                    INFO     \U0001f680 Starting ForexFactory MCP server  server.py:127
+                             (transport=stdio)                                 
+                    INFO     Processing request of type           server.py:727
+                             CallToolRequest                                   
+                    INFO     \U0001f310 Scraping              ff_scraper_service.py:137
+                             ForexFactory:                                     
+                             https://www.forexfactory                          
+                             .com/calendar?month=this                          
+                    INFO     \u23f1 Using timeout 5000ms   ff_scraper_service.py:148
+[06/23/26 16:00:26] ERROR    \u26a0\ufe0f Could not scrape      ff_scraper_service.py:190
+                             ForexFactory: Page.goto:                          
+                             Timeout 5000ms exceeded.                          
+                             Call log:                                         
+                               - navigating to                                 
+                             "https://www.forexfactor                          
+                             y.com/calendar?month=thi                          
+                             s", waiting until                                 
+                             "domcontentloaded"                                
+                                                                               
+                             +- Traceback (most rec-+                          
+                             | D:\PartnaStudio\sent |                          
+                             | inel\stack\FinRobot- |                          
+                             | IntentChain\sentimen |                          
+                             | t\forexfactory-mcp\s |                          
+                             | rc\forexfactory_mcp\ |                          
+                             | services\ff_scraper_ |                          
+                             | service.py:165 in    |                          
+                             | _get_calendar        |                          
+                             |                      |                          
+                             |   162                |                          
+                             |   163             #  |                          
+                             |   164             aw |                          
+                             | > 165             aw |                          
+                             |   166             aw |                          
+                             |   167                |                          
+                             |   168                |                          
+                             |                      |                          
+                             | D:\PartnaStudio\sent |                          
+                             | inel\sentiment\venv\ |                          
+                             | Lib\site-packages\pl |                          
+                             | aywright\async_api\_ |                          
+                             | generated.py:9611 in |                          
+                             | goto                 |                          
+                             |                      |                          
+                             |    9608         """  |                          
+                             |    9609              |                          
+                             |    9610         retu |                          
+                             | >  9611              |                          
+                             |    9612              |                          
+                             |    9613              |                          
+                             |    9614              |                          
+                             |                      |                          
+                             | D:\PartnaStudio\sent |                          
+                             | inel\sentiment\venv\ |                          
+                             | Lib\site-packages\pl |                          
+                             | aywright\_impl\_page |                          
+                             | .py:557 in goto      |                          
+                             |                      |                          
+                             |    554         waitU |                          
+                             |    555         refer |                          
+                             |    556     ) -> Opti |                          
+                             | >  557         retur |                          
+                             |    558               |                          
+                             |    559     async def |                          
+                             |    560         self, |                          
+                             |                      |                          
+                             | D:\PartnaStudio\sent |                          
+                             | inel\sentiment\venv\ |                          
+                             | Lib\site-packages\pl |                          
+                             | aywright\_impl\_fram |                          
+                             | e.py:156 in goto     |                          
+                             |                      |                          
+                             |   153         return |                          
+                             |   154             Op |                          
+                             |   155             fr |                          
+                             | > 156                |                          
+                             |   157                |                          
+                             |   158                |                          
+                             |   159             ), |                          
+                             |                      |                          
+                             | D:\PartnaStudio\sent |                          
+                             | inel\sentiment\venv\ |                          
+                             | Lib\site-packages\pl |                          
+                             | aywright\_impl\_conn |                          
+                             | ection.py:69 in send |                          
+                             |                      |                          
+                             |    66         is_int |                          
+                             |    67         title: |                          
+                             |    68     ) -> Any:  |                          
+                             | >  69         return |                          
+                             |    70             la |                          
+                             |    71             is |                          
+                             |    72             ti |                          
+                             |                      |                          
+                             | D:\PartnaStudio\sent |                          
+                             | inel\sentiment\venv\ |                          
+                             | Lib\site-packages\pl |                          
+                             | aywright\_impl\_conn |                          
+                             | ection.py:559 in     |                          
+                             | wrap_api_call        |                          
+                             |                      |                          
+                             |   556         try:   |                          
+                             |   557             re |                          
+                             |   558         except |                          
+                             | > 559             ra |                          
+                             |   560         finall |                          
+                             |   561             se |                          
+                             |   562                |                          
+                             +----------------------+                          
+                             TimeoutError: Page.goto:                          
+                             Timeout 5000ms exceeded.                          
+                             Call log:                                         
+                               - navigating to                                 
+                             "https://www.forexfactor                          
+                             y.com/calendar?month=thi                          
+                             s", waiting until                                 
+                             "domcontentloaded"                                
+                                                                               
+[06/23/26 16:00:28] INFO     Processing request of type           server.py:727
+                             ListToolsRequest                                  
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+
+==================== TEST 5: AAPL Sentiment Analysis ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/news_sentiment_cli.py --ticker AAPL --limit 10
+
+Result: TIMEOUT (Exceeded 300s)
+
+==================== TEST 6: MSFT Sentiment Analysis ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/news_sentiment_cli.py --ticker MSFT --limit 10
+
+Result: TIMEOUT (Exceeded 300s)
+
+==================== TEST 7: NVDA Sentiment Analysis ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/news_sentiment_cli.py --ticker NVDA --limit 10
+
+Result: TIMEOUT (Exceeded 300s)
+
+==================== TEST 8: SPY ETF Constituent Sentiment ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/news_sentiment_cli.py --ticker SPY --holdings 3 --limit 20
+
+Result: TIMEOUT (Exceeded 300s)
+
+==================== TEST 9: QQQ ETF Constituent Sentiment ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/news_sentiment_cli.py --ticker QQQ --holdings 5 --limit 10
+
+Duration: 219.62s
+Exit Code: 2
+
+--- STDOUT ---
+Starting news sentiment analysis for QQQ (Limit: 10, Holdings: 5)...
+[+] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 10
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] Fetching OpenBB YFINANCE...
+[+] Fetching OpenBB TMX...
+[+] Fetching OpenBB FMP...
+    -> OpenBB FMP Error: 
+[Error] -> Unauthorized FMP request -> 402 -> Restricted Endpoint: This endpoint is not available under your current subscription please visit our subscription page to upgrade your plan at https://financialmodelingprep.com/
+[+] Fetching OpenBB TIINGO...
+    -> OpenBB TIINGO Error: 
+[Error] -> Unauthorized Tiingo request -> You do not have permission to access the News API
+[+] Fetching OpenBB BIZTOC...
+    -> OpenBB BIZTOC Error: 
+[Error] -> You have exceeded the MONTHLY quota for Requests on your current plan, BASIC. Upgrade your plan at https://rapidapi.com/thma/api/biztoc
+[+] Fetching OpenBB BENZINGA...
+    -> OpenBB BENZINGA Error: 
+[Empty] -> The request was returned empty.
+[+] Fetching Custom ALPHA-VANTAGE...
+[+] Fetching Custom NEWS_API...
+[+] Fetching Custom SEEKING-ALPHA...
+Seeking Alpha Error: 403 Client Error: Forbidden for url: https://seeking-alpha-api.p.rapidapi.com/news/v2/list-by-symbol?symbol=QQQ&size=100
+[+] Fetching Custom NASDAQ...
+[+] Fetching Custom FINVIZ...
+[+] [SCORER CACHE MISS] Article not found in cache: Nasdaq, S&P 500, Dow Futures Slip As Chip Stocks Pull Back: LULU, NFLX, KEEL, MRLN Stocks In Focus
+[+] [SCORER CACHE MISS] Article not found in cache: Gunman likely targeted Trump administration, acting US attorney general says
+[+] [SCORER CACHE MISS] Article not found in cache: Trump says shooter at correspondents dinner is in custody, DA unveils charges
+[+] [SCORER CACHE MISS] Article not found in cache: Trump safely evacuated from White House correspondents dinner after shooting
+[+] [SCORER CACHE MISS] Article not found in cache: Trump removed from White  House correspondents dinner after security alarm
+[+] [SCORER CACHE HIT] Article found in cache: What 15,000 ETF Investors Were Searching for This Month. Sentiment: Neutral (Score: 0.00)
+[+] [SCORER CACHE HIT] Article found in cache: Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?. Sentiment: Negative (Score: -0.60)
+[+] [SCORER CACHE MISS] Article not found in cache: Best ETFs to Buy After Hot Inflation Data
+[+] [SCORER CACHE HIT] Article found in cache: The Most-Compared ETFs Right Now  And What They Reveal. Sentiment: Neutral (Score: 0.00)
+[+] [SCORER CACHE HIT] Article found in cache: ETF Fund Flows: A Beginner's Guide to the ETF.com Tool. Sentiment: Neutral (Score: 0.00)
+[+] [sentiment_scorer_node] Scoring 6 articles...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[*] Batching scoring pipeline: processing articles 1 to 5 of 6
+[*] Batching scoring pipeline: processing articles 6 to 6 of 6
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Nasdaq, S&P 500, Dow Futures Slip As Chip Stocks Pull Back: LULU, NFLX, KEEL, MRLN Stocks In Focus' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Gunman likely targeted Trump administration, acting US attorney general says' to MongoDB. Sentiment: Negative (Score: -0.80)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Trump says shooter at correspondents dinner is in custody, DA unveils charges' to MongoDB. Sentiment: Negative (Score: -0.80)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Trump safely evacuated from White House correspondents dinner after shooting' to MongoDB. Sentiment: Negative (Score: -0.80)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Trump removed from White  House correspondents dinner after security alarm' to MongoDB. Sentiment: Negative (Score: -0.80)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Best ETFs to Buy After Hot Inflation Data' to MongoDB. Sentiment: Positive (Score: 0.85)
+[+] [cio_analyst_node] Executing consolidated CIO analyst node...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+
+[+] Step 2: Running Unstructured Reading Workers Layer...
+[*] Analyzing qualitative indicators for asset: QQQ...
+[*] Querying SEC CIK mapping for ticker: QQQ...
+[*] Found CIK: 0001067839 for QQQ
+[*] Fetching filings metadata for CIK: 0001067839...
+[!] Warning: specific 10-K for year 2024 not found. Attempting to fall back to latest 10-K...
+[!] Warning: no 10-K found. Attempting to fall back to S-1 or 424B4 (IPO Prospectus)...
+[!] Warning: failed to compute Textual Inertia for QQQ: No 10-K or IPO filings found for CIK 0001067839. Formulas will lack this data.
+[*] Fetching latest transcripts for QQQ via FMP API...
+[!] Warning: FMP transcript fetch failed: 403 Client Error: Forbidden for url: https://financialmodelingprep.com/api/v3/earnings_call_transcript/QQQ?apikey=qEjtIVILwT3wI8ICOVB6MhMdiycNbFiT. Falling back to Motley Fool scraper...
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/nasdaq/QQQ/
+[!] Warning: no transcript links found in quote page script tags for QQQ.
+[!] Error: no transcript data could be retrieved for QQQ from FMP or Motley Fool.
+[!] Warning: Earnings call Q&A transcript unavailable for QQQ. Tension will be set to None. Formulas will lack this data.
+[+] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+
+[+] Step 2: Running Unstructured Reading Workers Layer...
+[*] Analyzing qualitative indicators for asset: QQQ...
+[*] Querying SEC CIK mapping for ticker: QQQ...
+[*] Found CIK: 0001067839 for QQQ
+[*] Fetching filings metadata for CIK: 0001067839...
+[!] Warning: specific 10-K for year 2024 not found. Attempting to fall back to latest 10-K...
+[!] Warning: no 10-K found. Attempting to fall back to S-1 or 424B4 (IPO Prospectus)...
+[!] Warning: failed to compute Textual Inertia for QQQ: No 10-K or IPO filings found for CIK 0001067839. Formulas will lack this data.
+[*] Fetching latest transcripts for QQQ via FMP API...
+[!] Warning: FMP transcript fetch failed: 403 Client Error: Forbidden for url: https://financialmodelingprep.com/api/v3/earnings_call_transcript/QQQ?apikey=qEjtIVILwT3wI8ICOVB6MhMdiycNbFiT. Falling back to Motley Fool scraper...
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/nasdaq/QQQ/
+[!] Warning: no transcript links found in quote page script tags for QQQ.
+[!] Error: no transcript data could be retrieved for QQQ from FMP or Motley Fool.
+[!] Warning: Earnings call Q&A transcript unavailable for QQQ. Tension will be set to None. Formulas will lack this data.
+
+--- STDERR ---
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_core\language_models\base.py:447: UserWarning: Using fallback GPT-2 tokenizer for token counting. Token counts may be inaccurate for non-GPT-2 models. For accurate counts, use a model-specific method if available.
+  return len(self.get_token_ids(text))
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+
+[Error] Failed to complete analysis: [429] Too Many Requests
+{'status': 429, 'title': 'Too Many Requests'}
+
+==================== TEST 10: IWM ETF Constituent Sentiment ====================
+Command: D:\PartnaStudio\sentinel\sentiment\venv\Scripts\python.exe scripts/news_sentiment_cli.py --ticker IWM --holdings 4 --limit 10
+
+Duration: 202.41s
+Exit Code: 2
+
+--- STDOUT ---
+Starting news sentiment analysis for IWM (Limit: 10, Holdings: 4)...
+[+] [ingest_news_node] Processing ticker: IWM, timeframe_days: 3, limit: 10
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[+] Fetching OpenBB YFINANCE...
+[+] Fetching OpenBB TMX...
+    -> OpenBB TMX Error: Results not found.
+[+] Fetching OpenBB FMP...
+    -> OpenBB FMP Error: 
+[Error] -> Unauthorized FMP request -> 402 -> Restricted Endpoint: This endpoint is not available under your current subscription please visit our subscription page to upgrade your plan at https://financialmodelingprep.com/
+[+] Fetching OpenBB TIINGO...
+    -> OpenBB TIINGO Error: 
+[Error] -> Unauthorized Tiingo request -> You do not have permission to access the News API
+[+] Fetching OpenBB BIZTOC...
+    -> OpenBB BIZTOC Error: 
+[Error] -> You have exceeded the MONTHLY quota for Requests on your current plan, BASIC. Upgrade your plan at https://rapidapi.com/thma/api/biztoc
+[+] Fetching OpenBB BENZINGA...
+    -> OpenBB BENZINGA Error: 
+[Empty] -> The request was returned empty.
+[+] Fetching Custom ALPHA-VANTAGE...
+[+] Fetching Custom NEWS_API...
+[+] Fetching Custom SEEKING-ALPHA...
+Seeking Alpha Error: 403 Client Error: Forbidden for url: https://seeking-alpha-api.p.rapidapi.com/news/v2/list-by-symbol?symbol=IWM&size=100
+[+] Fetching Custom NASDAQ...
+[+] Fetching Custom FINVIZ...
+[+] [SCORER CACHE MISS] Article not found in cache: Why Wall Street's Summer Slump Will Be Short-Lived
+[+] [SCORER CACHE MISS] Article not found in cache: Small Caps Options Traders Should See This Chart
+[+] [SCORER CACHE MISS] Article not found in cache: Russell 2000 Extends Records, Meta Jumps 5%: What's Moving Markets Thursday?
+[+] [SCORER CACHE MISS] Article not found in cache: John Hancocks CEO Explains the Explosive Growth of Active ETFs
+[+] [SCORER CACHE MISS] Article not found in cache: Software Slump Resumes, Bitcoin Plunges To 66,000: What's Moving Markets Wednesday?
+[+] [SCORER CACHE MISS] Article not found in cache: These Minnows Are Smashing The Magnificent Seven
+[+] [SCORER CACHE MISS] Article not found in cache: Silver Breaks $101, Intel Stock Plunges 17%: What's Moving Markets Friday?
+[+] [SCORER CACHE MISS] Article not found in cache: This Under-the-Radar Pet Stock Could Be the Biggest Meme Buy in January 2026
+[+] [SCORER CACHE MISS] Article not found in cache: Stocks Tumble, Treasury Yields Jump To 5-Month Highs: What's Moving Markets Tuesday?
+[+] [SCORER CACHE MISS] Article not found in cache: Natural Gas Rallies 30%, Silver Jumps 13% To $116: What's Moving Markets Monday?
+[+] [sentiment_scorer_node] Scoring 10 articles...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+[*] Batching scoring pipeline: processing articles 1 to 5 of 10
+[*] Batching scoring pipeline: processing articles 6 to 10 of 10
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Why Wall Street's Summer Slump Will Be Short-Lived' to MongoDB. Sentiment: Positive (Score: 0.85)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Small Caps Options Traders Should See This Chart' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Russell 2000 Extends Records, Meta Jumps 5%: What's Moving Markets Thursday?' to MongoDB. Sentiment: Positive (Score: 0.95)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'John Hancocks CEO Explains the Explosive Growth of Active ETFs' to MongoDB. Sentiment: Positive (Score: 0.90)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Software Slump Resumes, Bitcoin Plunges To 66,000: What's Moving Markets Wednesday?' to MongoDB. Sentiment: Negative (Score: -0.80)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'These Minnows Are Smashing The Magnificent Seven' to MongoDB. Sentiment: Positive (Score: 0.85)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Silver Breaks $101, Intel Stock Plunges 17%: What's Moving Markets Friday?' to MongoDB. Sentiment: Negative (Score: -0.60)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'This Under-the-Radar Pet Stock Could Be the Biggest Meme Buy in January 2026' to MongoDB. Sentiment: Positive (Score: 0.75)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Stocks Tumble, Treasury Yields Jump To 5-Month Highs: What's Moving Markets Tuesday?' to MongoDB. Sentiment: Negative (Score: -0.70)
+[+] [SCORER CACHE STORE] Saved scored sentiment for 'Natural Gas Rallies 30%, Silver Jumps 13% To $116: What's Moving Markets Monday?' to MongoDB. Sentiment: Positive (Score: 0.80)
+[+] [cio_analyst_node] Executing consolidated CIO analyst node...
+Loading dataset: D:\PartnaStudio\sentinel\sentiment\data\financial_sentiment.csv...
+[CACHE HIT] Loaded pre-computed calibration embeddings from MongoDB collection.
+
+[+] Step 2: Running Unstructured Reading Workers Layer...
+[*] Analyzing qualitative indicators for asset: IWM...
+[*] Querying SEC CIK mapping for ticker: IWM...
+[!] Warning: failed to compute Textual Inertia for IWM: Central Index Key (CIK) not found for ticker: IWM. Formulas will lack this data.
+[*] Fetching latest transcripts for IWM via FMP API...
+[!] Warning: FMP transcript fetch failed: 403 Client Error: Forbidden for url: https://financialmodelingprep.com/api/v3/earnings_call_transcript/IWM?apikey=qEjtIVILwT3wI8ICOVB6MhMdiycNbFiT. Falling back to Motley Fool scraper...
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/nasdaq/IWM/
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/nyse/IWM/
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/IWM/
+[!] Error: Could not find any quote page for ticker IWM on Motley Fool.
+[!] Error: no transcript data could be retrieved for IWM from FMP or Motley Fool.
+[!] Warning: Earnings call Q&A transcript unavailable for IWM. Tension will be set to None. Formulas will lack this data.
+[+] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+
+[+] Step 2: Running Unstructured Reading Workers Layer...
+[*] Analyzing qualitative indicators for asset: IWM...
+[*] Querying SEC CIK mapping for ticker: IWM...
+[!] Warning: failed to compute Textual Inertia for IWM: Central Index Key (CIK) not found for ticker: IWM. Formulas will lack this data.
+[*] Fetching latest transcripts for IWM via FMP API...
+[!] Warning: FMP transcript fetch failed: 403 Client Error: Forbidden for url: https://financialmodelingprep.com/api/v3/earnings_call_transcript/IWM?apikey=qEjtIVILwT3wI8ICOVB6MhMdiycNbFiT. Falling back to Motley Fool scraper...
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/nasdaq/IWM/
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/nyse/IWM/
+[*] Trying Motley Fool quote page: https://www.fool.com/quote/IWM/
+[!] Error: Could not find any quote page for ticker IWM on Motley Fool.
+[!] Error: no transcript data could be retrieved for IWM from FMP or Motley Fool.
+[!] Warning: Earnings call Q&A transcript unavailable for IWM. Tension will be set to None. Formulas will lack this data.
+
+--- STDERR ---
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_core\language_models\base.py:447: UserWarning: Using fallback GPT-2 tokenizer for token counting. Token counts may be inaccurate for non-GPT-2 models. For accurate counts, use a model-specific method if available.
+  return len(self.get_token_ids(text))
+D:\PartnaStudio\sentinel\sentiment\venv\Lib\site-packages\langchain_nvidia_ai_endpoints\_common.py:250: UserWarning: Found moonshotai/kimi-k2.6 in available_models, but type is unknown and inference may fail.
+  warnings.warn(
+
+[Error] Failed to complete analysis: [429] Too Many Requests
+{'status': 429, 'title': 'Too Many Requests'}

@@ -1,0 +1,143 @@
+import os
+import sys
+import json
+from typing import Dict, Any
+from langchain_core.runnables import RunnableConfig
+from langchain_core.tools import tool
+from langchain_nvidia_ai_endpoints import ChatNVIDIA
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sentiment_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+
+if sentiment_dir not in sys.path:
+    sys.path.insert(0, sentiment_dir)
+
+from functions.types.macro_state import MacroState
+from functions.utils.logging.pipeline_logger import get_pipeline_logger
+from functions.utils.news.ingest import setup_clients_and_embeddings
+
+# 5. Node: Chief Macro Economist (Consolidation & output generation)
+def chief_economist_node(state: MacroState, config: RunnableConfig) -> Dict[str, Any]:
+    logger = get_pipeline_logger()
+    logger.info("[chief_economist_node] Consolidating all macroeconomic nodes into final report...")
+    
+    config = config or {}
+    env_path = config.get("configurable", {}).get("env_path", None)
+    csv_path = config.get("configurable", {}).get("csv_path", None)
+    _, _, base_llm_config, _, _, _, _ = setup_clients_and_embeddings(env_path=env_path, csv_path=csv_path)
+    alt_api_key = os.getenv("NVIDIA_API_KEY_ALT")
+    
+    # Consolidate state details
+    macro_summary = {
+        "forex_events": state.get("forex_events", []),
+        "av_indicators": state.get("av_indicators", {}),
+        "textual_inertia_results": state.get("textual_inertia_results", {}),
+        "tension_extractor_results": state.get("tension_extractor_results", {})
+    }
+    
+    from functions.utils.db.prompt_manager import get_prompt
+    from functions.types.macro import MacroReport
+    
+    prompt_template = get_prompt("chief_macro_economist_prompt.txt")
+    schema_content = json.dumps(MacroReport.model_json_schema(), indent=2)
+    system_prompt = prompt_template.format(SCHEMA=schema_content, EXAMPLES="")
+    
+    from functions.utils.common.config import build_chat_model
+    from functions.types.macro import MacroReport
+    from langgraph.prebuilt import create_react_agent
+    
+    cio_message = (
+        "Generate the final macroeconomic analysis report based on these indicators:\n\n"
+        f"{json.dumps(macro_summary, indent=2)}\n\n"
+        "Generate the final structured JSON compliance output."
+    )
+    inputs = {"messages": [("human", cio_message)]}
+
+    max_retries = 3 if alt_api_key else 1
+    attempt = 0
+    final_report_msg = ""
+    
+    # Goal 3: Inject MongoDBDatabaseToolkit Text-to-MQL tools
+    from functions.tools.mongo_toolkits import get_mongodb_toolkit
+    
+    while attempt < max_retries:
+        attempt += 1
+        try:
+            llm_for_mongo = ChatNVIDIA(
+                model=base_llm_config["model"],
+                api_key=base_llm_config.get("api_key", os.getenv("NVIDIA_API_KEY", ""))
+            )
+            mongo_toolkit = get_mongodb_toolkit(llm=llm_for_mongo)
+            
+            @tool
+            def query_mongodb_mql(query: str) -> str:
+                """Executes a MongoDB MQL query against historical macro databases and returns the results.
+                IMPORTANT: The query MUST be a string of the form: `db.collectionName.aggregate([...])`.
+                Only aggregation queries are supported.
+                """
+                mql_tool = next((t for t in mongo_toolkit.get_tools() if "query" in t.name.lower()), None)
+                if mql_tool:
+                    try:
+                        return mql_tool.invoke({"query": query})
+                    except Exception as e:
+                        return f"Error executing query: {e}"
+                return "Tool not available."
+
+            llm = build_chat_model(
+                model=base_llm_config["model"],
+                base_url=base_llm_config.get("base_url"),
+                api_key=base_llm_config.get("api_key")
+            )
+            
+            agent_executor = create_react_agent(
+                model=llm,
+                tools=[query_mongodb_mql],
+                prompt=system_prompt,
+                response_format=MacroReport
+            )
+            
+            result = agent_executor.invoke(inputs)
+            final_report_msg = result["messages"][-1].content
+            break
+        except Exception as e:
+            error_str = str(e).lower()
+            is_rate_limit = "429" in error_str or "too many requests" in error_str or "rate limit" in error_str
+            if is_rate_limit and attempt < max_retries:
+                logger.warning("[chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...")
+                base_llm_config["api_key"] = alt_api_key
+                continue
+            raise e
+    
+    # Goal 4: Enforce Pydantic schema generation with LangChain's with_structured_output
+    from functions.types.macro import MacroReport
+
+    structured_llm = llm.with_structured_output(MacroReport)
+    
+    from langchain_core.prompts import ChatPromptTemplate
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "You are an expert JSON structured parser. Extract the exact values into the strict MacroReport schema."),
+        ("human", "{raw_report}")
+    ])
+    chain = prompt | structured_llm
+    
+    try:
+        final_report_pydantic = chain.invoke({"raw_report": final_report_msg})
+        final_report = final_report_pydantic.model_dump()
+    except Exception as e:
+        logger.error(f"Error parsing Macro CIO response with Pydantic: {e}")
+        try:
+            # Strip markdown braces if raw fallback needed
+            clean_msg = final_report_msg
+            if "```json" in clean_msg:
+                clean_msg = clean_msg.split("```json")[1].split("```")[0].strip()
+            elif "```" in clean_msg:
+                clean_msg = clean_msg.split("```")[1].split("```")[0].strip()
+            start_idx = clean_msg.find('{')
+            end_idx = clean_msg.rfind('}')
+            if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+                clean_msg = clean_msg[start_idx:end_idx+1].strip()
+            final_report = json.loads(clean_msg)
+        except Exception:
+            final_report = {"error": "JSON parse error", "raw": final_report_msg}
+        
+    return {"results": final_report}

@@ -1,0 +1,605 @@
+[2026-06-17 21:45:20,456] [INFO] [pipeline_orchestrator.py:43] Setting up clients, settings, and embeddings configuration (env: None, calibration: None)...
+[2026-06-17 21:45:42,744] [INFO] [pipeline_orchestrator.py:51] Instantiating pipeline agents (Scorer, CIO, Textual Inertia, Analyst Tension, Thesis Scribe)...
+[2026-06-17 21:45:44,238] [INFO] [pipeline_orchestrator.py:69] Registering mathematical formulas and labelling tools directly to CIO Agent...
+[2026-06-17 21:45:45,436] [INFO] [pipeline_orchestrator.py:104] Retrieving and decomposing holdings for ticker 'AAPL' (Limit: 2, Holdings depth: 5)...
+[2026-06-17 21:45:55,330] [INFO] [pipeline_orchestrator.py:125] Batch scoring 2 articles in cycles of 5 using Scorer Agent...
+[2026-06-17 21:46:06,092] [INFO] [pipeline_orchestrator.py:134] Executing unstructured reading workers (SEC 10-K Textual Inertia & Call Transcript Tension) for AAPL...
+[2026-06-17 21:46:11,189] [INFO] [pipeline_orchestrator.py:178] Initiating Consolidated Senior Analyst (CIO) Chat...
+[2026-06-17 21:57:03,402] [INFO] [pipeline_orchestrator.py:43] Setting up clients, settings, and embeddings configuration (env: None, calibration: None)...
+[2026-06-17 21:57:23,540] [INFO] [pipeline_orchestrator.py:51] Instantiating pipeline agents (Scorer, CIO, Textual Inertia, Analyst Tension, Thesis Scribe)...
+[2026-06-17 21:57:25,391] [INFO] [pipeline_orchestrator.py:69] Registering mathematical formulas and labelling tools directly to CIO Agent...
+[2026-06-17 21:57:26,560] [INFO] [pipeline_orchestrator.py:104] Retrieving and decomposing holdings for ticker 'AAPL' (Limit: 2, Holdings depth: 5)...
+[2026-06-17 21:57:38,679] [INFO] [pipeline_orchestrator.py:125] Batch scoring 2 articles in cycles of 5 using Scorer Agent...
+[2026-06-17 21:57:46,097] [INFO] [pipeline_orchestrator.py:134] Executing unstructured reading workers (SEC 10-K Textual Inertia & Call Transcript Tension) for AAPL...
+[2026-06-17 21:57:50,737] [INFO] [pipeline_orchestrator.py:178] Initiating Consolidated Senior Analyst (CIO) Chat...
+[2026-06-17 21:58:19,701] [ERROR] [pipeline_orchestrator.py:191] Failed to parse CIO agent response as JSON: Extra data: line 45 column 1 (char 2054)
+[2026-06-17 22:09:44,508] [INFO] [pipeline_orchestrator.py:43] Setting up clients, settings, and embeddings configuration (env: None, calibration: None)...
+[2026-06-17 22:10:05,144] [INFO] [pipeline_orchestrator.py:51] Instantiating pipeline agents (Scorer, CIO, Textual Inertia, Analyst Tension, Thesis Scribe)...
+[2026-06-17 22:10:06,621] [INFO] [pipeline_orchestrator.py:69] Registering mathematical formulas and labelling tools directly to CIO Agent...
+[2026-06-17 22:10:07,788] [INFO] [pipeline_orchestrator.py:104] Retrieving and decomposing holdings for ticker 'AAPL' (Limit: 2, Holdings depth: 5)...
+[2026-06-17 22:10:20,521] [INFO] [pipeline_orchestrator.py:125] Batch scoring 2 articles in cycles of 5 using Scorer Agent...
+[2026-06-17 22:10:47,388] [INFO] [pipeline_orchestrator.py:134] Executing unstructured reading workers (SEC 10-K Textual Inertia & Call Transcript Tension) for AAPL...
+[2026-06-17 22:10:53,663] [INFO] [pipeline_orchestrator.py:178] Initiating Consolidated Senior Analyst (CIO) Chat...
+[2026-06-17 22:11:06,746] [INFO] [pipeline_orchestrator.py:200] Running compliance limits validation and Scribe manual override narrative checks...
+[2026-06-17 22:11:06,747] [INFO] [pipeline_orchestrator.py:214] Sentiment analysis pipeline execution complete.
+[2026-06-17 22:12:41,311] [INFO] [pipeline_orchestrator.py:43] Setting up clients, settings, and embeddings configuration (env: None, calibration: None)...
+[2026-06-17 22:12:55,174] [INFO] [pipeline_orchestrator.py:51] Instantiating pipeline agents (Scorer, CIO, Textual Inertia, Analyst Tension, Thesis Scribe)...
+[2026-06-17 22:12:56,661] [INFO] [pipeline_orchestrator.py:69] Registering mathematical formulas and labelling tools directly to CIO Agent...
+[2026-06-17 22:12:57,836] [INFO] [pipeline_orchestrator.py:104] Retrieving and decomposing holdings for ticker 'AAPL' (Limit: 10, Holdings depth: 5)...
+[2026-06-17 22:13:12,234] [INFO] [pipeline_orchestrator.py:125] Batch scoring 10 articles in cycles of 5 using Scorer Agent...
+[2026-06-17 22:13:33,090] [INFO] [pipeline_orchestrator.py:134] Executing unstructured reading workers (SEC 10-K Textual Inertia & Call Transcript Tension) for AAPL...
+[2026-06-17 22:13:38,046] [INFO] [pipeline_orchestrator.py:178] Initiating Consolidated Senior Analyst (CIO) Chat...
+[2026-06-17 22:14:33,970] [INFO] [pipeline_orchestrator.py:200] Running compliance limits validation and Scribe manual override narrative checks...
+[2026-06-17 22:14:38,177] [INFO] [pipeline_orchestrator.py:214] Sentiment analysis pipeline execution complete.
+[2026-06-17 22:25:48,725] [INFO] [pipeline_orchestrator.py:43] Setting up clients, settings, and embeddings configuration (env: None, calibration: None)...
+[2026-06-17 22:26:07,960] [INFO] [pipeline_orchestrator.py:51] Instantiating pipeline agents (Scorer, CIO, Textual Inertia, Analyst Tension, Thesis Scribe)...
+[2026-06-17 22:26:09,492] [INFO] [pipeline_orchestrator.py:69] Registering mathematical formulas and labelling tools directly to CIO Agent...
+[2026-06-17 22:26:10,911] [INFO] [pipeline_orchestrator.py:104] Retrieving and decomposing holdings for ticker 'AAPL' (Limit: 2, Holdings depth: 5)...
+[2026-06-17 22:26:23,765] [INFO] [pipeline_orchestrator.py:125] Batch scoring 2 articles in cycles of 5 using Scorer Agent...
+[2026-06-17 22:26:41,140] [INFO] [pipeline_orchestrator.py:134] Executing unstructured reading workers (SEC 10-K Textual Inertia & Call Transcript Tension) for AAPL...
+[2026-06-17 22:26:46,077] [INFO] [pipeline_orchestrator.py:178] Initiating Consolidated Senior Analyst (CIO) Chat...
+[2026-06-20 10:38:52,016] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: NVDA, timeframe_days: 2, limit: 3
+[2026-06-20 10:44:39,791] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: NVDA, timeframe_days: 2, limit: 3
+[2026-06-20 10:44:43,878] [ERROR] [sentiment_graph.py:140] Error fetching news for NVDA: Results not found.
+[2026-06-20 10:44:43,891] [INFO] [sentiment_graph.py:229] [sentiment_scorer_node] No articles to score.
+[2026-06-20 10:44:43,894] [INFO] [sentiment_graph.py:321] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-20 10:46:20,324] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: NVDA, timeframe_days: 2, limit: 3
+[2026-06-20 10:46:23,519] [ERROR] [sentiment_graph.py:140] Error fetching news for NVDA: Results not found.
+[2026-06-20 10:46:23,531] [INFO] [sentiment_graph.py:229] [sentiment_scorer_node] No articles to score.
+[2026-06-20 10:46:23,538] [INFO] [sentiment_graph.py:321] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-20 10:46:55,152] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: NVDA, timeframe_days: 2, limit: 3
+[2026-06-20 10:46:57,505] [ERROR] [sentiment_graph.py:140] Error fetching news for NVDA: Results not found.
+[2026-06-20 10:46:57,517] [INFO] [sentiment_graph.py:229] [sentiment_scorer_node] No articles to score.
+[2026-06-20 10:46:57,522] [INFO] [sentiment_graph.py:321] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-20 10:48:18,254] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 2
+[2026-06-20 10:48:23,266] [ERROR] [sentiment_graph.py:140] Error fetching news for AAPL: Results not found.
+[2026-06-20 10:48:23,275] [INFO] [sentiment_graph.py:229] [sentiment_scorer_node] No articles to score.
+[2026-06-20 10:48:23,279] [INFO] [sentiment_graph.py:321] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-20 10:49:21,024] [INFO] [pipeline_orchestrator.py:46] Initiating stateful Sentiment LangGraph for ticker 'AAPL' (Limit: 2, timeframe: 30 days)...
+[2026-06-20 10:49:21,718] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 30, limit: 2
+[2026-06-20 10:49:25,050] [ERROR] [sentiment_graph.py:140] Error fetching news for AAPL: Results not found.
+[2026-06-20 10:49:25,062] [INFO] [sentiment_graph.py:229] [sentiment_scorer_node] No articles to score.
+[2026-06-20 10:49:25,069] [INFO] [sentiment_graph.py:321] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-20 11:55:34,142] [INFO] [pipeline_orchestrator.py:46] Initiating stateful Sentiment LangGraph for ticker 'AAPL' (Limit: 2, timeframe: 30 days)...
+[2026-06-20 11:55:37,210] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 30, limit: 2
+[2026-06-20 11:55:41,938] [ERROR] [sentiment_graph.py:140] Error fetching news for AAPL: Results not found.
+[2026-06-20 11:55:41,951] [INFO] [sentiment_graph.py:229] [sentiment_scorer_node] No articles to score.
+[2026-06-20 11:55:41,955] [INFO] [sentiment_graph.py:321] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-20 12:07:52,662] [INFO] [pipeline_orchestrator.py:46] Initiating stateful Sentiment LangGraph for ticker 'AAPL' (Limit: 2, timeframe: 30 days)...
+[2026-06-20 12:07:53,378] [INFO] [sentiment_graph.py:62] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 30, limit: 2
+[2026-06-20 12:10:42,719] [INFO] [sentiment_graph.py:213] [SCORER CACHE MISS] Article not found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-20 12:10:42,721] [INFO] [sentiment_graph.py:213] [SCORER CACHE MISS] Article not found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-20 12:10:42,724] [INFO] [sentiment_graph.py:232] [sentiment_scorer_node] Scoring 2 articles...
+[2026-06-21 13:50:27,570] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 13:59:03,482] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 14:08:27,926] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 14:08:27,954] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 14:08:27,988] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 14:08:28,015] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: AAPL Stock In Focus: Tim Cook Reportedly Confirms Hike In Apple Products Due To Memory Chip Crunch
+[2026-06-21 14:08:28,053] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq And Dow End Holiday-Shortened Week Higher As Investors Cheer US-Iran Peace Deal  SPCX, AMZN, ONDS, NFLX, TTWO In Focus
+[2026-06-21 14:08:28,061] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-21 14:21:15,066] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 14:24:18,551] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 14:24:18,615] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 14:24:18,685] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 14:24:18,745] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: AAPL Stock In Focus: Tim Cook Reportedly Confirms Hike In Apple Products Due To Memory Chip Crunch
+[2026-06-21 14:24:18,792] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Polymarket reportedly paid people to post fake videos of themselves placing bets
+[2026-06-21 14:24:18,890] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-21 14:45:35,364] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 14:50:14,058] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 14:50:14,098] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 14:50:14,169] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 14:50:14,474] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: The Best State in America for Healthy Aging Has Been Revealed—and No, It’s Not Florida
+[2026-06-21 14:50:14,534] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: When the Trump administration cracks down on Anthropic, who benefits?
+[2026-06-21 14:50:14,537] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-21 15:07:45,021] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:09:43,227] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:12:04,567] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 15:12:04,598] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 15:12:04,993] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 15:12:05,046] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Bose thinks it can be a media company for some reason
+[2026-06-21 15:12:05,254] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: I left the Navy SEALs to have more time with my 3 kids. What I learned in the military helped me raise confident kids
+[2026-06-21 15:12:05,257] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-21 15:12:35,939] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Google Has The Best Problem Money Cant Quite Buy' to MongoDB.
+[2026-06-21 15:12:35,986] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain' to MongoDB.
+[2026-06-21 15:12:36,039] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Why Apple's War Chest Can't Win the Memory War' to MongoDB.
+[2026-06-21 15:12:36,088] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Bose thinks it can be a media company for some reason' to MongoDB.
+[2026-06-21 15:12:36,134] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'I left the Navy SEALs to have more time with my 3 kids. What I learned in the military helped me raise confident kids' to MongoDB.
+[2026-06-21 15:12:36,138] [INFO] [sentiment_graph.py:341] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-21 15:14:10,812] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:17:09,719] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 15:17:10,002] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 15:17:10,055] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 15:17:10,094] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Bose thinks it can be a media company for some reason
+[2026-06-21 15:17:10,129] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: I left the Navy SEALs to have more time with my 3 kids. What I learned in the military helped me raise confident kids
+[2026-06-21 15:17:10,133] [INFO] [sentiment_graph.py:236] [sentiment_scorer_node] No articles to score.
+[2026-06-21 15:17:10,146] [INFO] [sentiment_graph.py:341] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-21 15:21:00,051] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:24:41,005] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 15:24:41,031] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 15:24:41,056] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 15:24:41,081] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Why Jim Cramer says Ford’s real story isn’t trucks or EVs
+[2026-06-21 15:24:41,156] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: ‘It’s Going To Be Glorious’—SpaceX And Tesla Suddenly Braced For A Game Changer
+[2026-06-21 15:24:41,609] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 2 articles...
+[2026-06-21 15:24:48,883] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Why Jim Cramer says Ford’s real story isn’t trucks or EVs' to MongoDB.
+[2026-06-21 15:24:48,917] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for '‘It’s Going To Be Glorious’—SpaceX And Tesla Suddenly Braced For A Game Changer' to MongoDB.
+[2026-06-21 15:24:48,920] [INFO] [sentiment_graph.py:341] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-21 15:29:14,202] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:32:15,660] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 15:32:15,689] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 15:32:15,733] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 15:32:15,766] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Why Jim Cramer says Ford’s real story isn’t trucks or EVs
+[2026-06-21 15:32:15,804] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: ‘It’s Going To Be Glorious’—SpaceX And Tesla Suddenly Braced For A Game Changer
+[2026-06-21 15:32:15,808] [INFO] [sentiment_graph.py:236] [sentiment_scorer_node] No articles to score.
+[2026-06-21 15:32:15,811] [INFO] [sentiment_graph.py:341] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-21 15:35:11,164] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:41:02,416] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 15:45:50,261] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 15:45:50,294] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 15:45:50,384] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 15:45:50,898] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: She saved $24,000 to launch a craft festival in an old Joann store: 'This is my dream come true'
+[2026-06-21 15:45:50,980] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Ken Griffin fires back at Mamdani, says business leaders must 'fight for their city'
+[2026-06-21 15:45:50,984] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 2 articles...
+[2026-06-21 15:46:11,663] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'She saved $24,000 to launch a craft festival in an old Joann store: 'This is my dream come true'' to MongoDB.
+[2026-06-21 15:46:11,702] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Ken Griffin fires back at Mamdani, says business leaders must 'fight for their city'' to MongoDB.
+[2026-06-21 15:46:11,705] [INFO] [sentiment_graph.py:341] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-21 16:00:37,552] [INFO] [sentiment_graph.py:69] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-21 16:09:59,517] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-21 16:09:59,567] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Tata Electronics pollution probe closure highlights lingering risks for Apple's India supply chain
+[2026-06-21 16:09:59,646] [INFO] [sentiment_graph.py:216] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-21 16:09:59,702] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Oil prices face sudden $150 spike after vital route shuts
+[2026-06-21 16:09:59,738] [INFO] [sentiment_graph.py:220] [SCORER CACHE MISS] Article not found in cache: Social Security change for 3.6 million beneficiaries starts this month
+[2026-06-21 16:09:59,742] [INFO] [sentiment_graph.py:239] [sentiment_scorer_node] Scoring 2 articles...
+[2026-06-21 16:10:13,455] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Oil prices face sudden $150 spike after vital route shuts' to MongoDB.
+[2026-06-21 16:10:13,508] [INFO] [sentiment_graph.py:330] [SCORER CACHE STORE] Saved scored sentiment for 'Social Security change for 3.6 million beneficiaries starts this month' to MongoDB.
+[2026-06-21 16:10:13,510] [INFO] [sentiment_graph.py:341] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-22 13:38:43,798] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 1
+[2026-06-22 13:43:10,458] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch
+[2026-06-22 13:43:10,461] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 1 articles...
+[2026-06-22 13:43:29,834] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Apple's foldable iPhone supply chain reportedly gears up for 2026 launch' to MongoDB.
+[2026-06-22 13:43:29,967] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-22 13:47:45,822] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-22 13:50:11,920] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch
+[2026-06-22 13:50:11,950] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?
+[2026-06-22 13:50:12,320] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?
+[2026-06-22 13:50:12,343] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-22 13:50:12,367] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-22 13:50:12,370] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 4 articles...
+[2026-06-22 13:50:25,300] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Why Is INTC Stock Jumping Over 5% In Overnight Trading?' to MongoDB.
+[2026-06-22 13:50:25,347] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?' to MongoDB.
+[2026-06-22 13:50:25,379] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Google Has The Best Problem Money Cant Quite Buy' to MongoDB.
+[2026-06-22 13:50:25,415] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Why Apple's War Chest Can't Win the Memory War' to MongoDB.
+[2026-06-22 13:50:25,417] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-22 13:56:28,184] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-22 14:25:30,222] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-22 14:28:30,954] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch
+[2026-06-22 14:28:31,019] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?
+[2026-06-22 14:28:31,072] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?
+[2026-06-22 14:28:31,122] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-22 14:28:31,166] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-22 14:28:31,168] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-22 14:28:31,170] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-22 14:37:38,184] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPCX, timeframe_days: 3, limit: 5
+[2026-06-22 14:40:21,369] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: The AI Arms Race Isnt About Technology  Its About Electricity
+[2026-06-22 14:40:21,398] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Building-Materials Supplier CRH to Buy Rival Arcosa for $8.5 Billion
+[2026-06-22 14:40:21,436] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Stock Market Today: Dow rises 150 points, S&P 500 and Nasdaq fall as U.S. oil prices drop below $74 a barrel after Treasury allows Iran oil sales for 60 days
+[2026-06-22 14:40:21,472] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Doorbell cam filmed Tesla Autopilot crash that killed woman in her home
+[2026-06-22 14:40:21,505] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: ‘The View’ Asks Its Audience for Help in Battle With F.C.C
+[2026-06-22 14:40:21,508] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-22 14:40:35,055] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'The AI Arms Race Isnt About Technology  Its About Electricity' to MongoDB.
+[2026-06-22 14:40:35,089] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Building-Materials Supplier CRH to Buy Rival Arcosa for $8.5 Billion' to MongoDB.
+[2026-06-22 14:40:35,181] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Stock Market Today: Dow rises 150 points, S&P 500 and Nasdaq fall as U.S. oil prices drop below $74 a barrel after Treasury allows Iran oil sales for 60 days' to MongoDB.
+[2026-06-22 14:40:35,237] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for 'Doorbell cam filmed Tesla Autopilot crash that killed woman in her home' to MongoDB.
+[2026-06-22 14:40:35,299] [INFO] [sentiment_scorer.py:120] [SCORER CACHE STORE] Saved scored sentiment for '‘The View’ Asks Its Audience for Help in Battle With F.C.C' to MongoDB.
+[2026-06-22 14:40:35,320] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-22 14:54:05,026] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-22 14:57:03,912] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch
+[2026-06-22 14:57:03,958] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?
+[2026-06-22 14:57:04,015] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?
+[2026-06-22 14:57:04,055] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy
+[2026-06-22 14:57:04,081] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War
+[2026-06-22 14:57:04,084] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-22 14:57:04,085] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 10:07:15,259] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 2
+[2026-06-23 10:09:29,594] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch
+[2026-06-23 10:09:29,620] [INFO] [check_cache.py:37] [SCORER CACHE MISS] Article not found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?
+[2026-06-23 10:09:29,626] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 2 articles...
+[2026-06-23 10:09:48,565] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Apple's foldable iPhone supply chain reportedly gears up for 2026 launch' to MongoDB.
+[2026-06-23 10:09:48,604] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Why Is INTC Stock Jumping Over 5% In Overnight Trading?' to MongoDB.
+[2026-06-23 10:09:48,606] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 10:14:01,338] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 2
+[2026-06-23 10:15:56,060] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 10:15:56,089] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 10:15:56,093] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 10:15:56,095] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 10:18:58,171] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 3
+[2026-06-23 10:20:43,346] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 10:20:43,404] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 10:20:43,428] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?
+[2026-06-23 10:20:43,431] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 1 articles...
+[2026-06-23 10:20:48,192] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 10:20:48,194] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 10:22:17,264] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 10:22:27,684] [ERROR] [forex_factory.py:33] Error fetching ForexFactory events: [Scheduler] Timeout after 10.0s on 'forexfactory'.
+[2026-06-23 10:22:27,687] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 10:22:29,095] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 10:22:29,773] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 10:22:30,218] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 10:39:53,936] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-23 10:41:51,445] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-23 10:42:08,258] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Apple's foldable iPhone supply chain reportedly gears up for 2026 launch' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 10:42:08,301] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Why Is INTC Stock Jumping Over 5% In Overnight Trading?' to MongoDB. Sentiment: Positive (Score: 0.80)
+[2026-06-23 10:42:08,331] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?' to MongoDB. Sentiment: Positive (Score: 0.90)
+[2026-06-23 10:42:08,359] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Google Has The Best Problem Money Cant Quite Buy' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 10:42:08,387] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Why Apple's War Chest Can't Win the Memory War' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 10:42:08,914] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 10:44:27,958] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-23 10:46:00,344] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 10:46:00,369] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 10:46:00,433] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?. Sentiment: Positive (Score: 0.90)
+[2026-06-23 10:46:00,460] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 10:46:00,484] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War. Sentiment: Negative (Score: -0.60)
+[2026-06-23 10:46:01,017] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 10:48:56,482] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 5
+[2026-06-23 10:50:58,760] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Who Really Powered VGT's Climb This Year?
+[2026-06-23 10:50:58,784] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: PLTR Stock: The Math Hidden In Its Price
+[2026-06-23 10:50:58,806] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Memory's price surge threatens Apple's 'magic formula'  and the economy: WSJ reporter
+[2026-06-23 10:50:58,841] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft and Chevron plan one of the largest gas-powered data center projects in US
+[2026-06-23 10:50:58,867] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gaming gets hit by memory shortage: A look at Sandisk's $3K PlayStation 5 SSD
+[2026-06-23 10:50:59,387] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-23 10:51:10,529] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Who Really Powered VGT's Climb This Year?' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 10:51:10,559] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'PLTR Stock: The Math Hidden In Its Price' to MongoDB. Sentiment: Negative (Score: -0.50)
+[2026-06-23 10:51:10,603] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Memory's price surge threatens Apple's 'magic formula'  and the economy: WSJ reporter' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 10:51:10,630] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Microsoft and Chevron plan one of the largest gas-powered data center projects in US' to MongoDB. Sentiment: Positive (Score: 0.70)
+[2026-06-23 10:51:10,659] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Gaming gets hit by memory shortage: A look at Sandisk's $3K PlayStation 5 SSD' to MongoDB. Sentiment: Negative (Score: -0.40)
+[2026-06-23 10:51:11,177] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:03:28,345] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-23 11:05:03,477] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:05:03,500] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 11:05:03,523] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?. Sentiment: Positive (Score: 0.90)
+[2026-06-23 11:05:03,550] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:05:03,576] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:05:04,095] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 11:05:04,619] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:08:36,886] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 5
+[2026-06-23 11:11:09,260] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:11:09,289] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 11:11:09,313] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?. Sentiment: Positive (Score: 0.90)
+[2026-06-23 11:11:09,336] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:11:09,366] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:11:09,890] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 11:11:10,414] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:13:18,327] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 2
+[2026-06-23 11:14:51,573] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:14:51,606] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 11:14:51,609] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 11:14:51,612] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:17:41,038] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 2
+[2026-06-23 11:19:08,981] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:19:09,009] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 11:19:09,533] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 11:19:10,057] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:21:48,927] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 20
+[2026-06-23 11:23:22,467] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:23:22,493] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 11:23:22,522] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?. Sentiment: Positive (Score: 0.90)
+[2026-06-23 11:23:22,547] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:23:22,580] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:23:22,609] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq And Dow End Holiday-Shortened Week Higher As Investors Cheer US-Iran Peace Deal  SPCX, AMZN, ONDS, NFLX, TTWO In Focus
+[2026-06-23 11:23:22,639] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Intel taps industry veteran Seok-Hee Lee to lead foundry packaging push
+[2026-06-23 11:23:22,674] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Memory's price surge threatens Apple's 'magic formula'  and the economy: WSJ reporter. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:23:22,715] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Intel shares surge after Trump touts deal with Apple
+[2026-06-23 11:23:22,742] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Wall St indexes advance with boost from chips, Iran optimism
+[2026-06-23 11:23:22,777] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Intel Rallies to Record After Trump Touts Apple Chip Deal
+[2026-06-23 11:23:22,804] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: The Best Warren Buffett Dividend Stocks
+[2026-06-23 11:23:22,831] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Intel Soars After Trump Says It Will Make Chips in America
+[2026-06-23 11:23:22,853] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Apple CEO confirms price hikes, Take Two announces GTA 6 preorder date
+[2026-06-23 11:23:22,878] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: QQQ vs QQQM: Same Nasdaq-100 Index, One Clear Winner for Long-Term Investors
+[2026-06-23 11:23:22,910] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Tim Cook Says Chip Wars Will Take a Big Bite of Apple
+[2026-06-23 11:23:22,936] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: A Face Computer for $2,200? Snap Makes Another Pitch for Augmented Reality.
+[2026-06-23 11:23:22,963] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Berkshire Looked Like It Got a Bargain on Alphabet Stock. It Didn't.
+[2026-06-23 11:23:23,021] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Trump says Intel will make chips for Apple in a major win for U.S. manufacturing
+[2026-06-23 11:23:23,068] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: UK tribunal gives go ahead for $4 billion lawsuit against Apple over iCloud services
+[2026-06-23 11:23:23,071] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 14 articles...
+[2026-06-23 11:23:52,877] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq And Dow End Holiday-Shortened Week Higher As Investors Cheer US-Iran Peace Deal  SPCX, AMZN, ONDS, NFLX, TTWO In Focus' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:23:52,903] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Intel taps industry veteran Seok-Hee Lee to lead foundry packaging push' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:23:52,957] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Intel shares surge after Trump touts deal with Apple' to MongoDB. Sentiment: Positive (Score: 0.90)
+[2026-06-23 11:23:52,996] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Wall St indexes advance with boost from chips, Iran optimism' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:23:53,046] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Intel Rallies to Record After Trump Touts Apple Chip Deal' to MongoDB. Sentiment: Positive (Score: 0.95)
+[2026-06-23 11:23:53,076] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'The Best Warren Buffett Dividend Stocks' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:23:53,113] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Intel Soars After Trump Says It Will Make Chips in America' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:23:53,144] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Apple CEO confirms price hikes, Take Two announces GTA 6 preorder date' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:23:53,169] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'QQQ vs QQQM: Same Nasdaq-100 Index, One Clear Winner for Long-Term Investors' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:23:53,201] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Tim Cook Says Chip Wars Will Take a Big Bite of Apple' to MongoDB. Sentiment: Negative (Score: -0.75)
+[2026-06-23 11:23:53,229] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'A Face Computer for $2,200? Snap Makes Another Pitch for Augmented Reality.' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:23:53,257] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Berkshire Looked Like It Got a Bargain on Alphabet Stock. It Didn't.' to MongoDB. Sentiment: Negative (Score: -0.80)
+[2026-06-23 11:23:53,287] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Trump says Intel will make chips for Apple in a major win for U.S. manufacturing' to MongoDB. Sentiment: Positive (Score: 0.70)
+[2026-06-23 11:23:53,314] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'UK tribunal gives go ahead for $4 billion lawsuit against Apple over iCloud services' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:23:53,317] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:24:13,399] [WARNING] [cio_analyst.py:226] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 11:37:44,307] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 11:37:52,534] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 11:37:54,021] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 11:37:55,111] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 11:37:55,809] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 11:42:32,168] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: AAPL, timeframe_days: 3, limit: 20
+[2026-06-23 11:43:58,463] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple's foldable iPhone supply chain reportedly gears up for 2026 launch. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:43:58,493] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Is INTC Stock Jumping Over 5% In Overnight Trading?. Sentiment: Positive (Score: 0.80)
+[2026-06-23 11:43:58,525] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: MRVL, INTC, MU Stocks Hit 52-Week Highs Last Week: What Fueled The Surge?. Sentiment: Positive (Score: 0.90)
+[2026-06-23 11:43:58,566] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Google Has The Best Problem Money Cant Quite Buy. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:43:58,589] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Why Apple's War Chest Can't Win the Memory War. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:43:58,614] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500, Nasdaq And Dow End Holiday-Shortened Week Higher As Investors Cheer US-Iran Peace Deal  SPCX, AMZN, ONDS, NFLX, TTWO In Focus. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:43:58,640] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Intel taps industry veteran Seok-Hee Lee to lead foundry packaging push. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:43:58,672] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Memory's price surge threatens Apple's 'magic formula'  and the economy: WSJ reporter. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:43:58,698] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Intel shares surge after Trump touts deal with Apple. Sentiment: Positive (Score: 0.90)
+[2026-06-23 11:43:58,725] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Wall St indexes advance with boost from chips, Iran optimism. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:43:58,751] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Intel Rallies to Record After Trump Touts Apple Chip Deal. Sentiment: Positive (Score: 0.95)
+[2026-06-23 11:43:58,781] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: The Best Warren Buffett Dividend Stocks. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:43:58,808] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Intel Soars After Trump Says It Will Make Chips in America. Sentiment: Positive (Score: 0.85)
+[2026-06-23 11:43:58,841] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Apple CEO confirms price hikes, Take Two announces GTA 6 preorder date. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:43:58,869] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: QQQ vs QQQM: Same Nasdaq-100 Index, One Clear Winner for Long-Term Investors. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:43:58,894] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Tim Cook Says Chip Wars Will Take a Big Bite of Apple. Sentiment: Negative (Score: -0.75)
+[2026-06-23 11:43:58,924] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: A Face Computer for $2,200? Snap Makes Another Pitch for Augmented Reality.. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 11:43:58,958] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Berkshire Looked Like It Got a Bargain on Alphabet Stock. It Didn't.. Sentiment: Negative (Score: -0.80)
+[2026-06-23 11:43:58,993] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Trump says Intel will make chips for Apple in a major win for U.S. manufacturing. Sentiment: Positive (Score: 0.70)
+[2026-06-23 11:43:59,028] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: UK tribunal gives go ahead for $4 billion lawsuit against Apple over iCloud services. Sentiment: Negative (Score: -0.60)
+[2026-06-23 11:43:59,040] [INFO] [sentiment_scorer.py:25] [sentiment_scorer_node] No articles to score.
+[2026-06-23 11:43:59,088] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 11:44:27,977] [WARNING] [cio_analyst.py:226] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 11:46:30,355] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPY, timeframe_days: 3, limit: 20
+[2026-06-23 11:48:04,740] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: VOO Is About to Become the First $1 Trillion ETF
+[2026-06-23 11:48:04,767] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What 15,000 ETF Investors Were Searching for This Month
+[2026-06-23 11:48:04,796] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Logs Worst Day Since March, S&P 500 And Nasdaq Snap Win Streak After US-Iran Exchange Fire  SNDK, TSLA, GOOGL, META, IREN In Focus
+[2026-06-23 11:48:04,850] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?
+[2026-06-23 11:48:04,895] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500 and Nasdaq Gain As Chipmaker Stocks Revive, While Israel-Iran Ceasefire Aids Sentiment  AAPL, INTC, AAL, PSKY, CBRS In Focus
+[2026-06-23 11:48:04,934] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: The Most-Compared ETFs Right Now  And What They Reveal
+[2026-06-23 11:48:04,961] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF Fund Flows: A Beginner's Guide to the ETF.com Tool
+[2026-06-23 11:48:05,021] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Best ETFs for H1 2026: Winners, Losers, and What to Watch
+[2026-06-23 11:48:05,044] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF vs. Mutual Fund: Which Is Better for Your Money in 2026?
+[2026-06-23 11:48:05,085] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq, Dow Rise To Record Highs As Strong Tech Gains Outpower US-Iran War Uncertainty  MSFT, UBER, MRVL, HPE, MSTR Stocks In Focus
+[2026-06-23 11:48:05,115] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq End Lower As Investors Take Breather From AI And Chips  AAPL, ASTS, APLD, RIVN, ZVRA In Focus
+[2026-06-23 11:48:05,147] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Nasdaq Posts Worst Drop Since April 2025, S&P 500 And Dow Drop As Strong Jobs Data Ignites Rate Hike Bets  TSLA, GME, META, BA, MSTR, GOOGL In Focus
+[2026-06-23 11:48:05,173] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record Highs, S&P 500 And Nasdaq Climb Amid Hopes Of Diplomatic Resolution Between US and Iran IBM, STLA, SPOT, FCEL, EL In Focus
+[2026-06-23 11:48:05,200] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Vanguard index product becomes first ETF to top $1 trillion in assets
+[2026-06-23 11:48:05,224] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Closes At Record Highs On Iran Truce Optimism, While Nasdaq Snaps Four-Day Win Streak On Weak Chip Stocks   META, BA, AAL, DY, VRRM In Focus
+[2026-06-23 11:48:05,254] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500 And Nasdaq Close At Record Highs, Dow Climbs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus
+[2026-06-23 11:48:05,289] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Close At Record Highs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus
+[2026-06-23 11:48:05,313] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Drop As SpaceX, Broader Tech Weakness Outweighs US-Iran Hopes  SPCX, GOOGL, NFLX, COIN, MU In Focus
+[2026-06-23 11:48:05,344] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record High On Strong Banks And Industrial Stocks, Nasdaq And S&P 500 Slip On Tech Weakness  SPCX, YUM, HOOD, RIVN, AAPL, SNAP In Focus
+[2026-06-23 11:48:05,371] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq  AVGO, UNH, META, PINS, RUM In Focus
+[2026-06-23 11:48:05,373] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 20 articles...
+[2026-06-23 11:50:24,924] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 11:50:31,920] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 11:50:33,229] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 11:50:33,730] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 11:50:34,220] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 11:50:35,102] [WARNING] [chief_economist.py:94] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 11:59:43,641] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPCX, timeframe_days: 3, limit: 5
+[2026-06-23 12:01:22,522] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: SpaceX expands AI infrastructure business with US$6.3 billion Reflection AI deal
+[2026-06-23 12:01:22,547] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: A Lot of Leeway: SpaceXs High-Grade Debt Brings Out Skeptics
+[2026-06-23 12:01:22,577] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: RKLB Stock Slides Overnight: SpaceX Selloff Dulls Rocket Labs Record 16-Hour Space Force Mission
+[2026-06-23 12:01:22,605] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Stock market today: Dow, S&P 500, Nasdaq futures waver as Wall Street weighs US-Iran talks, AI trade
+[2026-06-23 12:01:22,631] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: US stocks end mostly lower, dragged by megacap tech; focus on Iran
+[2026-06-23 12:01:23,157] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-06-23 12:01:39,480] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'SpaceX expands AI infrastructure business with US$6.3 billion Reflection AI deal' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 12:01:39,510] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'A Lot of Leeway: SpaceXs High-Grade Debt Brings Out Skeptics' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:01:39,546] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'RKLB Stock Slides Overnight: SpaceX Selloff Dulls Rocket Labs Record 16-Hour Space Force Mission' to MongoDB. Sentiment: Negative (Score: -0.75)
+[2026-06-23 12:01:39,570] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'Stock market today: Dow, S&P 500, Nasdaq futures waver as Wall Street weighs US-Iran talks, AI trade' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:01:39,601] [INFO] [sentiment_scorer.py:123] [SCORER CACHE STORE] Saved scored sentiment for 'US stocks end mostly lower, dragged by megacap tech; focus on Iran' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 12:01:40,125] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 12:04:46,317] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 12:04:55,123] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 12:04:56,530] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 12:04:57,144] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 12:04:57,801] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 12:04:58,505] [WARNING] [chief_economist.py:99] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 12:07:18,484] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 12:07:24,841] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 12:07:26,347] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 12:07:27,327] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 12:07:27,831] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 12:07:28,709] [WARNING] [chief_economist.py:105] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 12:11:10,454] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPY, timeframe_days: 3, limit: 20
+[2026-06-23 12:12:31,725] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: VOO Is About to Become the First $1 Trillion ETF
+[2026-06-23 12:12:31,754] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What 15,000 ETF Investors Were Searching for This Month
+[2026-06-23 12:12:31,779] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Logs Worst Day Since March, S&P 500 And Nasdaq Snap Win Streak After US-Iran Exchange Fire  SNDK, TSLA, GOOGL, META, IREN In Focus
+[2026-06-23 12:12:31,805] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?
+[2026-06-23 12:12:31,829] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500 and Nasdaq Gain As Chipmaker Stocks Revive, While Israel-Iran Ceasefire Aids Sentiment  AAPL, INTC, AAL, PSKY, CBRS In Focus
+[2026-06-23 12:12:31,852] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: The Most-Compared ETFs Right Now  And What They Reveal
+[2026-06-23 12:12:31,877] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF Fund Flows: A Beginner's Guide to the ETF.com Tool
+[2026-06-23 12:12:31,912] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Best ETFs for H1 2026: Winners, Losers, and What to Watch
+[2026-06-23 12:12:31,941] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF vs. Mutual Fund: Which Is Better for Your Money in 2026?
+[2026-06-23 12:12:31,965] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq, Dow Rise To Record Highs As Strong Tech Gains Outpower US-Iran War Uncertainty  MSFT, UBER, MRVL, HPE, MSTR Stocks In Focus
+[2026-06-23 12:12:31,995] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq End Lower As Investors Take Breather From AI And Chips  AAPL, ASTS, APLD, RIVN, ZVRA In Focus
+[2026-06-23 12:12:32,024] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Nasdaq Posts Worst Drop Since April 2025, S&P 500 And Dow Drop As Strong Jobs Data Ignites Rate Hike Bets  TSLA, GME, META, BA, MSTR, GOOGL In Focus
+[2026-06-23 12:12:32,058] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record Highs, S&P 500 And Nasdaq Climb Amid Hopes Of Diplomatic Resolution Between US and Iran IBM, STLA, SPOT, FCEL, EL In Focus
+[2026-06-23 12:12:32,124] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Vanguard index product becomes first ETF to top $1 trillion in assets
+[2026-06-23 12:12:32,144] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Closes At Record Highs On Iran Truce Optimism, While Nasdaq Snaps Four-Day Win Streak On Weak Chip Stocks   META, BA, AAL, DY, VRRM In Focus
+[2026-06-23 12:12:32,169] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500 And Nasdaq Close At Record Highs, Dow Climbs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus
+[2026-06-23 12:12:32,196] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Close At Record Highs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus
+[2026-06-23 12:12:32,220] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Drop As SpaceX, Broader Tech Weakness Outweighs US-Iran Hopes  SPCX, GOOGL, NFLX, COIN, MU In Focus
+[2026-06-23 12:12:32,373] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record High On Strong Banks And Industrial Stocks, Nasdaq And S&P 500 Slip On Tech Weakness  SPCX, YUM, HOOD, RIVN, AAPL, SNAP In Focus
+[2026-06-23 12:12:32,658] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq  AVGO, UNH, META, PINS, RUM In Focus
+[2026-06-23 12:12:32,662] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 20 articles...
+[2026-06-23 12:13:21,706] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'VOO Is About to Become the First $1 Trillion ETF' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 12:13:21,735] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'What 15,000 ETF Investors Were Searching for This Month' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:13:21,762] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Dow Logs Worst Day Since March, S&P 500 And Nasdaq Snap Win Streak After US-Iran Exchange Fire  SNDK, TSLA, GOOGL, META, IREN In Focus' to MongoDB. Sentiment: Negative (Score: -0.75)
+[2026-06-23 12:13:21,804] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 12:13:21,840] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500 and Nasdaq Gain As Chipmaker Stocks Revive, While Israel-Iran Ceasefire Aids Sentiment  AAPL, INTC, AAL, PSKY, CBRS In Focus' to MongoDB. Sentiment: Positive (Score: 0.90)
+[2026-06-23 12:13:21,867] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'The Most-Compared ETFs Right Now  And What They Reveal' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:13:21,895] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'ETF Fund Flows: A Beginner's Guide to the ETF.com Tool' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:13:21,944] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Best ETFs for H1 2026: Winners, Losers, and What to Watch' to MongoDB. Sentiment: Positive (Score: 0.80)
+[2026-06-23 12:13:21,971] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'ETF vs. Mutual Fund: Which Is Better for Your Money in 2026?' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:13:22,023] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq, Dow Rise To Record Highs As Strong Tech Gains Outpower US-Iran War Uncertainty  MSFT, UBER, MRVL, HPE, MSTR Stocks In Focus' to MongoDB. Sentiment: Positive (Score: 0.90)
+[2026-06-23 12:13:22,052] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq End Lower As Investors Take Breather From AI And Chips  AAPL, ASTS, APLD, RIVN, ZVRA In Focus' to MongoDB. Sentiment: Negative (Score: 0.80)
+[2026-06-23 12:13:22,080] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Nasdaq Posts Worst Drop Since April 2025, S&P 500 And Dow Drop As Strong Jobs Data Ignites Rate Hike Bets  TSLA, GME, META, BA, MSTR, GOOGL In Focus' to MongoDB. Sentiment: Negative (Score: 0.85)
+[2026-06-23 12:13:22,106] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Dow Hits Record Highs, S&P 500 And Nasdaq Climb Amid Hopes Of Diplomatic Resolution Between US and Iran IBM, STLA, SPOT, FCEL, EL In Focus' to MongoDB. Sentiment: Positive (Score: 0.75)
+[2026-06-23 12:13:22,130] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Vanguard index product becomes first ETF to top $1 trillion in assets' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 12:13:22,154] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Dow Closes At Record Highs On Iran Truce Optimism, While Nasdaq Snaps Four-Day Win Streak On Weak Chip Stocks   META, BA, AAL, DY, VRRM In Focus' to MongoDB. Sentiment: Positive (Score: 0.80)
+[2026-06-23 12:13:22,183] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500 And Nasdaq Close At Record Highs, Dow Climbs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 12:13:22,224] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq Close At Record Highs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 12:13:22,267] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq Drop As SpaceX, Broader Tech Weakness Outweighs US-Iran Hopes  SPCX, GOOGL, NFLX, COIN, MU In Focus' to MongoDB. Sentiment: Negative (Score: -0.75)
+[2026-06-23 12:13:22,293] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Dow Hits Record High On Strong Banks And Industrial Stocks, Nasdaq And S&P 500 Slip On Tech Weakness  SPCX, YUM, HOOD, RIVN, AAPL, SNAP In Focus' to MongoDB. Sentiment: Positive (Score: 0.80)
+[2026-06-23 12:13:22,317] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq  AVGO, UNH, META, PINS, RUM In Focus' to MongoDB. Sentiment: Positive (Score: 0.80)
+[2026-06-23 12:13:22,319] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 15:43:50,622] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPY, timeframe_days: 3, limit: 20
+[2026-06-23 15:45:03,065] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 15:45:13,304] [ERROR] [forex_factory.py:33] Error fetching ForexFactory events: [Scheduler] Timeout after 10.0s on 'forexfactory'.
+[2026-06-23 15:45:13,308] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 15:45:14,748] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 15:45:15,562] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 15:45:16,057] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 15:48:07,232] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 15:48:12,836] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 15:48:14,149] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 15:48:14,825] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 15:48:15,337] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 15:49:59,414] [WARNING] [chief_economist.py:105] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 15:54:19,533] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 15:54:25,198] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 15:54:26,655] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 15:54:27,780] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 15:54:28,456] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 15:54:29,586] [WARNING] [chief_economist.py:105] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 16:00:19,054] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-23 16:00:29,026] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-23 16:00:34,501] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-23 16:00:35,448] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-23 16:00:36,143] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-23 16:00:37,250] [WARNING] [chief_economist.py:105] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 16:13:11,756] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-06-23 16:14:44,336] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: NVDA, timeframe_days: 3, limit: 10
+[2026-06-23 16:17:28,321] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Qualcomm Nears Deal for AI Chip Startup Modular
+[2026-06-23 16:17:28,360] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: NVIDIA Stock's Next Big Move Might Not Involve A GPU
+[2026-06-23 16:17:28,390] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: A Lot of Leeway: SpaceXs High-Grade Debt Brings Out Skeptics. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:17:28,416] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P, Nasdaq end lower on semiconductor selloff as AI spending concerns mount
+[2026-06-23 16:17:28,452] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: The AI Arms Race Isnt About Technology  Its About Electricity
+[2026-06-23 16:17:28,484] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: How Many Barrels of Oil Do AI Data Centers Consume on a Daily Basis?
+[2026-06-23 16:17:28,506] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Apple and Intel Just Signed a Historic Chip Partnership. Is the Silicon Pioneer a No-Brainer Buy Today?
+[2026-06-23 16:17:28,529] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Is Fluence Energy (FLNC) a Hidden AI Play With Breakout Potential?
+[2026-06-23 16:17:28,562] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Infleqtion (INFQ): Social Media’s Favorite Quantum Stock With 10X Potential
+[2026-06-23 16:17:28,605] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Tech stocks tumble for a second day. Here's what's behind the selloff.
+[2026-06-23 16:17:28,607] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 9 articles...
+[2026-06-23 16:18:08,986] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Qualcomm Nears Deal for AI Chip Startup Modular' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:18:09,043] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'NVIDIA Stock's Next Big Move Might Not Involve A GPU' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:18:09,075] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'S&P, Nasdaq end lower on semiconductor selloff as AI spending concerns mount' to MongoDB. Sentiment: Negative (Score: -0.75)
+[2026-06-23 16:18:09,110] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'The AI Arms Race Isnt About Technology  Its About Electricity' to MongoDB. Sentiment: Positive (Score: 0.90)
+[2026-06-23 16:18:09,134] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'How Many Barrels of Oil Do AI Data Centers Consume on a Daily Basis?' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:18:09,162] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Apple and Intel Just Signed a Historic Chip Partnership. Is the Silicon Pioneer a No-Brainer Buy Today?' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:18:09,198] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Is Fluence Energy (FLNC) a Hidden AI Play With Breakout Potential?' to MongoDB. Sentiment: Positive (Score: 0.75)
+[2026-06-23 16:18:09,496] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Infleqtion (INFQ): Social Media’s Favorite Quantum Stock With 10X Potential' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:18:09,526] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Tech stocks tumble for a second day. Here's what's behind the selloff.' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 16:18:09,528] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 16:18:44,385] [WARNING] [cio_analyst.py:232] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 16:20:35,620] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPY, timeframe_days: 3, limit: 20
+[2026-06-23 16:23:39,935] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Why Retirees With Over $1 Million Should Hold a 5-Year Cash and Bond Ladder Instead of Cashing Out for Yield
+[2026-06-23 16:23:40,030] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: VOO Is About to Become the First $1 Trillion ETF. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:23:40,058] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: What 15,000 ETF Investors Were Searching for This Month. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:23:40,084] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Dow Logs Worst Day Since March, S&P 500 And Nasdaq Snap Win Streak After US-Iran Exchange Fire  SNDK, TSLA, GOOGL, META, IREN In Focus. Sentiment: Negative (Score: -0.75)
+[2026-06-23 16:23:40,114] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?. Sentiment: Negative (Score: -0.60)
+[2026-06-23 16:23:40,146] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500 and Nasdaq Gain As Chipmaker Stocks Revive, While Israel-Iran Ceasefire Aids Sentiment  AAPL, INTC, AAL, PSKY, CBRS In Focus. Sentiment: Positive (Score: 0.90)
+[2026-06-23 16:23:40,208] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: The Most-Compared ETFs Right Now  And What They Reveal. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:23:40,249] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: ETF Fund Flows: A Beginner's Guide to the ETF.com Tool. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:23:40,281] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Best ETFs for H1 2026: Winners, Losers, and What to Watch. Sentiment: Positive (Score: 0.80)
+[2026-06-23 16:23:40,312] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: ETF vs. Mutual Fund: Which Is Better for Your Money in 2026?. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:23:40,336] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500, Nasdaq, Dow Rise To Record Highs As Strong Tech Gains Outpower US-Iran War Uncertainty  MSFT, UBER, MRVL, HPE, MSTR Stocks In Focus. Sentiment: Positive (Score: 0.90)
+[2026-06-23 16:23:40,363] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500, Nasdaq End Lower As Investors Take Breather From AI And Chips  AAPL, ASTS, APLD, RIVN, ZVRA In Focus. Sentiment: Negative (Score: 0.80)
+[2026-06-23 16:23:40,390] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Nasdaq Posts Worst Drop Since April 2025, S&P 500 And Dow Drop As Strong Jobs Data Ignites Rate Hike Bets  TSLA, GME, META, BA, MSTR, GOOGL In Focus. Sentiment: Negative (Score: 0.85)
+[2026-06-23 16:23:40,422] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Dow Hits Record Highs, S&P 500 And Nasdaq Climb Amid Hopes Of Diplomatic Resolution Between US and Iran IBM, STLA, SPOT, FCEL, EL In Focus. Sentiment: Positive (Score: 0.75)
+[2026-06-23 16:23:40,457] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Vanguard index product becomes first ETF to top $1 trillion in assets. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:23:40,483] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Dow Closes At Record Highs On Iran Truce Optimism, While Nasdaq Snaps Four-Day Win Streak On Weak Chip Stocks   META, BA, AAL, DY, VRRM In Focus. Sentiment: Positive (Score: 0.80)
+[2026-06-23 16:23:40,512] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500, Nasdaq Close At Record Highs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:23:40,543] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500 And Nasdaq Close At Record Highs, Dow Climbs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:23:40,578] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: S&P 500, Nasdaq Drop As SpaceX, Broader Tech Weakness Outweighs US-Iran Hopes  SPCX, GOOGL, NFLX, COIN, MU In Focus. Sentiment: Negative (Score: -0.75)
+[2026-06-23 16:23:40,610] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Dow Hits Record High On Strong Banks And Industrial Stocks, Nasdaq And S&P 500 Slip On Tech Weakness  SPCX, YUM, HOOD, RIVN, AAPL, SNAP In Focus. Sentiment: Positive (Score: 0.80)
+[2026-06-23 16:23:40,612] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 1 articles...
+[2026-06-23 16:23:47,428] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Why Retirees With Over $1 Million Should Hold a 5-Year Cash and Bond Ladder Instead of Cashing Out for Yield' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:23:47,430] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 16:23:55,884] [WARNING] [cio_analyst.py:232] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 16:26:37,639] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 10
+[2026-06-23 16:29:21,577] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Nasdaq, S&P 500, Dow Futures Slip As Chip Stocks Pull Back: LULU, NFLX, KEEL, MRLN Stocks In Focus
+[2026-06-23 16:29:21,607] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gunman likely targeted Trump administration, acting US attorney general says
+[2026-06-23 16:29:21,630] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Trump says shooter at correspondents dinner is in custody, DA unveils charges
+[2026-06-23 16:29:21,658] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Trump safely evacuated from White House correspondents dinner after shooting
+[2026-06-23 16:29:21,703] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Trump removed from White  House correspondents dinner after security alarm
+[2026-06-23 16:29:21,977] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: What 15,000 ETF Investors Were Searching for This Month. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:29:22,004] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?. Sentiment: Negative (Score: -0.60)
+[2026-06-23 16:29:22,057] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Best ETFs to Buy After Hot Inflation Data
+[2026-06-23 16:29:22,097] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: The Most-Compared ETFs Right Now  And What They Reveal. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:29:22,130] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: ETF Fund Flows: A Beginner's Guide to the ETF.com Tool. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:29:22,132] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 6 articles...
+[2026-06-23 16:29:39,673] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Nasdaq, S&P 500, Dow Futures Slip As Chip Stocks Pull Back: LULU, NFLX, KEEL, MRLN Stocks In Focus' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:29:39,731] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Gunman likely targeted Trump administration, acting US attorney general says' to MongoDB. Sentiment: Negative (Score: -0.80)
+[2026-06-23 16:29:39,783] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Trump says shooter at correspondents dinner is in custody, DA unveils charges' to MongoDB. Sentiment: Negative (Score: -0.80)
+[2026-06-23 16:29:39,811] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Trump safely evacuated from White House correspondents dinner after shooting' to MongoDB. Sentiment: Negative (Score: -0.80)
+[2026-06-23 16:29:39,838] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Trump removed from White  House correspondents dinner after security alarm' to MongoDB. Sentiment: Negative (Score: -0.80)
+[2026-06-23 16:29:39,877] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Best ETFs to Buy After Hot Inflation Data' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:29:39,879] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 16:29:52,007] [WARNING] [cio_analyst.py:232] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-23 16:31:16,863] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: IWM, timeframe_days: 3, limit: 10
+[2026-06-23 16:33:46,111] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Why Wall Street's Summer Slump Will Be Short-Lived
+[2026-06-23 16:33:46,141] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Small Caps Options Traders Should See This Chart
+[2026-06-23 16:33:46,165] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Russell 2000 Extends Records, Meta Jumps 5%: What's Moving Markets Thursday?
+[2026-06-23 16:33:46,190] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: John Hancocks CEO Explains the Explosive Growth of Active ETFs
+[2026-06-23 16:33:46,214] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Software Slump Resumes, Bitcoin Plunges To 66,000: What's Moving Markets Wednesday?
+[2026-06-23 16:33:46,244] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: These Minnows Are Smashing The Magnificent Seven
+[2026-06-23 16:33:46,266] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Silver Breaks $101, Intel Stock Plunges 17%: What's Moving Markets Friday?
+[2026-06-23 16:33:46,290] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: This Under-the-Radar Pet Stock Could Be the Biggest Meme Buy in January 2026
+[2026-06-23 16:33:46,314] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Stocks Tumble, Treasury Yields Jump To 5-Month Highs: What's Moving Markets Tuesday?
+[2026-06-23 16:33:46,338] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Natural Gas Rallies 30%, Silver Jumps 13% To $116: What's Moving Markets Monday?
+[2026-06-23 16:33:46,340] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-06-23 16:34:07,982] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Why Wall Street's Summer Slump Will Be Short-Lived' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:34:08,020] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Small Caps Options Traders Should See This Chart' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-23 16:34:08,062] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Russell 2000 Extends Records, Meta Jumps 5%: What's Moving Markets Thursday?' to MongoDB. Sentiment: Positive (Score: 0.95)
+[2026-06-23 16:34:08,098] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'John Hancocks CEO Explains the Explosive Growth of Active ETFs' to MongoDB. Sentiment: Positive (Score: 0.90)
+[2026-06-23 16:34:08,127] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Software Slump Resumes, Bitcoin Plunges To 66,000: What's Moving Markets Wednesday?' to MongoDB. Sentiment: Negative (Score: -0.80)
+[2026-06-23 16:34:08,161] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'These Minnows Are Smashing The Magnificent Seven' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-23 16:34:08,199] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Silver Breaks $101, Intel Stock Plunges 17%: What's Moving Markets Friday?' to MongoDB. Sentiment: Negative (Score: -0.60)
+[2026-06-23 16:34:08,231] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'This Under-the-Radar Pet Stock Could Be the Biggest Meme Buy in January 2026' to MongoDB. Sentiment: Positive (Score: 0.75)
+[2026-06-23 16:34:08,258] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Stocks Tumble, Treasury Yields Jump To 5-Month Highs: What's Moving Markets Tuesday?' to MongoDB. Sentiment: Negative (Score: -0.70)
+[2026-06-23 16:34:08,284] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'Natural Gas Rallies 30%, Silver Jumps 13% To $116: What's Moving Markets Monday?' to MongoDB. Sentiment: Positive (Score: 0.80)
+[2026-06-23 16:34:08,287] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-23 16:34:17,682] [WARNING] [cio_analyst.py:232] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-24 11:33:29,078] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPY, timeframe_days: 3, limit: 20
+[2026-06-24 11:35:51,234] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: VOO Is About to Become the First $1 Trillion ETF
+[2026-06-24 11:35:51,247] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What 15,000 ETF Investors Were Searching for This Month
+[2026-06-24 11:35:51,261] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Logs Worst Day Since March, S&P 500 And Nasdaq Snap Win Streak After US-Iran Exchange Fire  SNDK, TSLA, GOOGL, META, IREN In Focus
+[2026-06-24 11:35:51,276] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Rob Arnott: Will SpaceX Create The Biggest Bubble Ever?
+[2026-06-24 11:35:51,293] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500 and Nasdaq Gain As Chipmaker Stocks Revive, While Israel-Iran Ceasefire Aids Sentiment  AAPL, INTC, AAL, PSKY, CBRS In Focus
+[2026-06-24 11:35:51,306] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: The Most-Compared ETFs Right Now  And What They Reveal
+[2026-06-24 11:35:51,322] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF Fund Flows: A Beginner's Guide to the ETF.com Tool
+[2026-06-24 11:35:51,348] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Best ETFs for H1 2026: Winners, Losers, and What to Watch
+[2026-06-24 11:35:51,362] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF Zoo: The Leveraged ETF Frenzy Picks Up Momentum
+[2026-06-24 11:35:51,376] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ETF vs. Mutual Fund: Which Is Better for Your Money in 2026?
+[2026-06-24 11:35:51,389] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq, Dow Rise To Record Highs As Strong Tech Gains Outpower US-Iran War Uncertainty  MSFT, UBER, MRVL, HPE, MSTR Stocks In Focus
+[2026-06-24 11:35:51,403] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq End Lower As Investors Take Breather From AI And Chips  AAPL, ASTS, APLD, RIVN, ZVRA In Focus
+[2026-06-24 11:35:51,417] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Nasdaq Posts Worst Drop Since April 2025, S&P 500 And Dow Drop As Strong Jobs Data Ignites Rate Hike Bets  TSLA, GME, META, BA, MSTR, GOOGL In Focus
+[2026-06-24 11:35:51,444] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Hits Record Highs, S&P 500 And Nasdaq Climb Amid Hopes Of Diplomatic Resolution Between US and Iran IBM, STLA, SPOT, FCEL, EL In Focus
+[2026-06-24 11:35:51,461] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq, Dow Drop As Broader Tech And AI Selloff Continues  SPCX, BLZE, WMT, WEN, MU In Focus
+[2026-06-24 11:35:51,477] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Vanguard index product becomes first ETF to top $1 trillion in assets
+[2026-06-24 11:35:51,490] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Closes At Record Highs On Iran Truce Optimism, While Nasdaq Snaps Four-Day Win Streak On Weak Chip Stocks   META, BA, AAL, DY, VRRM In Focus
+[2026-06-24 11:35:51,505] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Close At Record Highs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus
+[2026-06-24 11:35:51,524] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500 And Nasdaq Close At Record Highs, Dow Climbs Amid Hopes Of Diplomatic Resolution Between US And Iran  MU, QCOM, LUNR, LLY, CODX In Focus
+[2026-06-24 11:35:51,585] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Drop As SpaceX, Broader Tech Weakness Outweighs US-Iran Hopes  SPCX, GOOGL, NFLX, COIN, MU In Focus
+[2026-06-24 11:35:51,599] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 20 articles...
+[2026-06-24 11:36:41,492] [WARNING] [sentiment_scorer.py:79] [sentiment_scorer_node] 402 Rate Limit / Depleted Credits hit on HuggingFace model. Falling back to NVIDIA Base Model...
+[2026-06-24 11:50:58,331] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: SPY, timeframe_days: 3, limit: 2
+[2026-06-24 11:52:28,329] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: VOO Is About to Become the First $1 Trillion ETF
+[2026-06-24 11:52:28,344] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What 15,000 ETF Investors Were Searching for This Month
+[2026-06-24 11:52:28,347] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 2 articles...
+[2026-06-24 11:52:37,399] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'VOO Is About to Become the First $1 Trillion ETF' to MongoDB. Sentiment: Positive (Score: 0.85)
+[2026-06-24 11:52:37,415] [INFO] [sentiment_scorer.py:142] [SCORER CACHE STORE] Saved scored sentiment for 'What 15,000 ETF Investors Were Searching for This Month' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-06-24 11:52:37,417] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-06-24 11:52:43,511] [WARNING] [cio_analyst.py:232] [cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-06-24 12:38:27,375] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-24 12:38:38,168] [ERROR] [forex_factory.py:33] Error fetching ForexFactory events: [Scheduler] Timeout after 10.0s on 'forexfactory'.
+[2026-06-24 12:38:38,172] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-24 12:38:39,607] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-24 12:38:40,756] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-24 12:38:41,205] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-24 12:59:50,551] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-06-24 13:00:00,564] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-06-24 13:00:01,777] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-06-24 13:00:02,958] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-06-24 13:00:03,572] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-06-24 13:01:10,378] [WARNING] [chief_economist.py:105] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...

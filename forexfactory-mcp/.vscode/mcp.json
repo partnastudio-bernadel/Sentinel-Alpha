@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "forexfactory_mcp": {
+      "type": "streamable-http",
+      "url": "http://localhost:8000/mcp"
+    }
+  }
+}

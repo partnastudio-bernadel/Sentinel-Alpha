@@ -1,0 +1,9 @@
+[run]
+source = functions
+omit =
+    venv/*
+    */test_*.py
+
+[report]
+fail_under = 40
+show_missing = True

@@ -1,0 +1,1 @@
+from functions.aggregator.aggregator import fetch_aggregate_all_news

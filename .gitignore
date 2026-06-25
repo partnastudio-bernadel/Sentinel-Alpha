@@ -1,0 +1,16 @@
+.env
+.env.local
+.venv
+venv/
+__pycache__/
+*.pyc
+.ruff_cache/
+data/news_*.csv
+data/news_*.json
+test_sentiment.py
+data/*
+!data/financial_sentiment.csv
+local/
+tutorials/
+.coverage
+coverage.xml
