@@ -65,8 +65,8 @@ graph TD
     %% The Governor
     subgraph Governor ["The Governor (IntentCore Validation)"]
         DB -- "Raw Signal" --> IG{"Intent-Governor"}
-        IG -- "Reject (Hallucination)" --> Audit["Audit DB"]
-        IG -- "Approve (Compliant)" --> Dash["Retail Dashboard"]
+        IG -- "Reject (Hallucination)" --> Audit["Audit DB (Fail-Safe)"]
+        IG -- "Approve (Compliant)" --> Dash["Retail Dashboard UI"]
     end
     class IG,Dash passNode;
     class Audit failNode;
