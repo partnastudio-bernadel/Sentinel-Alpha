@@ -28,7 +28,7 @@ def tension_extractor_node(state: MacroState, config: RunnableConfig, store: Bas
     _, _, _, kimi_llm_config, _, _, _ = setup_clients_and_embeddings(env_path=env_path, csv_path=csv_path)
     
     tension_extractor_agent = create_tension_extractor_agent(
-        prompt_path=os.path.join(sentiment_dir, "prompts", "tension_extractor_prompt.txt"),
+        prompt_id="tension_extractor_prompt.txt",
         llm_config=kimi_llm_config
     )
     

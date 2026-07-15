@@ -30,7 +30,7 @@ def textual_inertia_node(state: MacroState, config: RunnableConfig, store: BaseS
     
     # Instantiate the agent natively using the factory
     textual_inertia_agent = create_textual_inertia_agent(
-        prompt_path=os.path.join(sentiment_dir, "prompts", "textual_inertia_prompt.txt"),
+        prompt_id="textual_inertia_prompt.txt",
         llm_config=kimi_llm_config
     )
     
