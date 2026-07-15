@@ -68,7 +68,7 @@ FinRobot==0.1.5
 FLAML==2.6.0
 flatbuffers==25.12.19
 fonttools==4.63.0
--e git+https://github.com/partnastudio-bernadel/Sentinel-Alpha.git@bcd0d6f99b7ddb22a71023df7d4d6c736a2c9219#egg=forexfactory_mcp&subdirectory=forexfactory-mcp
+-e ./forexfactory-mcp
 frozenlist==1.8.0
 fsspec==2026.4.0
 gitdb==4.0.12
