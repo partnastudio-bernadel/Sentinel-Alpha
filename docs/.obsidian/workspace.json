@@ -11,14 +11,10 @@
             "id": "1c9128b8c87b85cc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "reference/mcp_limitations.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "mcp_limitations"
+              "title": "New tab"
             }
           }
         ]

@@ -8,6 +8,7 @@ class SentimentState(TypedDict):
     holdings: int
     force_rescore: bool
     cache_buster: Optional[float]
+    async_mode: bool
     
     # Store references/pointers to articles and documents rather than bloating the state
     raw_article_ids: List[str]

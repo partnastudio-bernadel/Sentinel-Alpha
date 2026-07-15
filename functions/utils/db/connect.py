@@ -1,4 +1,5 @@
 import os
+import certifi
 from pymongo import MongoClient
 
 _client = None
@@ -9,7 +10,7 @@ def get_db_client():
         mongodb_uri = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
         _client = MongoClient(
             mongodb_uri, 
-            tlsAllowInvalidCertificates=True,
+            tlsCAFile=certifi.where(),
             maxIdleTimeMS=60000,
             socketTimeoutMS=600000,
             connectTimeoutMS=10000,

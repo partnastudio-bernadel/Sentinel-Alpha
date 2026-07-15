@@ -24,7 +24,8 @@ def run_sentiment_analysis(
     limit: int = 5,
     holdings: str = "5",
     csv_path: str = None,
-    env_path: str = None
+    env_path: str = None,
+    async_mode: bool = False
 ) -> dict:
     """Runs the LangGraph news sentiment analysis pipeline natively."""
     if env_path is None:
@@ -52,7 +53,8 @@ def run_sentiment_analysis(
         "ticker": ticker.upper().strip(),
         "timeframe_days": 3,  # default fallback
         "limit": limit,
-        "holdings": holdings
+        "holdings": holdings,
+        "async_mode": async_mode
     }
     
     final_state = None
@@ -101,6 +103,11 @@ def main():
         default=None,
         help="Path to environment file (default: .env.local)."
     )
+    parser.add_argument(
+        "--async-mode", "-a",
+        action="store_true",
+        help="Run LLM processing asynchronously (requires asyncio support in pipeline)."
+    )
     
     args = parser.parse_args()
     
@@ -112,7 +119,8 @@ def main():
             limit=args.limit,
             holdings=args.holdings,
             csv_path=args.csv,
-            env_path=args.env
+            env_path=args.env,
+            async_mode=args.async_mode
         )
         print("\n================ SENTIMENT ANALYSIS REPORT ================")
         print(json.dumps(report, indent=2))

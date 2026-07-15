@@ -37,9 +37,9 @@ class IntentRouter:
         self.parser = PydanticOutputParser(pydantic_object=IntentClassification)
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", "You are the Intent Router for Sentinel Alpha, an autonomous financial intelligence engine.\n\n"
-                       "Your job is to classify incoming user requests or webhook payloads into one of the following intents:\n"
-                       "1. INTENT_UPDATE_MACRO: The user or system wants to fetch, ingest, or update macro-economic events (e.g. CPI, GDP, calendar sweeps).\n"
-                       "2. INTENT_SCORE_SECTOR: The user or system wants to score sentiment for a specific ticker, ETF, or run a portfolio scan.\n"
+                       "Your job is to classify incoming user requests or webhook news payloads into one of the following intents:\n"
+                       "1. INTENT_UPDATE_MACRO: The payload is a breaking news headline about macro-economic data (e.g., CPI, GDP, interest rates, Nonfarm payrolls, Federal Reserve), OR the user wants to fetch/update macro events.\n"
+                       "2. INTENT_SCORE_SECTOR: The payload is a breaking news headline about a specific company, ticker, or sector (e.g., Apple, Nvidia, Tech), OR the user wants to score sentiment for a ticker.\n"
                        "3. INTENT_CONVERSATIONAL: The user is asking a general question about the market, asking why Sentinel made a decision, or asking for current state/context.\n"
                        "4. INTENT_UNKNOWN: The intent cannot be determined.\n\n"
                        "Extract any relevant parameters (e.g., 'ticker': 'AAPL', 'event': 'CPI m/m').\n\n"

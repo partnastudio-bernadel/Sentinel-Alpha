@@ -12,6 +12,7 @@ import logging
 from functions.governance.runtime import IntentCoreRuntime
 from functions.api.router import IntentRouter
 from functions.utils.db.connect import get_db_client
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
@@ -55,8 +56,14 @@ app.add_middleware(
 )
 
 # Initialize DB and Runtime
-project_root = Path(__file__).resolve().parents[3]
+project_root = Path(__file__).resolve().parents[2]
 scripts_dir = project_root / "scripts"
+
+# Load environment variables
+env_path = project_root / ".env.local"
+if not env_path.exists():
+    env_path = project_root / ".env"
+load_dotenv(env_path)
 
 # Note: We are migrating away from SQLite. 
 # For now runtime is initialized to prevent breaking old UI code,

@@ -70,16 +70,25 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
     scorer_agent = create_react_agent(llm, tools=[retrieve_calibration_examples], prompt=system_prompt, response_format=SentimentAnalysisReport)
     
     # Score in batches
-    from functions.utils.news.scoring import batch_score_articles
+    from functions.utils.news.scoring import batch_score_articles, async_batch_score_articles
+    
+    is_async = state.get("async_mode", False)
+    
     try:
-        merged_results, _ = batch_score_articles(
-            all_articles=articles_to_score,
-            scorer_agent=scorer_agent
-        )
+        if is_async:
+            merged_results, _ = async_batch_score_articles(
+                all_articles=articles_to_score,
+                scorer_agent=scorer_agent
+            )
+        else:
+            merged_results, _ = batch_score_articles(
+                all_articles=articles_to_score,
+                scorer_agent=scorer_agent
+            )
     except Exception as e:
         error_str = str(e).lower()
-        if "402" in error_str or "depleted" in error_str:
-            logger.warning("[sentiment_scorer_node] 402 Rate Limit / Depleted Credits hit on HuggingFace model. Falling back to NVIDIA Base Model...")
+        if "402" in error_str or "depleted" in error_str or "400" in error_str or "model_not_supported" in error_str:
+            logger.warning("[sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...")
             # Rebuild LLM using NVIDIA base model
             llm = build_chat_model(
                 model=base_llm_config.get("model"),
@@ -88,10 +97,16 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
             )
             scorer_agent = create_react_agent(llm, tools=[retrieve_calibration_examples], prompt=system_prompt, response_format=SentimentAnalysisReport)
             
-            merged_results, _ = batch_score_articles(
-                all_articles=articles_to_score,
-                scorer_agent=scorer_agent
-            )
+            if is_async:
+                merged_results, _ = async_batch_score_articles(
+                    all_articles=articles_to_score,
+                    scorer_agent=scorer_agent
+                )
+            else:
+                merged_results, _ = batch_score_articles(
+                    all_articles=articles_to_score,
+                    scorer_agent=scorer_agent
+                )
         else:
             raise e
     

@@ -603,3 +603,25 @@
 [2026-06-24 13:00:02,958] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
 [2026-06-24 13:00:03,572] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
 [2026-06-24 13:01:10,378] [WARNING] [chief_economist.py:105] [chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...
+[2026-07-13 16:29:33,313] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 5
+[2026-07-13 16:32:16,981] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: AIQ Gained 25% While Everyone Was Busy Watching ANET
+[2026-07-13 16:32:17,005] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Global oil prices top $83 a barrel as Trump reimposes Strait of Hormuz blockade
+[2026-07-13 16:32:17,029] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Fed Should Hike “in the Near Term” if CPI & PPI this Week Are “Hot”: Fed’s Waller. So at the July Meeting? Treasury Yields Jump
+[2026-07-13 16:32:17,055] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: How Women in Finance Are Building Professional Networks That Make a Difference
+[2026-07-13 16:32:17,083] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Minnesota prosecutors obtain long withheld evidence in probe into fatal shootings of Good, Pretti
+[2026-07-13 16:32:17,085] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-07-13 16:33:20,608] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 5
+[2026-07-13 16:35:58,847] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 5
+[2026-07-13 16:36:07,251] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: AIQ Gained 25% While Everyone Was Busy Watching ANET
+[2026-07-13 16:36:07,275] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Global oil prices top $83 a barrel as Trump reimposes Strait of Hormuz blockade
+[2026-07-13 16:36:07,305] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Fed Should Hike “in the Near Term” if CPI & PPI this Week Are “Hot”: Fed’s Waller. So at the July Meeting? Treasury Yields Jump
+[2026-07-13 16:36:07,327] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: How Women in Finance Are Building Professional Networks That Make a Difference
+[2026-07-13 16:36:07,348] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Minnesota prosecutors obtain long withheld evidence in probe into fatal shootings of Good, Pretti
+[2026-07-13 16:36:07,350] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-07-13 16:39:24,492] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: AIQ Gained 25% While Everyone Was Busy Watching ANET
+[2026-07-13 16:39:24,525] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Global oil prices top $83 a barrel as Trump reimposes Strait of Hormuz blockade
+[2026-07-13 16:39:24,546] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Fed Should Hike “in the Near Term” if CPI & PPI this Week Are “Hot”: Fed’s Waller. So at the July Meeting? Treasury Yields Jump
+[2026-07-13 16:39:24,575] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: How Women in Finance Are Building Professional Networks That Make a Difference
+[2026-07-13 16:39:24,605] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Minnesota prosecutors obtain long withheld evidence in probe into fatal shootings of Good, Pretti
+[2026-07-13 16:39:24,608] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-07-13 16:39:26,407] [WARNING] [sentiment_scorer.py:82] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
