@@ -14,3 +14,14 @@ local/
 tutorials/
 .coverage
 coverage.xml
+
+# IDEs and local logs
+.vscode/
+*.log
+debug.log
+
+# Media files
+*.mp3
+
+# Secret keys/Credentials
+*.pem
