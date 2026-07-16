@@ -53,7 +53,7 @@ def chief_economist_node(state: MacroState, config: RunnableConfig) -> Dict[str,
     )
     inputs = {"messages": [("human", cio_message)]}
 
-    max_retries = 3 if alt_api_key else 1
+    max_retries = 3
     attempt = 0
     final_report_msg = ""
     
@@ -101,11 +101,27 @@ def chief_economist_node(state: MacroState, config: RunnableConfig) -> Dict[str,
             break
         except Exception as e:
             error_str = str(e).lower()
-            is_rate_limit = "429" in error_str or "too many requests" in error_str or "rate limit" in error_str
-            if is_rate_limit and attempt < max_retries:
-                logger.warning("[chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...")
-                base_llm_config["api_key"] = alt_api_key
-                continue
+            is_api_error = (
+                "503" in error_str or 
+                "502" in error_str or 
+                "504" in error_str or 
+                "resourceexhausted" in error_str or 
+                "429" in error_str or 
+                "400" in error_str or 
+                "depleted" in error_str or 
+                "model_not_supported" in error_str
+            )
+            if is_api_error and attempt < max_retries:
+                primary_tooling_model = os.getenv("NVIDIA_TOOLING_MODEL", "deepseek-ai/deepseek-v4-flash").strip('"\' ')
+                if base_llm_config.get("model") == primary_tooling_model:
+                    fallback_model = os.getenv("NVIDIA_TOOLING_MODEL_ALT", "meta/llama-3.1-70b-instruct").strip('"\' ')
+                    logger.warning(f"[chief_economist_node] API error on primary tooling model. Falling back to: {fallback_model}")
+                    base_llm_config["model"] = fallback_model
+                    continue
+                elif "429" in error_str and alt_api_key:
+                    logger.warning("[chief_economist_node] 429 Rate Limit hit. Switching to alternate API key and retrying...")
+                    base_llm_config["api_key"] = alt_api_key
+                    continue
             raise e
     
     # Goal 4: Enforce Pydantic schema generation with LangChain's with_structured_output

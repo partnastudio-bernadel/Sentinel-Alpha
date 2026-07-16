@@ -31,6 +31,7 @@ def fetch_aggregate_all_news(symbol: str = "AAPL", limit: int = 100) -> pd.DataF
     Example:
         fetch_aggregate_all_news(symbol="AAPL", limit=50)
     """
+    import concurrent.futures
     aggregated_dfs = []
     
     # 1. OpenBB Platform Providers
@@ -44,6 +45,8 @@ def fetch_aggregate_all_news(symbol: str = "AAPL", limit: int = 100) -> pd.DataF
         ("benzinga", "company", "benzinga_api_key")
     ]
     
+    # Pre-set credentials on the main thread to avoid multi-threaded race conditions
+    active_obb_providers = []
     for provider, endpoint_type, credential_attr in obb_providers:
         if credential_attr:
             env_val = os.getenv(credential_attr.upper())
@@ -52,7 +55,19 @@ def fetch_aggregate_all_news(symbol: str = "AAPL", limit: int = 100) -> pd.DataF
             if not getattr(obb.user.credentials, credential_attr, None):
                 print(f"[-] Skipping OpenBB {provider.upper()}: Key not set")
                 continue
+        active_obb_providers.append((provider, endpoint_type, credential_attr))
                 
+    # 2. Custom Web/Official API Providers
+    custom_fetchers = [
+        ("alpha-vantage", fetch_alpha_vantage),
+        ("news_api", fetch_news_api),
+        ("seeking-alpha", fetch_seeking_alpha_rapidapi),
+        ("nasdaq", fetch_nasdaq_api),
+        ("finviz", fetch_finviz_scrape)
+    ]
+    
+    def run_obb_provider(p_info):
+        provider, endpoint_type, _ = p_info
         print(f"[+] Fetching OpenBB {provider.upper()}...")
         try:
             if endpoint_type == "company":
@@ -63,29 +78,38 @@ def fetch_aggregate_all_news(symbol: str = "AAPL", limit: int = 100) -> pd.DataF
                 df = res.to_dataframe()
             
             standard_df = standardize_df(df, provider)
-            if not standard_df.empty:
-                aggregated_dfs.append(standard_df)
+            return standard_df
         except Exception as e:
             print(f"    -> OpenBB {provider.upper()} Error: {e}")
-            
-            
-    # 2. Custom Web/Official API Providers
-    custom_fetchers = [
-        ("alpha-vantage", fetch_alpha_vantage),
-        ("news_api", fetch_news_api),
-        ("seeking-alpha", fetch_seeking_alpha_rapidapi),
-        ("nasdaq", fetch_nasdaq_api),
-        ("finviz", fetch_finviz_scrape)
-    ]
-    
-    for name, fetcher_fn in custom_fetchers:
+            return pd.DataFrame()
+
+    def run_custom_fetcher(c_info):
+        name, fetcher_fn = c_info
         print(f"[+] Fetching Custom {name.upper()}...")
         try:
             df = fetcher_fn(symbol=symbol, limit=limit)
             if df is not None and not df.empty:
-                aggregated_dfs.append(standardize_df(df, name))
+                return standardize_df(df, name)
         except (RuntimeError, ValueError, AttributeError) as e:
             print(f"    -> Custom {name.upper()} Error: {e}")
+        return pd.DataFrame()
+
+    # Query all providers concurrently in a ThreadPoolExecutor
+    futures = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=11) as executor:
+        for p in active_obb_providers:
+            futures.append(executor.submit(run_obb_provider, p))
+        for c in custom_fetchers:
+            futures.append(executor.submit(run_custom_fetcher, c))
+            
+        # Collect results with a timeout of 15 seconds
+        for fut in concurrent.futures.as_completed(futures, timeout=15):
+            try:
+                res_df = fut.result()
+                if res_df is not None and not res_df.empty:
+                    aggregated_dfs.append(res_df)
+            except Exception as e:
+                print(f"[-] Thread execution error: {e}")
             
     if aggregated_dfs:
         final_df = pd.concat(aggregated_dfs, ignore_index=True)

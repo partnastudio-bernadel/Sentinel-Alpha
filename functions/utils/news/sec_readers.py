@@ -10,17 +10,18 @@ def execute_reading_workers(
     tension_extractor_agent
 ) -> dict:
     """Runs Unstructured Reading Workers (Textual Inertia and Q&A Tension) for target tickers."""
+    import concurrent.futures
     print("\n[+] Step 2: Running Unstructured Reading Workers Layer...")
     indicators_report_data = {}
     
-    for t_symbol in tickers_to_query:
-        print(f"[*] Analyzing qualitative indicators for asset: {t_symbol}...")
-        indicators_report_data[t_symbol] = {
+    def process_ticker(t_symbol):
+        ticker_data = {
             "textual_inertia": None,
             "textual_inertia_reason": "No data available.",
             "tension": None,
             "tension_reason": "No data available."
         }
+        print(f"[*] Analyzing qualitative indicators for asset: {t_symbol}...")
         
         # A. Item 1A (Risk Factors) Textual Inertia (Lazy Prices)
         try:
@@ -59,14 +60,14 @@ def execute_reading_workers(
                     res_inertia = res_inertia[start_idx:end_idx+1].strip()
                     
                 parsed_inertia = json.loads(res_inertia)
-                indicators_report_data[t_symbol]["textual_inertia"] = float(parsed_inertia.get("modification_score", 0.0))
-                indicators_report_data[t_symbol]["textual_inertia_reason"] = parsed_inertia.get("reasoning_summary", "")
+                ticker_data["textual_inertia"] = float(parsed_inertia.get("modification_score", 0.0))
+                ticker_data["textual_inertia_reason"] = parsed_inertia.get("reasoning_summary", "")
             else:
-                indicators_report_data[t_symbol]["textual_inertia_reason"] = "Risk factors filings unavailable."
+                ticker_data["textual_inertia_reason"] = "Risk factors filings unavailable."
                 print(f"[!] Warning: Risk factors filings unavailable for {t_symbol}. Textual inertia will be set to None. Formulas will lack this data.")
         except Exception as e:
             print(f"[!] Warning: failed to compute Textual Inertia for {t_symbol}: {e}. Formulas will lack this data.")
-            indicators_report_data[t_symbol]["textual_inertia_reason"] = f"Extraction failed: {e}"
+            ticker_data["textual_inertia_reason"] = f"Extraction failed: {e}"
 
         # B. Analyst Q&A Tension Extractor
         try:
@@ -100,13 +101,20 @@ def execute_reading_workers(
                     res_tension = res_tension[start_idx:end_idx+1].strip()
                     
                 parsed_tension = json.loads(res_tension)
-                indicators_report_data[t_symbol]["tension"] = float(parsed_tension.get("tension_score", 0.0))
-                indicators_report_data[t_symbol]["tension_reason"] = parsed_tension.get("reasoning_summary", "")
+                ticker_data["tension"] = float(parsed_tension.get("tension_score", 0.0))
+                ticker_data["tension_reason"] = parsed_tension.get("reasoning_summary", "")
             else:
-                indicators_report_data[t_symbol]["tension_reason"] = "Earnings call Q&A transcript unavailable."
+                ticker_data["tension_reason"] = "Earnings call Q&A transcript unavailable."
                 print(f"[!] Warning: Earnings call Q&A transcript unavailable for {t_symbol}. Tension will be set to None. Formulas will lack this data.")
         except Exception as e:
             print(f"[!] Warning: failed to extract Analyst Q&A tension for {t_symbol}: {e}. Formulas will lack this data.")
-            indicators_report_data[t_symbol]["tension_reason"] = f"Extraction failed: {e}"
+            ticker_data["tension_reason"] = f"Extraction failed: {e}"
+            
+        return t_symbol, ticker_data
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=len(tickers_to_query)) as executor:
+        results = executor.map(process_ticker, tickers_to_query)
+        for t_symbol, ticker_data in results:
+            indicators_report_data[t_symbol] = ticker_data
 
     return indicators_report_data

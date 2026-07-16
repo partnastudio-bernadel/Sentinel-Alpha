@@ -140,21 +140,29 @@ def fetch_and_decompose_holdings(ticker: str, holdings: int, limit: int, db) -> 
 
     all_articles = []
     if is_etf and constituents:
+        import concurrent.futures
         print(f"[+] Decomposed ETF. Top {len(constituents)} constituents to analyze: {[c['ticker'] for c in constituents]}")
-        for const in constituents:
+        
+        def process_constituent(const):
             c_ticker = const["ticker"]
             print(f"[*] Fetching news for constituent: {c_ticker}...")
             try:
                 df_c_news = fetch_aggregate_all_news(symbol=c_ticker, limit=100)
                 if df_c_news.empty:
                     print(f"[-] No articles found for constituent {c_ticker}. Skipping.")
-                    continue
+                    return []
                 prepared = prepare_articles(df_c_news, db, limit=limit)
                 for art in prepared:
                     art["ticker"] = c_ticker
-                all_articles.extend(prepared)
+                return prepared
             except Exception as ex:
                 print(f"[-] Error processing constituent {c_ticker}: {ex}. Skipping.")
+                return []
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=len(constituents)) as executor:
+            results = executor.map(process_constituent, constituents)
+            for res in results:
+                all_articles.extend(res)
     else:
         print(f"[*] Ticker {ticker} is a single stock or failed decomposition. Processing fallback...")
         try:
