@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
 # Set project paths (assuming script is located in sentiment/scripts/)
@@ -36,6 +37,16 @@ def check_log_file(path):
             return True, f"Size: {size} bytes\nLast lines:\n{last_lines}"
     except Exception as e:
         return True, f"File exists but error reading: {e}"
+
+def parse_iso_datetime(dt_str):
+    if not dt_str:
+        return None
+    if dt_str.endswith("Z"):
+        dt_str = dt_str[:-1] + "+00:00"
+    try:
+        return datetime.fromisoformat(dt_str)
+    except Exception:
+        return None
 
 def main():
     print("================ SENTINEL PRODUCTION DIAGNOSTIC CHECK ================")
@@ -81,7 +92,7 @@ def main():
             ("macro_calendar", "Seeded Economic Events"),
             ("fred_mappings", "FRED Series Mappings"),
             ("macro_baselines", "Standard Deviation Baselines"),
-            ("sentiment_cache", "Scored News Sentiment Cache"),
+            ("scored_articles", "Scored News Sentiment Cache"),
             ("core_entities", "Seeded ETFs/Constituents"),
             ("prompts", "Seeded LLM Prompts")
         ]
@@ -96,8 +107,51 @@ def main():
         pending_macro = db["macro_calendar"].count_documents({"status": "pending"})
         print(f"\nMacro Calendar Stats: Completed={completed_macro}, Pending={pending_macro}")
         
+        # 4. Check Hourly Job Run Status (Last 60 Minutes)
+        print("\n[4] Checking Hourly Job Status (Last 60 Minutes)...")
+        now_utc = datetime.now(timezone.utc)
+        one_hour_ago = now_utc - timedelta(hours=1)
+        
+        core_entities_col = db["core_entities"]
+        leaderboard_col = db["sentiment_leaderboard"]
+        
+        core_entities = list(core_entities_col.find({}))
+        tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
+        
+        if not tickers:
+            print("⚠️ No core ETF entities found in database to verify.")
+        else:
+            print(f"Verifying sentiment update runs for {len(tickers)} core tickers:")
+            ran_count = 0
+            for ticker in sorted(tickers):
+                leaderboard_entry = leaderboard_col.find_one({"ticker": ticker})
+                if leaderboard_entry:
+                    last_updated_str = leaderboard_entry.get("last_updated")
+                    last_updated_dt = parse_iso_datetime(last_updated_str)
+                    
+                    if last_updated_dt:
+                        time_diff = now_utc - last_updated_dt
+                        minutes_ago = int(time_diff.total_seconds() / 60)
+                        
+                        if last_updated_dt >= one_hour_ago:
+                            print(f"  - {ticker:<6} | ✅ Ran {minutes_ago} mins ago ({last_updated_str})")
+                            ran_count += 1
+                        else:
+                            hours_ago = time_diff.total_seconds() / 3600
+                            print(f"  - {ticker:<6} | ❌ Out of sync - Ran {hours_ago:.1f} hours ago ({last_updated_str})")
+                    else:
+                        print(f"  - {ticker:<6} | ❌ Out of sync - Invalid last_updated timestamp: {last_updated_str}")
+                else:
+                    print(f"  - {ticker:<6} | ❌ Out of sync - No leaderboard entry found in MongoDB.")
+                    
+            print(f"\nSentiment Job Completion Rate in last 60 minutes: {ran_count}/{len(tickers)} ({ran_count/len(tickers)*100:.1f}%)")
+            if ran_count < len(tickers):
+                print("🚨 WARNING: Some core sentiment jobs did not run in the last hour.")
+            else:
+                print("🎉 SUCCESS: All core sentiment jobs successfully executed in the last hour!")
+                
     except Exception as e:
-        print(f"❌ MongoDB Connection failed: {e}")
+        print(f"❌ MongoDB Connection failed during health checks: {e}")
 
     print("\n======================================================================")
 

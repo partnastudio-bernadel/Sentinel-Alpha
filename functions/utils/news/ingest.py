@@ -72,7 +72,7 @@ def setup_clients_and_embeddings(env_path: str = None, csv_path: str = None) -> 
         config = config.copy()
         model_name = config.get("model", "")
         if "curiousily/Llama-3-8B-Instruct-Finance-RAG" in model_name:
-            config["model"] = "meta-llama/llama-3.1-8b-instruct"
+            config["model"] = "meta-llama/Meta-Llama-3.1-8B-Instruct"
         return config
 
     llm_config = override_deprecated_model(llm_config)
