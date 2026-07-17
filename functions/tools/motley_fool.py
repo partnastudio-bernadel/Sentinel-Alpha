@@ -21,10 +21,11 @@ def scrape_motley_fool_transcript(ticker: str, year: int = None, quarter: int = 
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
     }
     
-    # Try Nasdaq quote page first, fallback to NYSE
+    # Try Nasdaq quote page first, fallback to NYSE, NYSE MKT (AMEX) for sector ETFs
     urls_to_try = [
         f"https://www.fool.com/quote/nasdaq/{ticker}/",
         f"https://www.fool.com/quote/nyse/{ticker}/",
+        f"https://www.fool.com/quote/nysemkt/{ticker}/",
         f"https://www.fool.com/quote/{ticker}/"
     ]
     
