@@ -3,11 +3,19 @@ import sys
 import asyncio
 import argparse
 import logging
+from dotenv import load_dotenv
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 sentiment_dir = os.path.dirname(script_dir)
 if sentiment_dir not in sys.path:
     sys.path.insert(0, sentiment_dir)
+
+# Load environment variables before any other imports that may need them
+_env_path = os.path.join(sentiment_dir, ".env.local")
+if os.path.exists(_env_path):
+    load_dotenv(dotenv_path=_env_path)
+else:
+    load_dotenv()
 
 from functions.utils.db.connect import get_db_client
 from functions.utils.db.db_handler import process_sentiment_state
