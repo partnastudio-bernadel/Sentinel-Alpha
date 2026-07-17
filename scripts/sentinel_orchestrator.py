@@ -53,8 +53,12 @@ async def run_pipeline_for_ticker(ticker: str, semaphore: asyncio.Semaphore):
             
             app = build_sentiment_graph()
             
+            # MongoDBSaver checkpointer requires a thread_id in configurable
+            import uuid
+            run_config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+            
             # Execute graph asynchronously using run_in_executor to not block the event loop
-            final_state = await asyncio.to_thread(app.invoke, initial_state)
+            final_state = await asyncio.to_thread(app.invoke, initial_state, run_config)
             
             process_sentiment_state(ticker, final_state)
             logger.info(f"Pipeline completed successfully for {ticker}.")
