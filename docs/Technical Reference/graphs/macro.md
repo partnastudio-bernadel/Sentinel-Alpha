@@ -91,3 +91,26 @@ graph TD
    - **Data Intake**: Aggregates all prior state variables (`forex_events`, `av_indicators`, `textual_inertia_results`, `tension_extractor_results`).
    - **Inner Workings**: Acts as the ultimate aggregator. It employs a LangChain Agent armed with the **MongoDB Text-to-MQL Toolkit** to query historical macroeconomic regimes (e.g. previous high-inflation periods) and compare them with the current collected state variables.
    - **Data Passed Output**: Generates a unified, structured macroeconomic outlook schema, storing the final JSON into the `results` key.
+
+---
+
+## Economic Calendar Retrieval Resiliency Flow
+
+When resolving calendar events (e.g., `"CPI m/m"`), the pipeline uses a layered strategy to ensure high availability and bypass anti-bot scrapers:
+
+```mermaid
+graph TD
+    A[Start Macro Ingestion] --> B(Live ForexFactory Scraping)
+    B --> C{Events Retrieved?}
+    C -- Yes (Match Found) --> D[Resolve Event Data]
+    C -- No / Blocked --> E[Query MongoDB macro_calendar Cache]
+    E --> F{Cached Event Found?}
+    F -- Yes --> G[Extract Data & Set warning_flag=False]
+    F -- No --> H[Apply Fuzzy/Regex Title Matcher]
+    H --> I{Fuzzy Match Found?}
+    I -- Yes --> D
+    I -- No --> J[Trigger Scheduler fail-safe 0.0 payload]
+    D --> K[Calculate Surprise & Forward to Chief Economist]
+    G --> K
+    J --> L[Fallback Report with warning_flag=True]
+```

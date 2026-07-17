@@ -34,6 +34,8 @@ class MacroSurpriseCalibrationAgent:
             client, db = get_db_client()
             col = db["macro_baselines"]
             doc = col.find_one({"ff_event_name": ff_event_name})
+            if not doc:
+                doc = col.find_one({"av_indicator": ff_event_name})
             
             if doc and "std_dev" in doc:
                 std_val = float(doc["std_dev"])

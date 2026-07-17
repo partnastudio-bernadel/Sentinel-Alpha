@@ -40,9 +40,8 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
     csv_path = config.get("configurable", {}).get("csv_path", None)
     _, llm_config, base_llm_config, kimi_llm_config, _, _, _ = setup_clients_and_embeddings(env_path=env_path, csv_path=csv_path)
     alt_api_key = os.getenv("NVIDIA_API_KEY_ALT")
-    max_retries = 1 if alt_api_key else 0
     
-    for attempt in range(max_retries + 1):
+    for attempt in range(3):
         try:
     
 
@@ -226,10 +225,45 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
             return {"results": final_report}
         except Exception as e:
             error_str = str(e).lower()
-            is_rate_limit = "429" in error_str or "too many requests" in error_str or "rate limit" in error_str
-            if is_rate_limit and attempt < max_retries:
-                logger.warning("[cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...")
-                base_llm_config["api_key"] = alt_api_key
-                kimi_llm_config["api_key"] = alt_api_key
-                continue
+            
+            # Log the detailed exception and traceback exclusively to logs/pipeline.log
+            import traceback
+            import logging
+            from functions.utils.logging.pipeline_logger import log_to_file_only
+            detailed_err = f"NIM API error on model {base_llm_config.get('model')}: {e}\n{traceback.format_exc()}"
+            log_to_file_only(logger, logging.ERROR, detailed_err)
+            
+            is_api_error = (
+                "503" in error_str or 
+                "502" in error_str or 
+                "504" in error_str or 
+                "resourceexhausted" in error_str or 
+                "429" in error_str or 
+                "400" in error_str or 
+                "depleted" in error_str or 
+                "model_not_supported" in error_str or
+                "expecting value" in error_str
+            )
+            if is_api_error and attempt < 2:
+                primary_tooling_model = os.getenv("NVIDIA_TOOLING_MODEL", "deepseek-ai/deepseek-v4-flash").strip('"\' ')
+                fallback_model_70b = os.getenv("NVIDIA_TOOLING_MODEL_ALT", "meta/llama-3.1-70b-instruct").strip('"\' ')
+                fallback_model_8b = os.getenv("NVIDIA_BASE_MODEL", "meta/llama-3.1-8b-instruct").strip('"\' ')
+                
+                current_model = base_llm_config.get("model")
+                if current_model == primary_tooling_model:
+                    logger.warning(f"[cio_analyst_node] API error on primary tooling model. Falling back to: {fallback_model_70b}")
+                    base_llm_config["model"] = fallback_model_70b
+                    continue
+                elif current_model == fallback_model_70b:
+                    logger.warning(f"[cio_analyst_node] API error on secondary tooling model. Falling back to: {fallback_model_8b}")
+                    base_llm_config["model"] = fallback_model_8b
+                    continue
+                elif "429" in error_str and alt_api_key:
+                    logger.warning("[cio_analyst_node] 429 Rate Limit hit. Switching to alternate API key and retrying...")
+                    base_llm_config["api_key"] = alt_api_key
+                    kimi_llm_config["api_key"] = alt_api_key
+                    continue
+                else:
+                    logger.warning(f"[cio_analyst_node] API error on tooling model {current_model}. Retrying attempt {attempt + 2}/3...")
+                    continue
             raise e

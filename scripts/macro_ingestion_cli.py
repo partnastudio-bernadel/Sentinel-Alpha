@@ -38,7 +38,8 @@ def run_macro_ingestion_single(
     config = {
         "configurable": {
             "thread_id": thread_id,
-            "env_path": env_path
+            "env_path": env_path,
+            "event_name": event_name
         }
     }
     

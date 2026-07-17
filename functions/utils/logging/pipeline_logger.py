@@ -1,11 +1,24 @@
 import logging
 import os
 import sys
+import warnings
+
+# Suppress LangChain NVIDIA package warnings from cluttering the terminal
+warnings.filterwarnings("ignore", category=UserWarning, module="langchain_nvidia_ai_endpoints")
 
 # Resolve logs directory relative to this file
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 _LOGS_DIR = os.path.abspath(os.path.join(_CURRENT_DIR, "..", "..", "..", "logs"))
 _LOG_FILE = os.path.join(_LOGS_DIR, "pipeline.log")
+
+def log_to_file_only(logger: logging.Logger, level: int, message: str):
+    """Emits a log message exclusively to FileHandlers (bypassing console stream handlers)."""
+    for handler in logger.handlers:
+        if isinstance(handler, logging.FileHandler):
+            record = logger.makeRecord(
+                logger.name, level, "(internal)", 0, message, None, None
+            )
+            handler.emit(record)
 
 def get_pipeline_logger() -> logging.Logger:
     """Configures and returns a shared pipeline logger writing to logs/pipeline.log and console."""

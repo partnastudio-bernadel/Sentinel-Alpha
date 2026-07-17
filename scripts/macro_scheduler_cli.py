@@ -101,33 +101,87 @@ def fetch_and_store_weekly_calendar():
         logger.error(f"Failed to fetch or store weekly calendar: {e}")
 
 def hourly_realized_data_sweep():
-    """Hourly sweep to fetch the JSON once and process all pending events."""
+    """Hourly sweep to process all pending events prioritizing FRED then falling back to MCP."""
     logger.info("Starting hourly sweep for realized data...")
     try:
-        response = requests.get(FF_URL, headers=HEADERS)
-        response.raise_for_status()
-        events = response.json()
-        
         collection = get_db_collection()
+        pending_events = list(collection.find({"status": "pending"}))
         
-        # Create a fast lookup dictionary for the fetched events: (title, date) -> actual
+        if not pending_events:
+            logger.info("No pending events to sweep.")
+            return
+
+        # Fetch the weekly JSON feed as a lightweight fallback
+        events_json = []
+        try:
+            response = requests.get(FF_URL, headers=HEADERS)
+            response.raise_for_status()
+            events_json = response.json()
+        except Exception as e:
+            logger.warning(f"Could not fetch weekly JSON calendar feed: {e}")
+
+        # Create lookup dictionary from JSON feed
         fetched_actuals = {}
-        for event in events:
+        for event in events_json:
             if event.get("title") and event.get("date") and event.get("actual"):
                 fetched_actuals[(event["title"], event["date"])] = event["actual"]
-                
-        pending_events = collection.find({"status": "pending"})
-        
+
+        # Cache reference to database connection for FRED mapping
+        client, db = get_db_client()
+
         for p_event in pending_events:
             title = p_event["title"]
             date_str = p_event["date"]
-            
-            actual_val = fetched_actuals.get((title, date_str))
-            
+            actual_val = None
+
+            # 1. Prioritize FRED API for mapped events
+            try:
+                from functions.utils.macro.fred_helper import get_fred_actual
+                actual_val = get_fred_actual(title, db)
+                if actual_val:
+                    logger.info(f"Successfully swept realized data (via FRED) for {title}: {actual_val}")
+            except Exception as fred_err:
+                logger.error(f"FRED query failed for {title}: {fred_err}")
+
+            # 2. Fallback to weekly JSON calendar feed
+            if not actual_val:
+                actual_val = fetched_actuals.get((title, date_str))
+                if actual_val:
+                    logger.info(f"Successfully swept realized data (via JSON feed) for {title}: {actual_val}")
+
+            # 3. Fallback to ForexFactory MCP Server
+            if not actual_val:
+                try:
+                    import asyncio
+                    from functions.utils.macro.mcp_helper import async_query_forexfactory_mcp
+                    from dateutil import parser
+                    
+                    logger.info(f"Checking ForexFactory MCP fallback for '{title}'...")
+                    scraped_events = asyncio.run(async_query_forexfactory_mcp(
+                        "ffcal_get_calendar_events",
+                        {"time_period": "this_week"}
+                    ))
+                    
+                    if isinstance(scraped_events, list):
+                        p_title_clean = title.strip().lower()
+                        p_date = parser.isoparse(date_str)
+                        for s_event in scraped_events:
+                            s_title = s_event.get("title", "").strip().lower()
+                            s_actual = s_event.get("actual")
+                            if s_actual and str(s_actual).strip() != "" and str(s_actual).lower() != "none":
+                                if p_title_clean == s_title or p_title_clean in s_title or s_title in p_title_clean:
+                                    s_date_str = s_event.get("datetime_utc") or s_event.get("datetime_local")
+                                    if s_date_str:
+                                        s_date = parser.isoparse(s_date_str)
+                                        if abs((p_date - s_date).total_seconds()) < 7200: # within 2 hours
+                                            actual_val = s_actual
+                                            logger.info(f"Successfully swept realized data (via ForexFactory MCP) for {title}: {actual_val}")
+                                            break
+                except Exception as mcp_err:
+                    logger.warning(f"ForexFactory MCP fallback failed for '{title}': {mcp_err}")
+
+            # If we found an actual value, update DB and trigger downstream processing
             if actual_val:
-                logger.info(f"Successfully swept realized data for {title}: {actual_val}")
-                
-                # Update DB
                 collection.update_one(
                     {"_id": p_event["_id"]},
                     {"$set": {"actual": actual_val, "status": "completed"}}
@@ -145,7 +199,9 @@ def hourly_realized_data_sweep():
                     ).start()
                 except Exception as e:
                     logger.error(f"Failed to start macro ingestion thread: {e}")
-                    
+            else:
+                logger.info(f"No actual value found yet for pending event: {title}")
+
     except Exception as e:
         logger.error(f"Failed to execute hourly sweep: {e}")
 

@@ -642,3 +642,486 @@
 [2026-07-15 18:52:39,615] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
 [2026-07-15 18:52:39,784] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
 [2026-07-15 18:52:39,940] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-15 19:03:38,187] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 13:32:06,875] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 13:35:22,796] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 13:37:45,569] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 13:37:45,595] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: 10 Information Technology Stocks Whale Activity In Today’s Session
+[2026-07-16 13:37:45,608] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Short sellers notch $8.7 bln profit as SpaceX shares dip to IPO price
+[2026-07-16 13:37:45,621] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: California Forever loses $3.2 billion shipyard contract as defense startup picks Texas
+[2026-07-16 13:37:45,638] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Meta accused of using AI to pick employees with medical conditions for layoffs
+[2026-07-16 13:37:45,659] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: American mall retailer warns it may close up to 15 more stores this year
+[2026-07-16 13:37:45,670] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What You Actually Pay To Join The AAPL Run
+[2026-07-16 13:37:45,681] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Rather than going with the crowd, marketers are now questioning measurement ambiguity
+[2026-07-16 13:37:45,692] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Ontario asks for federal support for wildfire evacuations as smoke spreads
+[2026-07-16 13:37:45,705] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gen Z Isn't To Blame For Our Work Ethic Crisis—This Is | Opinion
+[2026-07-16 13:37:45,708] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 13:37:46,227] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 13:44:03,556] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 13:46:15,303] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 13:46:15,333] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: 10 Information Technology Stocks Whale Activity In Today’s Session
+[2026-07-16 13:46:15,346] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Short sellers notch $8.7 bln profit as SpaceX shares dip to IPO price
+[2026-07-16 13:46:15,359] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: California Forever loses $3.2 billion shipyard contract as defense startup picks Texas
+[2026-07-16 13:46:15,372] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Meta accused of using AI to pick employees with medical conditions for layoffs
+[2026-07-16 13:46:15,385] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: American mall retailer warns it may close up to 15 more stores this year
+[2026-07-16 13:46:15,398] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What You Actually Pay To Join The AAPL Run
+[2026-07-16 13:46:15,410] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Rather than going with the crowd, marketers are now questioning measurement ambiguity
+[2026-07-16 13:46:15,421] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Ontario asks for federal support for wildfire evacuations as smoke spreads
+[2026-07-16 13:46:15,435] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gen Z Isn't To Blame For Our Work Ethic Crisis—This Is | Opinion
+[2026-07-16 13:46:15,437] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 13:46:15,779] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 13:53:44,887] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 13:55:12,245] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 13:55:12,257] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gas is nearly $4 again and diesel just topped $5. It’s not what you think
+[2026-07-16 13:55:12,269] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Need for speed? Driving above the speed limit costs you — and doesn't actually save much time
+[2026-07-16 13:55:12,280] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: One of the world’s most prominent hospitals is testing how AI can revolutionize health care
+[2026-07-16 13:55:12,302] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Stripe and Advent reportedly offered to buy PayPal for around $53.4B
+[2026-07-16 13:55:12,316] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: TikTok is testing a new service that could reshape its shopping network
+[2026-07-16 13:55:12,341] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: WH: US continues investigating Iran school bombing
+[2026-07-16 13:55:12,354] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Buy, Sell, or Hold Post Q1 Earnings?
+[2026-07-16 13:55:12,365] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Oil giant BP shutters its corporate venture arm after 20 years
+[2026-07-16 13:55:12,376] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Israel eliminates Hamas platoon commander in Gaza
+[2026-07-16 13:55:12,377] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 13:55:12,889] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 13:57:17,629] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 13:58:20,459] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 13:58:20,471] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gas is nearly $4 again and diesel just topped $5. It’s not what you think
+[2026-07-16 13:58:20,481] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Need for speed? Driving above the speed limit costs you — and doesn't actually save much time
+[2026-07-16 13:58:20,492] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: One of the world’s most prominent hospitals is testing how AI can revolutionize health care
+[2026-07-16 13:58:20,503] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Stripe and Advent reportedly offered to buy PayPal for around $53.4B
+[2026-07-16 13:58:20,515] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: TikTok is testing a new service that could reshape its shopping network
+[2026-07-16 13:58:20,527] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: WH: US continues investigating Iran school bombing
+[2026-07-16 13:58:20,546] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Buy, Sell, or Hold Post Q1 Earnings?
+[2026-07-16 13:58:20,557] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Oil giant BP shutters its corporate venture arm after 20 years
+[2026-07-16 13:58:20,568] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Israel eliminates Hamas platoon commander in Gaza
+[2026-07-16 13:58:20,570] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 13:58:20,928] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 13:59:14,121] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 14:00:38,766] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 14:00:38,795] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Gas is nearly $4 again and diesel just topped $5. It’s not what you think
+[2026-07-16 14:00:38,811] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Need for speed? Driving above the speed limit costs you — and doesn't actually save much time
+[2026-07-16 14:00:38,822] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: One of the world’s most prominent hospitals is testing how AI can revolutionize health care
+[2026-07-16 14:00:38,833] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Stripe and Advent reportedly offered to buy PayPal for around $53.4B
+[2026-07-16 14:00:38,845] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: TikTok is testing a new service that could reshape its shopping network
+[2026-07-16 14:00:38,855] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: WH: US continues investigating Iran school bombing
+[2026-07-16 14:00:38,866] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Buy, Sell, or Hold Post Q1 Earnings?
+[2026-07-16 14:00:38,884] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Oil giant BP shutters its corporate venture arm after 20 years
+[2026-07-16 14:00:38,895] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Israel eliminates Hamas platoon commander in Gaza
+[2026-07-16 14:00:38,897] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 14:00:39,731] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 14:09:04,597] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 14:11:46,409] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 14:11:46,420] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: US gas prices edge up again as US-Iran tensions heighten over strait of Hormuz
+[2026-07-16 14:11:46,432] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: New York governor says she’s using AI to analyze ‘every single rule’ in the state
+[2026-07-16 14:11:46,450] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Bobby Portis Explains His Value to Miami Heat Franchise
+[2026-07-16 14:11:46,461] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Ecovacs’ self-cleaning Deebot X11 has hit a new low price
+[2026-07-16 14:11:46,483] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: SpaceX stock loses more altitude with Starship set for test flight: What Wall Street is saying
+[2026-07-16 14:11:46,518] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: General Mills recalls 736,000 Pillsbury bread rolls over glass
+[2026-07-16 14:11:46,554] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Why Apple’s ‘Standard Oil’ Strategy Is Driving the Stock to All-Time Highs
+[2026-07-16 14:11:46,585] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Jamie Dimon's JPMorgan Chase Just Posted 86% Growth in Equities Trading Revenue and Raised Its Full-Year Net Interest Income Guidance to $105.5 Billion
+[2026-07-16 14:11:46,633] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: A Live Nation Vice President Sold Company Shares Worth $1.1 Million. Here's What That Means for Investors
+[2026-07-16 14:11:46,636] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 14:11:47,435] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 14:18:24,617] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 14:19:39,621] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 14:19:39,648] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: High temperatures shut French gas plant, adding to heat-related outages
+[2026-07-16 14:19:39,660] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: JD Vance and the Democrats Put Netanyahu's Israel on Notice
+[2026-07-16 14:19:39,680] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Volkswagen enters the robotaxi race with its first passenger service launch in Germany
+[2026-07-16 14:19:39,701] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Social Security Has a $160 Billion Problem Congress Needs to Fix
+[2026-07-16 14:19:39,713] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Trump's teleprompter operator under CFTC probe over potential insider trading, sources say
+[2026-07-16 14:19:39,734] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: 3 Reasons Your Social Security Check Isn’t What You Expected
+[2026-07-16 14:19:39,747] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: IREN Just Collapsed 41% in a Month: Is This Dead Money or an Abandoned Gem?
+[2026-07-16 14:19:39,758] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: June Retail Sales Stall As Cheaper Gasoline Masks Consumer Strength
+[2026-07-16 14:19:39,770] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: VA Benefits Bill Stalls as Lawmakers Warn of Major Cuts for Veterans
+[2026-07-16 14:19:39,771] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 14:19:40,042] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 14:27:34,021] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 14:32:04,735] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation
+[2026-07-16 14:32:04,747] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Mortgage rates jump to highest level in almost a year
+[2026-07-16 14:32:04,759] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Korea Drives Semi Stocks Lower Despite Solid Taiwan Semi Earnings; Apple Boosts China AI Models
+[2026-07-16 14:32:04,770] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft (MSFT) Turns to In-House AI Models to Cut Costs and Reduce Reliance on Rivals
+[2026-07-16 14:32:04,791] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Tesla driver in fatal Texas crash overrode FSD by pressing accelerator ‘100 percent,’ investigators confirm
+[2026-07-16 14:32:04,804] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Anthropic Inches Toward a Mega-I.P.O
+[2026-07-16 14:32:04,816] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: High temperatures shut French gas plant, adding to heat-related outages
+[2026-07-16 14:32:04,827] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: JD Vance and the Democrats Put Netanyahu's Israel on Notice
+[2026-07-16 14:32:04,840] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Volkswagen enters the robotaxi race with its first passenger service launch in Germany
+[2026-07-16 14:32:04,851] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Social Security Has a $160 Billion Problem Congress Needs to Fix
+[2026-07-16 14:32:04,854] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 10 articles...
+[2026-07-16 14:32:05,983] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 14:36:06,814] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation' to MongoDB. Sentiment: Negative (Score: -0.40)
+[2026-07-16 14:36:06,828] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Mortgage rates jump to highest level in almost a year' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-07-16 14:36:06,843] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Korea Drives Semi Stocks Lower Despite Solid Taiwan Semi Earnings; Apple Boosts China AI Models' to MongoDB. Sentiment: Negative (Score: -0.20)
+[2026-07-16 14:36:06,857] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Microsoft (MSFT) Turns to In-House AI Models to Cut Costs and Reduce Reliance on Rivals' to MongoDB. Sentiment: Positive (Score: 0.72)
+[2026-07-16 14:36:06,860] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-07-16 14:42:11,892] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 14:43:56,619] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation. Sentiment: Negative (Score: -0.40)
+[2026-07-16 14:43:56,634] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Micron Stock Keeps Falling: 3 Reasons Why the Memory Chip Maker Is Suffering
+[2026-07-16 14:43:56,646] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Maker of Drone Boats Used in Iran War Will Open New Texas Shipyard
+[2026-07-16 14:43:56,658] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: The Six Vectors Of Gold Remonetization Revealed
+[2026-07-16 14:43:56,671] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: WATCH: Trump believes his Kalshi-betting teleprompter operator is a 'disgrace,' Leavitt says
+[2026-07-16 14:43:56,682] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Rides Growing Demand for AI-Enabled Smartwatches
+[2026-07-16 14:43:56,696] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Kendrick Perkins Tells Rich Paul Where LeBron James Should Go
+[2026-07-16 14:43:56,710] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: ICE says all its offices will have body cams in 60 days
+[2026-07-16 14:43:56,734] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: UAL Stock Slides as Fuel Costs Weigh on United Airlines
+[2026-07-16 14:43:56,746] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: UN Fears Over 500 Rohingya Dead After Two Boat Disasters
+[2026-07-16 14:43:56,748] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 9 articles...
+[2026-07-16 14:43:57,046] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 14:48:14,458] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Micron Stock Keeps Falling: 3 Reasons Why the Memory Chip Maker Is Suffering' to MongoDB. Sentiment: Negative (Score: -0.55)
+[2026-07-16 14:48:14,475] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Maker of Drone Boats Used in Iran War Will Open New Texas Shipyard' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-07-16 14:48:14,489] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'The Six Vectors Of Gold Remonetization Revealed' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-07-16 14:48:14,505] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'WATCH: Trump believes his Kalshi-betting teleprompter operator is a 'disgrace,' Leavitt says' to MongoDB. Sentiment: Neutral (Score: -0.05)
+[2026-07-16 14:48:14,519] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Rides Growing Demand for AI-Enabled Smartwatches' to MongoDB. Sentiment: Positive (Score: 0.20)
+[2026-07-16 14:48:14,522] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-07-16 14:52:25,297] [WARNING] [cio_analyst.py:242] [cio_analyst_node] API error on primary tooling model. Falling back to: meta/llama-3.1-70b-instruct
+[2026-07-16 14:58:02,346] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 15:02:39,412] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation. Sentiment: Negative (Score: -0.40)
+[2026-07-16 15:02:39,462] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dallas Fed President Logan calls for 'modestly' higher interest rates
+[2026-07-16 15:02:39,482] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Amtrak study finds way to run more trains at Penn Station without razing a Midtown block
+[2026-07-16 15:02:39,523] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: US could get a new nickel under bill passed by the House
+[2026-07-16 15:02:39,549] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: JPMorgan CEO Jamie Dimon says 300,000 workers are needed for American shipbuilding—jobs paying $100K
+[2026-07-16 15:02:39,580] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Chinese Users Bid Farewell To AI Companions
+[2026-07-16 15:02:39,624] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Ben & Jerry’s Foundation says it will shut down amid legal dispute with parent company
+[2026-07-16 15:02:39,651] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: 7-Eleven details plans to close 645 stores
+[2026-07-16 15:02:39,687] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Is SpaceX’s stock now a bust? Look what happened after Meta’s IPO
+[2026-07-16 15:02:39,721] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Live: Will Netflix’s Q2 Earnings Tonight Spark a Rebound for the Stock?
+[2026-07-16 15:02:39,724] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 9 articles...
+[2026-07-16 15:05:30,817] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: MSFT, timeframe_days: 3, limit: 10
+[2026-07-16 15:08:53,187] [INFO] [check_cache.py:33] [SCORER CACHE HIT] Article found in cache: Microsoft's Xbox overhaul signals AI is overtaking gaming in Big Tech capital allocation. Sentiment: Negative (Score: -0.40)
+[2026-07-16 15:08:53,207] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: FDA approves new kind of cholesterol pill
+[2026-07-16 15:08:53,220] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Trump Media launches paid data service to help Wall Street track Trump’s posts
+[2026-07-16 15:08:53,238] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Mississippi homeowners blame a noisy data center plant for sleepless nights. The mayor's advice? "Consider selling."
+[2026-07-16 15:08:53,249] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Musk's xAI sues Grok user over sexualized 'deepfakes'
+[2026-07-16 15:08:53,261] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: 5 Things to Do Now to Retire in One Year or Less
+[2026-07-16 15:08:53,272] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: How Long Has China's Economy Been This Bad?
+[2026-07-16 15:08:53,284] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: What Economists Are Missing About AI
+[2026-07-16 15:08:53,297] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft Stock Rises 2.9% as AI Sales Push Targets OpenAI and Anthropic
+[2026-07-16 15:08:53,309] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Microsoft Stock Rises. Why It's Taking On OpenAI, Google, and Anthropic
+[2026-07-16 15:08:53,313] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 9 articles...
+[2026-07-16 15:08:53,765] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 15:11:34,108] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-07-16 15:24:12,121] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 5
+[2026-07-16 15:25:19,785] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Musk’s xAI sues man accused of using Grok to create explicit material
+[2026-07-16 15:25:19,798] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: US wireless carrier Verizon to sell 274 stores, lay off another 500 corporate employees
+[2026-07-16 15:25:19,811] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Why Is Micron Stock Still Falling?
+[2026-07-16 15:25:19,836] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Nasdaq down sharply in final hour, as tech sector leads U.S. stocks lower — live
+[2026-07-16 15:25:19,849] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Iran denies releasing any US prisoners
+[2026-07-16 15:25:19,852] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-07-16 15:25:20,157] [WARNING] [sentiment_scorer.py:91] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-16 15:26:10,883] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Musk’s xAI sues man accused of using Grok to create explicit material' to MongoDB. Sentiment: Neutral (Score: 0.00)
+[2026-07-16 15:26:10,898] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'US wireless carrier Verizon to sell 274 stores, lay off another 500 corporate employees' to MongoDB. Sentiment: Negative (Score: -0.45)
+[2026-07-16 15:26:10,912] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Why Is Micron Stock Still Falling?' to MongoDB. Sentiment: Negative (Score: -0.35)
+[2026-07-16 15:26:10,926] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Nasdaq down sharply in final hour, as tech sector leads U.S. stocks lower — live' to MongoDB. Sentiment: Negative (Score: -0.65)
+[2026-07-16 15:26:10,940] [INFO] [sentiment_scorer.py:161] [SCORER CACHE STORE] Saved scored sentiment for 'Iran denies releasing any US prisoners' to MongoDB. Sentiment: Negative (Score: -0.25)
+[2026-07-16 15:26:10,942] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-07-16 15:31:54,336] [ERROR] [cio_analyst.py:205] Error parsing CIO response with Pydantic: 'NoneType' object has no attribute 'model_dump'
+[2026-07-16 15:35:51,649] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-16 15:35:54,434] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-16 15:35:54,615] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-16 15:35:54,754] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-16 15:35:54,851] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-16 15:42:50,422] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-16 15:42:52,347] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-16 15:42:52,500] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-16 15:42:52,636] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-16 15:42:52,736] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-16 15:46:25,175] [WARNING] [chief_economist.py:118] [chief_economist_node] API error on primary tooling model. Falling back to: meta/llama-3.1-70b-instruct
+[2026-07-16 15:55:55,255] [ERROR] [chief_economist.py:143] Error parsing Macro CIO response with Pydantic: 'NoneType' object has no attribute 'model_dump'
+[2026-07-17 08:34:56,018] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 08:34:58,450] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 08:34:58,677] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 08:34:58,853] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 08:34:59,014] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 08:59:45,582] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 08:59:49,000] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 08:59:49,219] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 08:59:49,432] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 08:59:49,604] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 09:07:02,300] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 09:07:04,199] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 09:07:04,278] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 09:07:04,638] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 09:07:04,796] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 09:12:07,827] [ERROR] [(internal):0] NIM API error on model deepseek-ai/deepseek-v4-flash: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 399, in _try_raise
+    response.raise_for_status()
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 504 Server Error: Gateway Timeout for url: https://integrate.api.nvidia.com/v1/chat/completions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/requests/models.py", line 1116, in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/simplejson/__init__.py", line 517, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/simplejson/decoder.py", line 396, in decode
+    obj, end = self.raw_decode(s)
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/simplejson/decoder.py", line 426, in raw_decode
+    return self.scan_once(s, idx=_w(s, idx).end())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+simplejson.errors.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/home/WD_BLACK/PartnaStudio/sentinel/sentiment/functions/nodes/chief_economist.py", line 99, in chief_economist_node
+    result = agent_executor.invoke(inputs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/__init__.py", line 2336, in invoke
+    for chunk in self.stream(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/__init__.py", line 1993, in stream
+    for _ in runner.tick(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/runner.py", line 230, in tick
+    run_with_retry(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/retry.py", line 40, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/utils/runnable.py", line 546, in invoke
+    input = step.invoke(input, config, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/utils/runnable.py", line 302, in invoke
+    ret = context.run(self.func, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/prebuilt/chat_agent_executor.py", line 657, in call_model
+    response = cast(AIMessage, model_runnable.invoke(state, config))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 2879, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 5093, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 277, in invoke
+    self.generate_prompt(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 777, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 634, in generate
+    raise e
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 624, in generate
+    self._generate_with_cache(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 846, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/chat_models.py", line 289, in _generate
+    response = self._client.get_req(payload=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 449, in get_req
+    response, session = self._post(self.infer_url, payload)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 346, in _post
+    self._try_raise(response)
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 402, in _try_raise
+    rd = response.json()
+         ^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/requests/models.py", line 1120, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+During task with name 'agent' and id '53ee0ea4-325f-c4f5-678e-82595f2a5739'
+
+[2026-07-17 09:12:07,827] [WARNING] [chief_economist.py:127] [chief_economist_node] API error on primary tooling model. Falling back to: meta/llama-3.1-70b-instruct
+[2026-07-17 09:17:10,622] [ERROR] [(internal):0] NIM API error on model meta/llama-3.1-70b-instruct: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 399, in _try_raise
+    response.raise_for_status()
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 504 Server Error: Gateway Timeout for url: https://integrate.api.nvidia.com/v1/chat/completions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/requests/models.py", line 1116, in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/simplejson/__init__.py", line 517, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/simplejson/decoder.py", line 396, in decode
+    obj, end = self.raw_decode(s)
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/simplejson/decoder.py", line 426, in raw_decode
+    return self.scan_once(s, idx=_w(s, idx).end())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+simplejson.errors.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/home/WD_BLACK/PartnaStudio/sentinel/sentiment/functions/nodes/chief_economist.py", line 99, in chief_economist_node
+    result = agent_executor.invoke(inputs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/__init__.py", line 2336, in invoke
+    for chunk in self.stream(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/__init__.py", line 1993, in stream
+    for _ in runner.tick(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/runner.py", line 230, in tick
+    run_with_retry(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/retry.py", line 40, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/utils/runnable.py", line 546, in invoke
+    input = step.invoke(input, config, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/utils/runnable.py", line 302, in invoke
+    ret = context.run(self.func, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/prebuilt/chat_agent_executor.py", line 657, in call_model
+    response = cast(AIMessage, model_runnable.invoke(state, config))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 2879, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 5093, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 277, in invoke
+    self.generate_prompt(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 777, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 634, in generate
+    raise e
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 624, in generate
+    self._generate_with_cache(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 846, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/chat_models.py", line 289, in _generate
+    response = self._client.get_req(payload=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 449, in get_req
+    response, session = self._post(self.infer_url, payload)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 346, in _post
+    self._try_raise(response)
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_nvidia_ai_endpoints/_common.py", line 402, in _try_raise
+    rd = response.json()
+         ^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/requests/models.py", line 1120, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+During task with name 'agent' and id 'a7144a6b-09a3-8510-ca68-3d2fe5cabd0c'
+
+[2026-07-17 09:18:55,087] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 09:18:57,098] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 09:18:57,332] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 09:18:57,494] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 09:18:57,659] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 09:29:01,741] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 09:29:03,620] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 09:29:03,866] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 09:29:04,005] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 09:29:04,178] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 11:09:26,101] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 11:09:28,612] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 11:09:28,891] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 11:09:29,096] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 11:09:29,275] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 11:25:01,832] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 11:25:07,696] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'CPI m/m' via FRED: -0.4%
+[2026-07-17 11:25:08,413] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Core CPI m/m' via FRED: -0.0%
+[2026-07-17 11:25:09,130] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Unemployment Rate' via FRED: 4.2%
+[2026-07-17 11:25:09,949] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'CPI y/y' via FRED: +3.7%
+[2026-07-17 11:25:10,563] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Core CPI y/y' via FRED: +2.8%
+[2026-07-17 11:25:11,494] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Unemployment Rate' via FRED: 4.2%
+[2026-07-17 11:25:12,407] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Core Retail Sales m/m' via FRED: +0.2%
+[2026-07-17 11:25:12,919] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Retail Sales m/m' via FRED: +0.2%
+[2026-07-17 11:25:13,430] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Unemployment Claims' via FRED: 208K
+[2026-07-17 11:25:14,762] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Retail Sales m/m' via FRED: +0.2%
+[2026-07-17 11:25:17,424] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'CPI m/m' via FRED: -0.4%
+[2026-07-17 11:25:18,040] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'CPI y/y' via FRED: +3.7%
+[2026-07-17 11:25:18,858] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Federal Funds Rate' via FRED: 3.6%
+[2026-07-17 11:25:20,498] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Unemployment Rate' via FRED: 4.2%
+[2026-07-17 11:25:21,534] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Unemployment Claims' via FRED: 208K
+[2026-07-17 11:25:23,167] [INFO] [forex_factory.py:75] [forex_factory_node] Resolved actual value for 'Unemployment Rate' via FRED: 4.2%
+[2026-07-17 11:25:24,392] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 11:25:24,680] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 11:25:24,875] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 11:25:25,044] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 11:38:09,399] [INFO] [forex_factory.py:20] [forex_factory_node] Fetching ForexFactory economic calendar...
+[2026-07-17 11:38:11,979] [INFO] [forex_factory.py:82] [forex_factory_node] Resolved actual value for 'CPI m/m' via FRED: -0.4%
+[2026-07-17 11:38:12,501] [INFO] [forex_factory.py:82] [forex_factory_node] Resolved actual value for 'CPI m/m' via FRED: -0.4%
+[2026-07-17 11:38:12,548] [INFO] [alpha_vantage.py:19] [alpha_vantage_node] Resolving historical baselines and rolling standard deviations...
+[2026-07-17 11:38:12,787] [INFO] [textual_inertia.py:23] [textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...
+[2026-07-17 11:38:12,951] [INFO] [tension_extractor.py:23] [tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...
+[2026-07-17 11:38:13,111] [INFO] [chief_economist.py:22] [chief_economist_node] Consolidating all macroeconomic nodes into final report...
+[2026-07-17 11:39:51,016] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: QQQ, timeframe_days: 3, limit: 5
+[2026-07-17 11:41:31,329] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Nasdaq, Dow, S&P 500 Futures Slip As Chip Selloff Overshadows Strong Earnings Season: NFLX, SNDK, SPCX, MRVL Stocks In Focus
+[2026-07-17 11:41:31,350] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq Close Lower On Tech Weakness But Recover After-Hours On Strong Micron Earnings  MU, AVGO, GOOGL In Focus
+[2026-07-17 11:41:31,369] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: S&P 500, Nasdaq End Week Lower As Investors Rotate Out Of Tech, AI Plays  ON, AAPL, SLS, INFQ, NKE in Focus
+[2026-07-17 11:41:31,392] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Why a hidden divergence between the VIX and Nasdaq volatility has the smart money on edge
+[2026-07-17 11:41:31,412] [INFO] [check_cache.py:41] [SCORER CACHE MISS] Article not found in cache: Dow Ends Lower To Record Worst Day In Nearly A Month As US-Iran Jitters Push Oil Prices  TSLA, NVDA, BE, AAPL, WBD  In Focus
+[2026-07-17 11:41:31,416] [INFO] [sentiment_scorer.py:28] [sentiment_scorer_node] Scoring 5 articles...
+[2026-07-17 11:41:32,312] [ERROR] [(internal):0] NIM API error during sentiment scoring: Error code: 400 - {'error': {'message': "The requested model 'meta-llama/llama-3.1-8b-instruct' does not exist.", 'type': 'invalid_request_error', 'param': 'model', 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/media/home/WD_BLACK/PartnaStudio/sentinel/sentiment/functions/nodes/sentiment_scorer.py", line 84, in sentiment_scorer_node
+    merged_results, _ = batch_score_articles(
+                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/home/WD_BLACK/PartnaStudio/sentinel/sentiment/functions/utils/news/scoring.py", line 21, in batch_score_articles
+    response = scorer_agent.invoke({"messages": [("user", message)]})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/__init__.py", line 2336, in invoke
+    for chunk in self.stream(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/__init__.py", line 1993, in stream
+    for _ in runner.tick(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/runner.py", line 230, in tick
+    run_with_retry(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/pregel/retry.py", line 40, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/utils/runnable.py", line 546, in invoke
+    input = step.invoke(input, config, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/utils/runnable.py", line 302, in invoke
+    ret = context.run(self.func, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langgraph/prebuilt/chat_agent_executor.py", line 657, in call_model
+    response = cast(AIMessage, model_runnable.invoke(state, config))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/runnables/base.py", line 2879, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 277, in invoke
+    self.generate_prompt(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 777, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 634, in generate
+    raise e
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 624, in generate
+    self._generate_with_cache(
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 846, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 686, in _generate
+    response = self.client.create(**payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py", line 1147, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/home/.sentinel-venv/lib/python3.11/site-packages/openai/_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "The requested model 'meta-llama/llama-3.1-8b-instruct' does not exist.", 'type': 'invalid_request_error', 'param': 'model', 'code': 'model_not_found'}}
+During task with name 'agent' and id '61070586-73e7-8109-3658-a3aa194ecd55'
+
+[2026-07-17 11:41:32,312] [WARNING] [sentiment_scorer.py:110] [sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...
+[2026-07-17 11:43:38,795] [INFO] [sentiment_scorer.py:180] [SCORER CACHE STORE] Saved scored sentiment for 'Nasdaq, Dow, S&P 500 Futures Slip As Chip Selloff Overshadows Strong Earnings Season: NFLX, SNDK, SPCX, MRVL Stocks In Focus' to MongoDB. Sentiment: Negative (Score: -0.45)
+[2026-07-17 11:43:38,821] [INFO] [sentiment_scorer.py:180] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq Close Lower On Tech Weakness But Recover After-Hours On Strong Micron Earnings  MU, AVGO, GOOGL In Focus' to MongoDB. Sentiment: Negative (Score: -0.30)
+[2026-07-17 11:43:38,860] [INFO] [sentiment_scorer.py:180] [SCORER CACHE STORE] Saved scored sentiment for 'S&P 500, Nasdaq End Week Lower As Investors Rotate Out Of Tech, AI Plays  ON, AAPL, SLS, INFQ, NKE in Focus' to MongoDB. Sentiment: Negative (Score: -0.50)
+[2026-07-17 11:43:38,885] [INFO] [sentiment_scorer.py:180] [SCORER CACHE STORE] Saved scored sentiment for 'Why a hidden divergence between the VIX and Nasdaq volatility has the smart money on edge' to MongoDB. Sentiment: Negative (Score: -0.55)
+[2026-07-17 11:43:38,911] [INFO] [sentiment_scorer.py:180] [SCORER CACHE STORE] Saved scored sentiment for 'Dow Ends Lower To Record Worst Day In Nearly A Month As US-Iran Jitters Push Oil Prices  TSLA, NVDA, BE, AAPL, WBD  In Focus' to MongoDB. Sentiment: Negative (Score: -0.50)
+[2026-07-17 11:43:38,914] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
+[2026-07-17 11:45:40,631] [ERROR] [cio_analyst.py:205] Error parsing CIO response with Pydantic: [###] {'message': 'ResourceExhausted: Worker local total request limit reached (131/48)', 'type': 'Service Unavailable', 'code': 503}
+{'error': {'message': 'ResourceExhausted: Worker local total request limit reached (131/48)', 'type': 'Service Unavailable', 'code': 503}}

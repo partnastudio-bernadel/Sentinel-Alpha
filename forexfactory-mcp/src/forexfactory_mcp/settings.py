@@ -46,6 +46,7 @@ class Settings(BaseSettings):
     # === Core configuration values ===
     BASE_URL: str = "https://www.forexfactory.com"
     SCRAPER_TIMEOUT_MS: int = 5000  # Default 5s (Playwright expects ms)
+    HEADLESS: bool = True
 
     # === MCP namespace ===
     NAMESPACE: str = "ffcal"

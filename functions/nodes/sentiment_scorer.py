@@ -67,7 +67,7 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
     system_prompt = system_prompt.replace("{", "{{").replace("}", "}}")
     
     from functions.types.sentiment import SentimentAnalysisReport
-    scorer_agent = create_react_agent(llm, tools=[retrieve_calibration_examples], prompt=system_prompt, response_format=SentimentAnalysisReport)
+    scorer_agent = create_react_agent(llm, tools=[], prompt=system_prompt)
     
     # Score in batches
     from functions.utils.news.scoring import batch_score_articles, async_batch_score_articles
@@ -87,15 +87,35 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
             )
     except Exception as e:
         error_str = str(e).lower()
-        if "402" in error_str or "depleted" in error_str or "400" in error_str or "model_not_supported" in error_str:
+        
+        # Log the detailed exception and traceback exclusively to logs/pipeline.log
+        import traceback
+        import logging
+        from functions.utils.logging.pipeline_logger import log_to_file_only
+        detailed_err = f"NIM API error during sentiment scoring: {e}\n{traceback.format_exc()}"
+        log_to_file_only(logger, logging.ERROR, detailed_err)
+        
+        is_api_error = (
+            "402" in error_str or 
+            "502" in error_str or 
+            "503" in error_str or 
+            "504" in error_str or 
+            "429" in error_str or 
+            "depleted" in error_str or 
+            "400" in error_str or 
+            "model_not_supported" in error_str or
+            "expecting value" in error_str
+        )
+        if is_api_error:
             logger.warning("[sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...")
             # Rebuild LLM using NVIDIA base model
+            fallback_model = os.getenv("NVIDIA_BASE_MODEL_ALT", "moonshotai/kimi-k2.6").strip('"\' ')
             llm = build_chat_model(
-                model=base_llm_config.get("model"),
+                model=fallback_model,
                 base_url=base_llm_config.get("base_url"),
                 api_key=base_llm_config.get("api_key")
             )
-            scorer_agent = create_react_agent(llm, tools=[retrieve_calibration_examples], prompt=system_prompt, response_format=SentimentAnalysisReport)
+            scorer_agent = create_react_agent(llm, tools=[], prompt=system_prompt)
             
             if is_async:
                 merged_results, _ = async_batch_score_articles(

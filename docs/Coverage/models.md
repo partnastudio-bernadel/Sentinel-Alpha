@@ -46,9 +46,18 @@ This document tracks the testing results and capabilities of various LLM models 
 
 9. **NVIDIA NIM Parallel Tool Calling Constraint**:
    Certain endpoints (such as NVIDIA NIM hosting `meta/llama-3.1-8b-instruct`) enforce a strict API schema restriction allowing only a single tool call per inference turn. When the agent attempts parallel tool calling (requesting multiple math operations in a single response), the endpoint rejects it with a 500 error (`This model only supports single tool-calls at once!`). Setting `"parallel_tool_calls": False` in `llm_config` is required to force sequential execution.
-
+   
 10. **Resilient JSON Extraction against Trailing Postambles (`TERMINATE`)**:
    Some models (such as `deepseek-v4-flash`) successfully write sequential tool calls and output a formatted JSON block but may append the `TERMINATE` instruction directly after the closing JSON brace (or leave code blocks unclosed). This triggers a JSON parse error due to trailing extra data. The parser must always run a `{` to `}` boundary extraction as the final pass when `is_json=True` to strip away any trailing text.
+
+11. **LangGraph React Agent `response_format` and Tooling Crashes**:
+   When using LangGraph's `create_react_agent` with `response_format` and no tools (`tools=[]`), the library internally registers a hidden tool (such as `respond`) to return structured data. When calling models that don't support function calling properly, or during parallel batching operations, this hidden tool calling mechanism is prone to crash or loop. Removing the `response_format` parameter and relying on raw text generation with downstream regex-based JSON extraction provides maximum robustness and speed.
+
+12. **NVIDIA NIM Gateway HTML/Empty Response Crashes**:
+   When NVIDIA NIM endpoints (e.g. `deepseek-ai/deepseek-v4-flash` or preview models like Qwen) are overloaded, the server proxy returns a `502 Bad Gateway` or `503 Service Unavailable` with HTML error pages or empty content instead of standard JSON. The LangChain client library tries to parse this response as JSON and raises `json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)`.
+   
+13. **Dynamic Tooling Fallbacks**:
+   To prevent pipeline crashes during these gateway/capacity failures, all agent invocations (e.g., in `sentiment_scorer.py` and `cio_analyst.py`) should wrap execution in try-except blocks that catch both API exceptions and `JSONDecodeError`, automatically falling back to stable backup models like `meta/llama-3.1-70b-instruct` or `minimaxai/minimax-m3`.
 
 ---
 

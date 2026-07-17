@@ -151,9 +151,19 @@ class FFScraperService:
             # Start Playwright engine
             playwright = await async_playwright().start()
             browser = await playwright.chromium.launch(
-                headless=True, args=["--no-sandbox"]
+                headless=self.settings.HEADLESS,
+                args=[
+                    "--no-sandbox",
+                    "--disable-blink-features=AutomationControlled",
+                    "--disable-infobars"
+                ]
             )
-            context = await browser.new_context()
+            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            context = await browser.new_context(
+                user_agent=user_agent,
+                bypass_csp=True,
+                viewport={"width": 1920, "height": 1080}
+            )
             page = await context.new_page()
 
             # Apply timeouts
