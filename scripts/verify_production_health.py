@@ -3,10 +3,9 @@ import sys
 import subprocess
 from dotenv import load_dotenv
 
-# Set project paths
+# Set project paths (assuming script is located in sentiment/scripts/)
 script_dir = os.path.dirname(os.path.abspath(__file__))
-local_dir = os.path.dirname(script_dir)
-sentiment_dir = os.path.dirname(local_dir)
+sentiment_dir = os.path.dirname(script_dir) # This resolves to sentiment/
 if sentiment_dir not in sys.path:
     sys.path.insert(0, sentiment_dir)
 
