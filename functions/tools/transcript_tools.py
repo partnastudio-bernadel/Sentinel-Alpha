@@ -1,5 +1,15 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+# Load env variables automatically
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sentiment_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+env_path = os.path.join(sentiment_dir, ".env.local")
+if os.path.exists(env_path):
+    load_dotenv(env_path)
+else:
+    load_dotenv()
 
 def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = None) -> dict:
     """Retrieves the earnings call transcript from FMP or Motley Fool scraper and splits it into Presentation and Q&A blocks.
@@ -17,7 +27,7 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
     """
     ticker = ticker.upper().strip()
     
-    # 1. Attempt to fetch from MongoDB cache
+    # 1. Attempt to fetch from MongoDB cache (skip if it's an uninitialized stub record)
     cache_col = None
     cache_key = f"{ticker}_{year or 0}_{quarter or 0}"
     try:
@@ -26,9 +36,11 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
         cache_col = db["transcripts_cache"]
         
         cached = cache_col.find_one({"_id": cache_key})
-        if cached:
-            print(f"[CACHE HIT] Loaded earnings call transcript for {ticker} Q{quarter or 0} {year or 0} from MongoDB.")
-            return cached["data"]
+        if cached and isinstance(cached.get("data"), dict):
+            cached_data = cached["data"]
+            if cached_data.get("presentation") != "No transcript available.":
+                print(f"[CACHE HIT] Loaded earnings call transcript for {ticker} Q{quarter or 0} {year or 0} from MongoDB.")
+                return cached_data
     except Exception as e:
         print(f"[!] Warning: failed to check transcripts cache: {e}")
 
