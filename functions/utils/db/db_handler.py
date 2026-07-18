@@ -63,11 +63,11 @@ def process_sentiment_state(ticker: str, state: dict):
         # 2. Process Leaderboard Timeseries
         leaderboard_col = db["sentiment_leaderboard"]
         
-        # Extract the final effective sentiment from the state
-        cio_analysis = state.get("cio_analysis", {})
+        # Extract the final effective sentiment from the state (check 'results' first, then 'cio_analysis')
+        cio_analysis = state.get("results") or state.get("cio_analysis") or {}
         if isinstance(cio_analysis, dict):
-            final_score = cio_analysis.get("effective_sentiment", 0.0)
-            velocity = cio_analysis.get("intraday_velocity", 0.0)
+            final_score = cio_analysis.get("aggregate_score", cio_analysis.get("effective_sentiment", 0.0))
+            velocity = cio_analysis.get("intraday_velocity", cio_analysis.get("velocity", 0.0))
         else:
             final_score = 0.0
             velocity = 0.0
