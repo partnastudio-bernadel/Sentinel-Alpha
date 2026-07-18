@@ -99,6 +99,7 @@ def main():
             ("fred_mappings", "FRED Series Mappings"),
             ("macro_baselines", "Standard Deviation Baselines"),
             ("scored_articles", "Scored News Sentiment Cache"),
+            ("sentiment_reports", "Persisted Sentiment Reports"),
             ("sentiment_leaderboard", "ETF Sentiment Leaderboard"),
             ("core_entities", "Seeded ETFs/Constituents"),
             ("prompts", "Seeded LLM Prompts")

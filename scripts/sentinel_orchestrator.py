@@ -18,7 +18,7 @@ else:
     load_dotenv()
 
 from functions.utils.db.connect import get_db_client
-from functions.utils.db.db_handler import process_sentiment_state
+from functions.utils.db.db_handler import process_sentiment_state, aggregate_leaderboard_for_ticker
 from functions.graphs.sentiment_graph import build_sentiment_graph
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -197,7 +197,11 @@ async def run_pipeline_for_ticker(ticker: str, semaphore: asyncio.Semaphore):
             update_queue_status(ticker, "completed")
             
         except Exception as e:
-            logger.error(f"Pipeline failed for {ticker}: {e}")
+            logger.error(f"Pipeline LLM run failed for {ticker}: {e}. Running fallback standalone aggregation...")
+            try:
+                aggregate_leaderboard_for_ticker(ticker)
+            except Exception as agg_err:
+                logger.error(f"Fallback aggregation also failed for {ticker}: {agg_err}")
             update_queue_status(ticker, "failed", str(e))
 
 def requeue_due_tickers(tickers: list, max_age_seconds: int = 3600):
@@ -282,6 +286,7 @@ def main():
     parser = argparse.ArgumentParser(description="Sentinel Orchestrator: Unifies Macro and Sentiment Agents.")
     parser.add_argument("--ticker", type=str, help="Run on-demand for a specific ticker.")
     parser.add_argument("--background", action="store_true", help="Run continuously in background daemon mode for all Core ETFs.")
+    parser.add_argument("--aggregate", action="store_true", help="Run standalone sentiment leaderboard aggregation across all tickers without calling LLMs.")
     parser.add_argument("--interval", type=int, default=60, help="Sleep interval in seconds when queue is empty in background mode (default: 60).")
     args = parser.parse_args()
     
@@ -290,6 +295,18 @@ def main():
         semaphore = asyncio.Semaphore(1)
         asyncio.run(run_pipeline_for_ticker(args.ticker.upper(), semaphore))
         
+    elif args.aggregate:
+        logger.info("Running STANDALONE LEADERBOARD AGGREGATION for all core tickers...")
+        client, db = get_db_client()
+        core_entities = list(db["core_entities"].find({}))
+        tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
+        if not tickers:
+            tickers = ["XLK", "QQQ", "SPY", "XLF", "XLE", "XLY", "XLP", "XLU", "XLV", "XLI", "XLB", "XLRE"]
+        
+        for t in tickers:
+            res = aggregate_leaderboard_for_ticker(t)
+            logger.info(f"Aggregated {t}: {res}")
+            
     elif args.background:
         logger.info("Running CONTINUOUS BACKGROUND mode for all Core ETFs...")
         asyncio.run(run_background_loop(interval=args.interval))

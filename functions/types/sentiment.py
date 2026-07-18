@@ -27,5 +27,6 @@ class SentimentReport(BaseModel):
     articles: List[ArticleSentiment] = Field(..., description="List of analyzed articles with detailed scores")
     aggregate_score: float = Field(..., description="Consolidated aggregate sentiment score")
     aggregate_label: str = Field(..., description="Consolidated sentiment label (Positive, Neutral, or Negative)")
+    velocity: float = Field(0.0, description="Intraday sentiment velocity / rate of change")
     reasoning: str = Field(..., description="Detailed thesis overview justifying the score and portfolio drift")
     warnings: List[str] = Field(default_factory=list, description="Compliance alerts or warnings raised during analysis")
