@@ -200,25 +200,51 @@ async def run_pipeline_for_ticker(ticker: str, semaphore: asyncio.Semaphore):
             logger.error(f"Pipeline failed for {ticker}: {e}")
             update_queue_status(ticker, "failed", str(e))
 
-async def run_background_loop():
-    """Runs the 12 Core ETFs from MongoDB in a managed concurrency queue."""
-    logger.info("Initializing Background Loop Orchestrator...")
-    client, db = get_db_client()
-    core_entities = list(db["core_entities"].find({}))
-    
-    if not core_entities:
-        logger.warning("No core entities found in MongoDB. Please run seed_etf_collection.py.")
-        return
+def requeue_due_tickers(tickers: list, max_age_seconds: int = 3600):
+    """Enqueues new tickers and resets completed/failed tickers whose finished_at is older than max_age_seconds back to pending."""
+    try:
+        client, db = get_db_client()
+        queue_col = db["orchestrator_queue"]
         
-    tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
-    logger.info(f"Loaded {len(tickers)} core entities from MongoDB.")
+        from datetime import datetime, timezone, timedelta
+        now = datetime.now(timezone.utc)
+        cutoff_iso = (now - timedelta(seconds=max_age_seconds)).isoformat()
+        
+        # 1. Upsert missing tickers as pending
+        enqueue_tickers(tickers)
+        
+        # 2. Reset completed/failed tickers whose finished_at is older than max_age_seconds back to pending
+        result = queue_col.update_many(
+            {
+                "ticker": {"$in": tickers},
+                "status": {"$in": ["completed", "failed"]},
+                "$or": [
+                    {"finished_at": {"$lt": cutoff_iso}},
+                    {"finished_at": None}
+                ]
+            },
+            {
+                "$set": {
+                    "status": "pending",
+                    "added_at": now.isoformat(),
+                    "started_at": None,
+                    "finished_at": None,
+                    "error": None
+                }
+            }
+        )
+        if result.modified_count > 0:
+            logger.info(f"Re-enqueued {result.modified_count} tickers due for hourly sentiment run.")
+    except Exception as e:
+        logger.error(f"Error requeuing due tickers: {e}")
+
+async def run_background_loop(interval: int = 60):
+    """Runs the Core ETFs from MongoDB in a continuous daemon loop with managed concurrency."""
+    logger.info("Initializing Continuous Background Loop Orchestrator...")
     
-    # 1. Enqueue all core tickers (if not already pending/processing)
-    enqueue_tickers(tickers)
-    
-    # 2. Try to acquire lock. If we can't, another instance is running, so we exit.
+    # Try to acquire lock. If we can't, another instance is running, so we exit.
     if not acquire_lock():
-        logger.info("Another background orchestrator worker is currently running. Enqueued tickers and exiting.")
+        logger.info("Another background orchestrator worker is currently running. Exiting.")
         return
         
     try:
@@ -228,26 +254,35 @@ async def run_background_loop():
         semaphore = asyncio.Semaphore(MAX_CONCURRENT_TASKS)
         
         while True:
-            # Fetch next batch of pending tickers from queue
+            client, db = get_db_client()
+            core_entities = list(db["core_entities"].find({}))
+            
+            if core_entities:
+                tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
+                requeue_due_tickers(tickers, max_age_seconds=3600)
+            
             pending_tickers = get_next_pending_tickers(MAX_CONCURRENT_TASKS)
-            if not pending_tickers:
-                logger.info("No more pending tickers in the queue.")
-                break
+            
+            if pending_tickers:
+                logger.info(f"Worker picked up pending tickers for execution: {pending_tickers}")
+                tasks = [run_pipeline_for_ticker(t, semaphore) for t in pending_tickers]
+                await asyncio.gather(*tasks)
+            else:
+                logger.info(f"No pending tickers due. Sleeping for {interval}s before next check...")
+                await asyncio.sleep(interval)
                 
-            logger.info(f"Worker picked up pending tickers for execution: {pending_tickers}")
-            
-            # Process this batch concurrently
-            tasks = [run_pipeline_for_ticker(t, semaphore) for t in pending_tickers]
-            await asyncio.gather(*tasks)
-            
-        logger.info("Background loop queue processing complete.")
+    except asyncio.CancelledError:
+        logger.info("Orchestrator background loop cancelled.")
+    except Exception as e:
+        logger.error(f"Unexpected error in background loop: {e}")
     finally:
         release_lock()
 
 def main():
     parser = argparse.ArgumentParser(description="Sentinel Orchestrator: Unifies Macro and Sentiment Agents.")
     parser.add_argument("--ticker", type=str, help="Run on-demand for a specific ticker.")
-    parser.add_argument("--background", action="store_true", help="Run the hourly loop for all Core ETFs.")
+    parser.add_argument("--background", action="store_true", help="Run continuously in background daemon mode for all Core ETFs.")
+    parser.add_argument("--interval", type=int, default=60, help="Sleep interval in seconds when queue is empty in background mode (default: 60).")
     args = parser.parse_args()
     
     if args.ticker:
@@ -256,8 +291,8 @@ def main():
         asyncio.run(run_pipeline_for_ticker(args.ticker.upper(), semaphore))
         
     elif args.background:
-        logger.info("Running BACKGROUND mode for all Core ETFs...")
-        asyncio.run(run_background_loop())
+        logger.info("Running CONTINUOUS BACKGROUND mode for all Core ETFs...")
+        asyncio.run(run_background_loop(interval=args.interval))
         
     else:
         parser.print_help()

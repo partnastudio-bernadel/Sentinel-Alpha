@@ -63,6 +63,12 @@ def main():
     else:
         print("❌ Macro Scheduler Daemon is NOT running (check tmux session!)")
 
+    orchestrator_running, orchestrator_cmd = check_process_running("sentinel_orchestrator.py")
+    if orchestrator_running:
+        print(f"✅ Sentinel Orchestrator Daemon is RUNNING (PID/Cmd: {orchestrator_cmd})")
+    else:
+        print("❌ Sentinel Orchestrator Daemon is NOT running (check tmux session!)")
+
     # 2. Check Log files
     print("\n[2] Checking Log Files...")
     pipeline_log = os.path.join(sentiment_dir, "logs", "pipeline.log")
