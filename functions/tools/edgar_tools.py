@@ -214,7 +214,17 @@ def get_sec_10k_section(ticker: str, year: int, section: str) -> str:
     # Save to MongoDB cache
     if cache_col is not None and content and "could not be parsed" not in content:
         try:
-            cache_col.replace_one({"_id": cache_key}, {"_id": cache_key, "content": content}, upsert=True)
+            cache_col.replace_one(
+                {"_id": cache_key}, 
+                {
+                    "_id": cache_key, 
+                    "ticker": ticker,
+                    "year": year,
+                    "section": section,
+                    "content": content
+                }, 
+                upsert=True
+            )
             print(f"[CACHE STORE] Saved SEC 10-K Item {section} for {ticker} ({year}) to MongoDB.")
         except Exception as e:
             print(f"[!] Warning: failed to save SEC filing to cache: {e}")

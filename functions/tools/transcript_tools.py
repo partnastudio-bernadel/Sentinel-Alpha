@@ -95,7 +95,17 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
     # 4. Save to MongoDB cache
     if cache_col is not None:
         try:
-            cache_col.replace_one({"_id": cache_key}, {"_id": cache_key, "data": result}, upsert=True)
+            cache_col.replace_one(
+                {"_id": cache_key}, 
+                {
+                    "_id": cache_key, 
+                    "ticker": ticker,
+                    "year": year or meta.get("year", 0),
+                    "quarter": quarter or meta.get("quarter", 0),
+                    "data": result
+                }, 
+                upsert=True
+            )
             print(f"[CACHE STORE] Saved earnings call transcript for {ticker} Q{meta.get('quarter', 0)} {meta.get('year', 0)} to MongoDB.")
         except Exception as e:
             print(f"[!] Warning: failed to save transcript to cache: {e}")
