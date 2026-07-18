@@ -50,32 +50,18 @@ def setup_clients_and_embeddings(env_path: str = None, csv_path: str = None) -> 
     
     # Setup configs: LLM config for Scorer and base config for CIO
     nvidia_base_model = os.getenv("NVIDIA_TOOLING_MODEL", "").strip('"\' ')
-    hf_api_key = os.getenv("HUGGINGFACE_API_KEY", "").strip('"\' ')
-    hf_model_name = os.getenv("HUGGINGFACE_MODEL_NAME_FEATHERLESS", "curiousily/Llama-3-8B-Instruct-Finance-RAG").strip('"\' ')
-    hf_base_url = os.getenv("HUGGINGFACE_BASE_URL", "https://router.huggingface.co/v1").strip('"\' ')
+    nvidia_tooling_alt = os.getenv("NVIDIA_TOOLING_MODEL_ALT", "meta/llama-3.1-70b-instruct").strip('"\' ')
     
     llm_config = {
-        "model": hf_model_name,
-        "base_url": hf_base_url,
-        "api_key": hf_api_key
-    }
-    base_llm_config = {
-        "model": nvidia_base_model,
+        "model": nvidia_tooling_alt if nvidia_tooling_alt else "meta/llama-3.1-70b-instruct",
         "base_url": nvidia_api_endpoint,
         "api_key": nvidia_api_key
     }
-
-    # Intercept and override deprecated Hugging Face model in-memory (comply with "No edits to env files" rule)
-    def override_deprecated_model(config):
-        if not config:
-            return config
-        config = config.copy()
-        model_name = config.get("model", "")
-        if "curiousily/Llama-3-8B-Instruct-Finance-RAG" in model_name:
-            config["model"] = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-        return config
-
-    llm_config = override_deprecated_model(llm_config)
+    base_llm_config = {
+        "model": nvidia_base_model if nvidia_base_model else "deepseek-ai/deepseek-v4-flash",
+        "base_url": nvidia_api_endpoint,
+        "api_key": nvidia_api_key
+    }
 
     # Setup Kimi configuration for the reading and compliance workers
     nvidia_base_model_alt = os.getenv("NVIDIA_BASE_MODEL_ALT", "moonshotai/kimi-k2.6").strip('"\' ')

@@ -97,6 +97,7 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
         
         is_api_error = (
             "402" in error_str or 
+            "500" in error_str or
             "502" in error_str or 
             "503" in error_str or 
             "504" in error_str or 
@@ -104,7 +105,10 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
             "depleted" in error_str or 
             "400" in error_str or 
             "model_not_supported" in error_str or
-            "expecting value" in error_str
+            "expecting value" in error_str or
+            "tool" in error_str or
+            "prompt template" in error_str or
+            "internal server error" in error_str
         )
         if is_api_error:
             logger.warning("[sentiment_scorer_node] API Error or Model Not Supported hit on primary model. Falling back to NVIDIA Base Model...")
