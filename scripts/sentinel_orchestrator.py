@@ -184,7 +184,7 @@ async def run_pipeline_for_ticker(ticker: str, semaphore: asyncio.Semaphore):
                 "cio_analysis": {},
                 "holdings": "all",
                 "limit": 25,
-                "timeframe_days": 7,
+                "timeframe_days": 1,
                 "macro_shock": macro_shock,
                 "etf_macro_beta": etf_macro_beta
             }
