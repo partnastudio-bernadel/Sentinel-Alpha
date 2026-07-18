@@ -70,7 +70,7 @@ def release_lock():
 
 def enqueue_tickers(tickers: list):
     """Enqueues tickers into the MongoDB orchestrator_queue collection.
-    If a ticker is already pending or processing, it keeps its state.
+    Assigns priority=2 to broad composite indices like SPY so they run last.
     """
     try:
         client, db = get_db_client()
@@ -82,16 +82,21 @@ def enqueue_tickers(tickers: list):
         from pymongo import UpdateOne
         operations = []
         for ticker in tickers:
+            priority = 2 if ticker.upper() == "SPY" else 1
             operations.append(UpdateOne(
                 {"_id": ticker},
                 {
                     "$setOnInsert": {
                         "ticker": ticker,
                         "status": "pending",
+                        "priority": priority,
                         "added_at": now_iso,
                         "started_at": None,
                         "finished_at": None,
                         "error": None
+                    },
+                    "$set": {
+                        "priority": priority
                     }
                 },
                 upsert=True
@@ -104,12 +109,13 @@ def enqueue_tickers(tickers: list):
         logger.error(f"Error enqueuing tickers: {e}")
 
 def get_next_pending_tickers(limit: int) -> list:
-    """Retrieves next batch of pending tickers from MongoDB queue."""
+    """Retrieves next batch of pending tickers from MongoDB queue sorted by priority (SPY run last)."""
     try:
         client, db = get_db_client()
         queue_col = db["orchestrator_queue"]
         
-        docs = list(queue_col.find({"status": "pending"}).limit(limit))
+        # Sort by priority ASC (Priority 1 = Sectors/QQQ first, Priority 2 = SPY last) and added_at ASC
+        docs = list(queue_col.find({"status": "pending"}).sort([("priority", 1), ("added_at", 1)]).limit(limit))
         return [doc["ticker"] for doc in docs]
     except Exception as e:
         logger.error(f"Error fetching pending tickers: {e}")
@@ -139,20 +145,20 @@ def update_queue_status(ticker: str, status: str, error_msg: str = None):
         logger.error(f"Error updating queue status for {ticker}: {e}")
 
 def reset_stale_jobs():
-    """Resets any jobs stuck in 'processing' status to 'pending' on startup."""
+    """Resets any jobs stuck in 'processing' or 'failed' status to 'pending' on startup."""
     try:
         client, db = get_db_client()
         queue_col = db["orchestrator_queue"]
         
         result = queue_col.update_many(
-            {"status": "processing"},
+            {"status": {"$in": ["processing", "failed"]}},
             {"$set": {
                 "status": "pending",
-                "error": "Resetting stale job from crashed instance"
+                "error": "Resetting stale/failed job on startup for retry"
             }}
         )
         if result.modified_count > 0:
-            logger.info(f"Reset {result.modified_count} stale 'processing' jobs back to 'pending'.")
+            logger.info(f"Reset {result.modified_count} stale or failed jobs back to 'pending'.")
     except Exception as e:
         logger.error(f"Error resetting stale jobs: {e}")
 
@@ -252,7 +258,14 @@ async def run_background_loop(interval: int = 60):
         return
         
     try:
-        # Reset any jobs that were left in 'processing' by a crashed worker
+        # Run startup database schema migrations
+        try:
+            from functions.utils.db.migrations import run_startup_migrations
+            run_startup_migrations()
+        except ImportError as ie:
+            logger.error(f"Could not import startup migrations: {ie}")
+            
+        # Reset any jobs that were left in 'processing' or 'failed' by previous runs
         reset_stale_jobs()
         
         semaphore = asyncio.Semaphore(MAX_CONCURRENT_TASKS)
@@ -301,7 +314,10 @@ def main():
         core_entities = list(db["core_entities"].find({}))
         tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
         if not tickers:
-            tickers = ["XLK", "QQQ", "SPY", "XLF", "XLE", "XLY", "XLP", "XLU", "XLV", "XLI", "XLB", "XLRE"]
+            tickers = ["XLK", "QQQ", "XLF", "XLE", "XLY", "XLP", "XLU", "XLV", "XLI", "XLB", "XLRE", "XLC", "SPY"]
+        else:
+            # Sort SPY to the very end
+            tickers = sorted(tickers, key=lambda t: 2 if t.upper() == "SPY" else 1)
         
         for t in tickers:
             res = aggregate_leaderboard_for_ticker(t)

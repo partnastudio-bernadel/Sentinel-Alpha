@@ -89,29 +89,42 @@ def setup_clients_and_embeddings(env_path: str = None, csv_path: str = None) -> 
 def fetch_and_decompose_holdings(ticker: str, holdings: int, limit: int, db) -> tuple:
     """Checks ETF decomposition and fetches news articles for the target ticker or its constituents."""
     print("\n[+] Step 1: Running ETF Decomposition check...")
-    df_holdings = fetch_etf_holdings_from_openbb(ticker)
+    # Check MongoDB core_entities first as primary source of truth
+    from functions.utils.db.connect import get_db_client
+    client_db, mongodb = get_db_client()
+    core_entity = mongodb["core_entities"].find_one({"ticker": ticker.upper()})
     
     is_etf = False
     constituents = []
     decomp_data = {}
     
-    if not df_holdings.empty:
-        df_holdings = df_holdings.sort_values(by="fund_weight", ascending=False)
-        candidate_constituents = df_holdings.to_dict(orient="records")
+    candidate_constituents = []
+    if core_entity and core_entity.get("is_etf", False):
+        candidate_constituents = core_entity.get("constituents", [])
+        
+    if not candidate_constituents:
+        try:
+            df_holdings = fetch_etf_holdings_from_openbb(ticker)
+            if not df_holdings.empty:
+                df_holdings = df_holdings.sort_values(by="fund_weight", ascending=False)
+                candidate_constituents = df_holdings.to_dict(orient="records")
+        except Exception as ex:
+            print(f"[-] OpenBB holdings fallback failed for {ticker}: {ex}")
+            
+    if candidate_constituents:
         candidate_constituents = [
             c for c in candidate_constituents
             if c.get("ticker") and str(c.get("ticker")).strip().upper() != ticker.upper()
         ]
-        
         if len(candidate_constituents) > 0:
-            constituents = candidate_constituents[:holdings]
+            constituents = candidate_constituents[:holdings] if isinstance(holdings, int) else candidate_constituents
             is_etf = True
             decomp_data = {
                 "ticker": ticker,
                 "is_etf": True,
                 "error_flag": False,
                 "constituents": [
-                    {"ticker": c["ticker"], "weight": float(c["fund_weight"])}
+                    {"ticker": c["ticker"], "weight": float(c.get("weight", c.get("fund_weight", 0.0)))}
                     for c in constituents
                 ]
             }

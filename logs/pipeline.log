@@ -1125,3 +1125,6 @@ During task with name 'agent' and id '61070586-73e7-8109-3658-a3aa194ecd55'
 [2026-07-17 11:43:38,914] [INFO] [cio_analyst.py:24] [cio_analyst_node] Executing consolidated CIO analyst node...
 [2026-07-17 11:45:40,631] [ERROR] [cio_analyst.py:205] Error parsing CIO response with Pydantic: [###] {'message': 'ResourceExhausted: Worker local total request limit reached (131/48)', 'type': 'Service Unavailable', 'code': 503}
 {'error': {'message': 'ResourceExhausted: Worker local total request limit reached (131/48)', 'type': 'Service Unavailable', 'code': 503}}
+[2026-07-18 13:39:39,713] [INFO] [ingest_news.py:35] [ingest_news_node] Processing ticker: XLC, timeframe_days: 14, limit: 5
+[2026-07-18 13:39:39,736] [INFO] [ingest_news.py:78] [ingest_news_node] Decomposed ETF XLC: 22 constituents resolved: ['META', 'GOOGL', 'GOOG', 'NFLX', 'TMUS']...
+[2026-07-18 13:42:01,571] [ERROR] [ingest_news.py:138] Error fetching news for GOOG: 1 (of 11) futures unfinished

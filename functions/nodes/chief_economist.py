@@ -93,8 +93,7 @@ def chief_economist_node(state: MacroState, config: RunnableConfig) -> Dict[str,
             agent_executor = create_react_agent(
                 model=llm,
                 tools=[query_mongodb_mql],
-                prompt=system_prompt,
-                response_format=MacroReport
+                prompt=system_prompt
             )
             
             result = agent_executor.invoke(inputs)

@@ -136,17 +136,21 @@ def main():
                 if leaderboard_entry:
                     last_updated_str = leaderboard_entry.get("last_updated")
                     last_updated_dt = parse_iso_datetime(last_updated_str)
+                    scores_obj = leaderboard_entry.get("scores", {})
+                    direct_s = scores_obj.get("direct", leaderboard_entry.get("current_sentiment", 0.0))
+                    rolled_s = scores_obj.get("rolled_up", leaderboard_entry.get("current_sentiment", 0.0))
+                    scores_str = f"Direct: {direct_s:.2f} | RolledUp: {rolled_s:.2f}"
                     
                     if last_updated_dt:
                         time_diff = now_utc - last_updated_dt
                         minutes_ago = int(time_diff.total_seconds() / 60)
                         
                         if last_updated_dt >= one_hour_ago:
-                            print(f"  - {ticker:<6} | ✅ Ran {minutes_ago} mins ago ({last_updated_str})")
+                            print(f"  - {ticker:<6} | ✅ Ran {minutes_ago} mins ago | {scores_str} ({last_updated_str})")
                             ran_count += 1
                         else:
                             hours_ago = time_diff.total_seconds() / 3600
-                            print(f"  - {ticker:<6} | ❌ Out of sync - Ran {hours_ago:.1f} hours ago ({last_updated_str})")
+                            print(f"  - {ticker:<6} | ❌ Out of sync - Ran {hours_ago:.1f} hours ago | {scores_str} ({last_updated_str})")
                     else:
                         print(f"  - {ticker:<6} | ❌ Out of sync - Invalid last_updated timestamp: {last_updated_str}")
                 else:

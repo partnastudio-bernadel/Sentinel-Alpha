@@ -51,7 +51,7 @@ def aggregate_leaderboard_for_ticker(ticker: str) -> dict:
     """
     Standalone aggregation engine that computes current sentiment score and intraday velocity
     for a given ticker or ETF using 'scored_articles' and 'sentiment_reports', and updates 'sentiment_leaderboard'.
-    Can be run independently of LLMs.
+    Supports dual-scoring (direct vs rolled_up) and zero-article constituent decay.
     """
     ticker_clean = ticker.upper()
     logger.info(f"Running standalone leaderboard aggregation for {ticker_clean}...")
@@ -64,35 +64,31 @@ def aggregate_leaderboard_for_ticker(ticker: str) -> dict:
         now = datetime.now(timezone.utc)
         now_iso = now.isoformat()
         
-        # 1. Determine tickers to query (Check if ETF with constituents)
-        tickers_to_query = [ticker_clean]
+        # 1. Determine constituents and initial weights
         constituents_map = {}
-        
         core_entity = db["core_entities"].find_one({"ticker": ticker_clean})
         if core_entity and core_entity.get("is_etf", False):
             for c in core_entity.get("constituents", []):
                 c_ticker = c.get("ticker", "").upper()
                 if c_ticker:
-                    tickers_to_query.append(c_ticker)
                     constituents_map[c_ticker] = float(c.get("weight", 1.0))
         
-        # Normalize constituent weights if available
-        if constituents_map:
-            total_w = sum(constituents_map.values())
-            if total_w > 0:
-                constituents_map = {k: v / total_w for k, v in constituents_map.items()}
-
-        # 2. Query scored_articles for matching tickers
-        articles = list(scored_col.find({"ticker": {"$in": tickers_to_query}}).sort("date", -1))
+        # 2. Query scored_articles matching this ticker in the 'tickers' array
+        # Fallback to old 'ticker' field query for safety if migration missed any
+        articles = list(scored_col.find({
+            "$or": [{"tickers": ticker_clean}, {"ticker": ticker_clean}]
+        }).sort("date", -1))
         
-        # Calculate time-weighted sentiment from scored_articles
-        recent_scores = []
-        prior_scores = []
+        direct_recent = []
+        direct_prior = []
+        
+        const_recent_scores = {c: [] for c in constituents_map}
+        const_prior_scores = {c: [] for c in constituents_map}
         
         for art in articles:
             score = float(art.get("sentiment_score", 0.0))
-            art_ticker = art.get("ticker", "").upper()
-            w_const = constituents_map.get(art_ticker, 1.0) if constituents_map else 1.0
+            # Determine primary ticker of the article
+            primary = art.get("primary_ticker", art.get("ticker", "")).upper()
             
             pub_date_str = art.get("date", "")
             pub_dt = None
@@ -101,68 +97,125 @@ def aggregate_leaderboard_for_ticker(ticker: str) -> dict:
                     pub_dt = datetime.fromisoformat(pub_date_str.replace("Z", "+00:00"))
                 except ValueError:
                     pass
-                    
+            
+            hours_old = 0.0
             if pub_dt:
                 hours_old = (now - pub_dt.replace(tzinfo=timezone.utc)).total_seconds() / 3600.0
+            
+            # Direct ETF News
+            if primary == ticker_clean:
                 if hours_old <= 24:
-                    recent_scores.append(score * w_const)
+                    direct_recent.append(score)
                 elif hours_old <= 72:
-                    prior_scores.append(score * w_const)
-            else:
-                recent_scores.append(score * w_const)
+                    direct_prior.append(score)
+            
+            # Constituent News
+            elif primary in constituents_map:
+                if hours_old <= 24:
+                    const_recent_scores[primary].append(score)
+                elif hours_old <= 72:
+                    const_prior_scores[primary].append(score)
+
+        # 3. Compute Direct Score
+        calc_direct_recent = sum(direct_recent) / len(direct_recent) if direct_recent else 0.0
+        calc_direct_prior = sum(direct_prior) / len(direct_prior) if direct_prior else calc_direct_recent
+        
+        # 4. Compute Rolled-Up Score
+        # Apply Zero-Article Decay: If a constituent has no recent articles, its weight is 0
+        active_recent_weights = {}
+        for c, scores in const_recent_scores.items():
+            if scores: # Has articles <= 24h
+                active_recent_weights[c] = constituents_map[c]
                 
-        calc_recent_avg = sum(recent_scores) / len(recent_scores) if recent_scores else 0.0
-        calc_prior_avg = sum(prior_scores) / len(prior_scores) if prior_scores else calc_recent_avg
-        
-        # Calculate calculated velocity
-        calc_velocity = round(calc_recent_avg - calc_prior_avg, 4)
-        
-        # 3. Check latest report from sentiment_reports
+        # Normalize active recent weights
+        total_recent_w = sum(active_recent_weights.values())
+        if total_recent_w > 0:
+            active_recent_weights = {k: v / total_recent_w for k, v in active_recent_weights.items()}
+            
+        rolled_up_recent = 0.0
+        for c, scores in const_recent_scores.items():
+            if c in active_recent_weights:
+                avg_score = sum(scores) / len(scores)
+                rolled_up_recent += avg_score * active_recent_weights[c]
+                
+        # Do the same for prior (<=72h)
+        active_prior_weights = {}
+        for c, scores in const_prior_scores.items():
+            if scores:
+                active_prior_weights[c] = constituents_map[c]
+            elif const_recent_scores[c]: # Also include if they had recent
+                active_prior_weights[c] = constituents_map[c]
+                
+        total_prior_w = sum(active_prior_weights.values())
+        if total_prior_w > 0:
+            active_prior_weights = {k: v / total_prior_w for k, v in active_prior_weights.items()}
+            
+        rolled_up_prior = 0.0
+        for c in constituents_map:
+            if c in active_prior_weights:
+                # Combine prior + recent to find average for prior window
+                all_prior = const_prior_scores[c] + const_recent_scores[c]
+                if all_prior:
+                    avg_score = sum(all_prior) / len(all_prior)
+                    rolled_up_prior += avg_score * active_prior_weights[c]
+
+        # 5. Check latest report from sentiment_reports for direct score override
         latest_report = reports_col.find_one({"ticker": ticker_clean}, sort=[("saved_at", -1)])
-        
-        final_sentiment = calc_recent_avg
-        final_velocity = calc_velocity
+        final_direct = calc_direct_recent
+        final_velocity = round(calc_direct_recent - calc_direct_prior, 4)
         
         if latest_report and "aggregate_score" in latest_report:
             rep_score = float(latest_report["aggregate_score"])
-            # Prefer validated CIO Analyst aggregate_score if non-zero or articles exist
             if rep_score != 0.0 or latest_report.get("articles_count", 0) > 0:
-                final_sentiment = round(rep_score, 4)
+                final_direct = round(rep_score, 4)
             if "velocity" in latest_report and latest_report["velocity"] != 0.0:
                 final_velocity = float(latest_report["velocity"])
         else:
-            final_sentiment = round(final_sentiment, 4)
+            final_direct = round(final_direct, 4)
 
-        # 4. Upsert into sentiment_leaderboard
+        final_rolled_up = round(rolled_up_recent, 4) if constituents_map else final_direct
+
+        # 6. Upsert into sentiment_leaderboard
         leaderboard_col.update_one(
             {"ticker": ticker_clean},
             {
                 "$set": {
-                    "current_sentiment": final_sentiment,
+                    "scores": {
+                        "direct": final_direct,
+                        "rolled_up": final_rolled_up
+                    },
+                    "current_sentiment": final_rolled_up if constituents_map else final_direct,
                     "velocity": final_velocity,
                     "last_updated": now_iso
                 },
                 "$push": {
                     "history": {
                         "time": now_iso,
-                        "score": final_sentiment
+                        "scores": {
+                            "direct": final_direct,
+                            "rolled_up": final_rolled_up
+                        }
                     }
                 }
             },
             upsert=True
         )
         
-        logger.info(f"Successfully aggregated leaderboard for {ticker_clean}: Sentiment={final_sentiment}, Velocity={final_velocity}")
+        logger.info(f"Successfully aggregated leaderboard for {ticker_clean}: Direct={final_direct}, RolledUp={final_rolled_up}, Velocity={final_velocity}")
         return {
             "ticker": ticker_clean,
-            "current_sentiment": final_sentiment,
+            "scores": {
+                "direct": final_direct,
+                "rolled_up": final_rolled_up
+            },
             "velocity": final_velocity,
             "last_updated": now_iso,
             "status": "success"
         }
         
     except Exception as e:
-        logger.error(f"Failed standalone leaderboard aggregation for {ticker}: {e}")
+        import traceback
+        logger.error(f"Failed standalone leaderboard aggregation for {ticker}: {e}\n{traceback.format_exc()}")
         return {"ticker": ticker, "error": str(e), "status": "failed"}
 
 def process_sentiment_state(ticker: str, state: dict):

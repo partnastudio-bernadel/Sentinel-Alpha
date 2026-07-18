@@ -13,10 +13,11 @@ from functions.providers.news_api import fetch_news_api
 from functions.providers.seeking_alpha import fetch_seeking_alpha_rapidapi
 from functions.providers.nasdaq import fetch_nasdaq_api
 from functions.providers.finviz import fetch_finviz_scrape
+from functions.providers.google_news import fetch_google_news_rss
 
 def fetch_aggregate_all_news(symbol: str = "AAPL", limit: int = 100) -> pd.DataFrame:
     """
-    Aggregates, standardizes, and consolidates stock news articles from all 11 providers (OpenBB & custom APIs/scrapers).
+    Aggregates, standardizes, and consolidates stock news articles from all providers (OpenBB, Google News RSS, custom APIs/scrapers).
     
     Use this tool ONLY when you need to retrieve a comprehensive, deduplicated feed of stock news from multiple sources.
     Do not use this for checking stock prices, charting, or extracting text from a single webpage.
@@ -57,8 +58,9 @@ def fetch_aggregate_all_news(symbol: str = "AAPL", limit: int = 100) -> pd.DataF
                 continue
         active_obb_providers.append((provider, endpoint_type, credential_attr))
                 
-    # 2. Custom Web/Official API Providers
+    # 2. Custom Web/Official API Providers (including Google News RSS)
     custom_fetchers = [
+        ("google-news", fetch_google_news_rss),
         ("alpha-vantage", fetch_alpha_vantage),
         ("news_api", fetch_news_api),
         ("seeking-alpha", fetch_seeking_alpha_rapidapi),

@@ -60,7 +60,10 @@ def create_agent(spec: AgentSpec, tools: Optional[List[Any]] = None) -> Runnable
     )
     
     if tools:
-        llm = llm.bind_tools(tools)
+        try:
+            llm = llm.bind_tools(tools, parallel_tool_calls=False)
+        except Exception:
+            llm = llm.bind_tools(tools)
         
     return prompt | llm
 

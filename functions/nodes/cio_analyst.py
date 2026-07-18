@@ -168,7 +168,7 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
             cio_system_prompt = cio_prompt_template.format(SCHEMA="Input data is provided in JSON format below.", EXAMPLES="See inline", OUTPUT=cio_output_schema_str)
             cio_system_prompt = cio_system_prompt.replace("{", "{{").replace("}", "}}")
     
-            cio_agent = create_react_agent(cio_llm, tools=cio_tools, prompt=cio_system_prompt, response_format=SentimentReport)
+            cio_agent = create_react_agent(cio_llm, tools=cio_tools, prompt=cio_system_prompt)
     
             # GOAL 2: Stateful Message Trimming (apply trimmer)
             from langchain_core.messages import trim_messages, HumanMessage
@@ -184,30 +184,26 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
             response = cio_agent.invoke({"messages": trimmed_messages})
             final_report_msg = response["messages"][-1].content
     
-            # Goal 4: Enforce Pydantic schema generation with LangChain's with_structured_output
+            # Goal 4: Enforce Pydantic schema generation with robust JSON parsing
             from functions.types.sentiment import SentimentReport
+            from functions.tools.custom_reply import extract_json_array
 
-            from langchain_core.prompts import ChatPromptTemplate
-            llm = ChatNVIDIA(model=base_llm_config["model"], api_key=base_llm_config.get("api_key", os.getenv("NVIDIA_API_KEY")))
-            structured_llm = llm.with_structured_output(SentimentReport)
-    
-            prompt = ChatPromptTemplate.from_messages([
-                ("system", "You are an expert JSON structured parser. Given the raw analysis report, extract the exact values into the strict SentimentReport schema."),
-                ("human", "{raw_report}")
-            ])
-    
-            chain = prompt | structured_llm
-    
-            try:
-                final_report_pydantic = chain.invoke({"raw_report": final_report_msg})
-                final_report = final_report_pydantic.model_dump()
-            except Exception as e:
-                logger.error(f"Error parsing CIO response with Pydantic: {e}")
-                # Fallback to standard json loads
+            final_report = {}
+            if final_report_msg and isinstance(final_report_msg, str) and final_report_msg.strip():
                 try:
+                    # First try standard json loads
                     final_report = json.loads(final_report_msg)
-                except Exception as fallback_e:
-                    final_report = {"error": "JSON parse error", "raw": final_report_msg}
+                except Exception:
+                    # Fallback to extract_json_array or regex JSON block parsing
+                    parsed = extract_json_array(final_report_msg)
+                    if isinstance(parsed, dict):
+                        final_report = parsed
+                    elif isinstance(parsed, list) and len(parsed) > 0:
+                        final_report = parsed[0]
+                    else:
+                        final_report = {"error": "JSON parse error", "raw": final_report_msg}
+            else:
+                final_report = {"error": "Empty response from CIO LLM", "raw": str(final_report_msg)}
 
         
             # Compliance override checks
