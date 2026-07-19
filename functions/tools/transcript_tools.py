@@ -27,20 +27,44 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
     """
     ticker = ticker.upper().strip()
     
-    # 1. Attempt to fetch from MongoDB cache (skip if it's an uninitialized stub record)
+    # 1. Attempt to fetch from Cloudflare R2 or MongoDB cache
     cache_col = None
     cache_key = f"{ticker}_{year or 0}_{quarter or 0}"
+    r2_path = f"transcripts_cache/{cache_key}.json"
+
+    try:
+        from functions.utils.storage.r2_client import exists_in_r2, download_article_doc
+        if exists_in_r2(r2_path):
+            cached_r2 = download_article_doc(r2_path)
+            if isinstance(cached_r2, dict) and isinstance(cached_r2.get("data"), dict):
+                cached_data = cached_r2["data"]
+                if cached_data.get("presentation") != "No transcript available.":
+                    print(f"[CACHE HIT] Loaded earnings call transcript for {ticker} Q{quarter or 0} {year or 0} from Cloudflare R2.")
+                    return cached_data
+    except Exception as r2_err:
+        print(f"[!] Warning: R2 cache check failed: {r2_err}")
+
     try:
         from functions.utils.db.connect import get_db_client
         _, db = get_db_client()
         cache_col = db["transcripts_cache"]
         
         cached = cache_col.find_one({"_id": cache_key})
-        if cached and isinstance(cached.get("data"), dict):
-            cached_data = cached["data"]
-            if cached_data.get("presentation") != "No transcript available.":
-                print(f"[CACHE HIT] Loaded earnings call transcript for {ticker} Q{quarter or 0} {year or 0} from MongoDB.")
-                return cached_data
+        if cached:
+            if isinstance(cached.get("data"), dict):
+                cached_data = cached["data"]
+                if cached_data.get("presentation") != "No transcript available.":
+                    print(f"[CACHE HIT] Loaded earnings call transcript for {ticker} Q{quarter or 0} {year or 0} from MongoDB.")
+                    return cached_data
+            elif cached.get("r2_path"):
+                try:
+                    from functions.utils.storage.r2_client import download_article_doc
+                    r2_doc = download_article_doc(cached["r2_path"])
+                    if isinstance(r2_doc.get("data"), dict):
+                        print(f"[CACHE HIT] Loaded transcript for {ticker} Q{quarter or 0} {year or 0} from R2 via Mongo Pointer.")
+                        return r2_doc["data"]
+                except Exception:
+                    pass
     except Exception as e:
         print(f"[!] Warning: failed to check transcripts cache: {e}")
 
@@ -104,23 +128,32 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
         "meta": meta
     }
 
-    # 4. Save to MongoDB cache
-    if cache_col is not None:
-        try:
-            cache_col.replace_one(
-                {"_id": cache_key}, 
-                {
-                    "_id": cache_key, 
-                    "ticker": ticker,
-                    "year": year or meta.get("year", 0),
-                    "quarter": quarter or meta.get("quarter", 0),
-                    "data": result
-                }, 
-                upsert=True
-            )
-            print(f"[CACHE STORE] Saved earnings call transcript for {ticker} Q{meta.get('quarter', 0)} {meta.get('year', 0)} to MongoDB.")
-        except Exception as e:
-            print(f"[!] Warning: failed to save transcript to cache: {e}")
+    # 4. Save to Cloudflare R2 and lightweight pointer in MongoDB
+    payload = {
+        "_id": cache_key, 
+        "ticker": ticker,
+        "year": year or meta.get("year", 0),
+        "quarter": quarter or meta.get("quarter", 0),
+        "data": result
+    }
+    try:
+        from functions.utils.storage.r2_client import upload_json_to_r2
+        upload_json_to_r2(r2_path, payload)
+        print(f"[CACHE STORE] Saved earnings call transcript for {ticker} Q{meta.get('quarter', 0)} {meta.get('year', 0)} to Cloudflare R2.")
+
+        if cache_col is not None:
+            pointer_doc = {
+                "_id": cache_key,
+                "ticker": ticker,
+                "year": year or meta.get("year", 0),
+                "quarter": quarter or meta.get("quarter", 0),
+                "r2_path": r2_path,
+                "archived": True
+            }
+            cache_col.replace_one({"_id": cache_key}, pointer_doc, upsert=True)
+            print(f"[CACHE STORE] Saved transcript lightweight pointer to MongoDB.")
+    except Exception as e:
+        print(f"[!] Warning: failed to save transcript to R2/MongoDB cache: {e}")
 
     return result
 

@@ -171,21 +171,39 @@ def get_sec_10k_section(ticker: str, year: int, section: str) -> str:
     if section not in ["1A", "7"]:
         raise ValueError("This tool only supports extraction of sections '1A' (Risk Factors) or '7' (MD&A).")
         
-    # Attempt to fetch from MongoDB cache
+    # 1. Attempt to fetch from Cloudflare R2 or MongoDB cache
     cache_col = None
     cache_key = f"{ticker.upper()}_{year}_{section}"
+    r2_path = f"sec_filings_cache/{cache_key}.json"
+
     try:
-        from pymongo import MongoClient
-        mongodb_uri = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-        db_name = os.getenv("MONGODB_DB", "sentinel_db")
-        client = MongoClient(mongodb_uri)
-        db = client[db_name]
+        from functions.utils.storage.r2_client import exists_in_r2, download_article_doc, upload_json_to_r2
+        if exists_in_r2(r2_path):
+            cached_r2 = download_article_doc(r2_path)
+            if isinstance(cached_r2, dict) and cached_r2.get("content"):
+                print(f"[CACHE HIT] Loaded SEC 10-K Item {section} for {ticker} ({year}) from Cloudflare R2.")
+                return cached_r2["content"]
+    except Exception as r2_err:
+        print(f"[!] Warning: R2 cache check failed: {r2_err}")
+
+    try:
+        from functions.utils.db.connect import get_db_client
+        _, db = get_db_client()
         cache_col = db["sec_filings_cache"]
         
         cached = cache_col.find_one({"_id": cache_key})
         if cached:
-            print(f"[CACHE HIT] Loaded SEC 10-K Item {section} for {ticker} ({year}) from MongoDB.")
-            return cached["content"]
+            if cached.get("content"):
+                print(f"[CACHE HIT] Loaded SEC 10-K Item {section} for {ticker} ({year}) from MongoDB.")
+                return cached["content"]
+            elif cached.get("r2_path"):
+                try:
+                    from functions.utils.storage.r2_client import download_article_doc
+                    r2_doc = download_article_doc(cached["r2_path"])
+                    print(f"[CACHE HIT] Loaded SEC 10-K Item {section} for {ticker} ({year}) from R2 via Mongo Pointer.")
+                    return r2_doc.get("content", "")
+                except Exception:
+                    pass
     except Exception as e:
         print(f"[!] Warning: failed to check SEC cache: {e}")
         
@@ -211,22 +229,32 @@ def get_sec_10k_section(ticker: str, year: int, section: str) -> str:
     else:
         content = extract_section_7(full_text)
         
-    # Save to MongoDB cache
-    if cache_col is not None and content and "could not be parsed" not in content:
+    # Save to Cloudflare R2 and lightweight pointer in MongoDB
+    if content and "could not be parsed" not in content:
+        payload = {
+            "_id": cache_key, 
+            "ticker": ticker,
+            "year": year,
+            "section": section,
+            "content": content
+        }
         try:
-            cache_col.replace_one(
-                {"_id": cache_key}, 
-                {
-                    "_id": cache_key, 
+            from functions.utils.storage.r2_client import upload_json_to_r2
+            upload_json_to_r2(r2_path, payload)
+            print(f"[CACHE STORE] Saved SEC 10-K Item {section} for {ticker} ({year}) to Cloudflare R2.")
+
+            if cache_col is not None:
+                pointer_doc = {
+                    "_id": cache_key,
                     "ticker": ticker,
                     "year": year,
                     "section": section,
-                    "content": content
-                }, 
-                upsert=True
-            )
-            print(f"[CACHE STORE] Saved SEC 10-K Item {section} for {ticker} ({year}) to MongoDB.")
+                    "r2_path": r2_path,
+                    "archived": True
+                }
+                cache_col.replace_one({"_id": cache_key}, pointer_doc, upsert=True)
+                print(f"[CACHE STORE] Saved SEC 10-K lightweight pointer to MongoDB.")
         except Exception as e:
-            print(f"[!] Warning: failed to save SEC filing to cache: {e}")
+            print(f"[!] Warning: failed to save SEC filing to R2/MongoDB cache: {e}")
             
     return content

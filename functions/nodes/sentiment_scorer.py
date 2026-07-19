@@ -180,7 +180,7 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
                 "flagged": scored.get("flagged", False) if isinstance(scored, dict) else getattr(scored, "flagged", False),
                 "flag_reason": scored.get("flag_reason", None) if isinstance(scored, dict) else getattr(scored, "flag_reason", None)
             }
-            # Save or update cache
+            # Save full document directly to MongoDB collection 'scored_articles'
             scored_collection.replace_one({"_id": art_id}, document, upsert=True)
             logger.info(
                 f"[SCORER CACHE STORE] Saved scored sentiment for '{title}' to MongoDB. "
