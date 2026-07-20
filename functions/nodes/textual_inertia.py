@@ -19,7 +19,7 @@ from functions.agents import create_textual_inertia_agent
 
 # 3. Node: Textual Inertia (10-K Deviation analysis)
 def textual_inertia_node(state: MacroState, config: RunnableConfig, store: BaseStore) -> Dict[str, Any]:
-    logger = get_pipeline_logger()
+    logger = get_pipeline_logger("macro")
     logger.info("[textual_inertia_node] Executing textual inertia node (10-K SEC filings analyzer)...")
     
     # Resolve agent configurations

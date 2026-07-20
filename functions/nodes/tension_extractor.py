@@ -19,7 +19,7 @@ from functions.agents import create_tension_extractor_agent
 
 # 4. Node: Tension Extractor (Earnings Call Transcript analyzer)
 def tension_extractor_node(state: MacroState, config: RunnableConfig, store: BaseStore) -> Dict[str, Any]:
-    logger = get_pipeline_logger()
+    logger = get_pipeline_logger("macro")
     logger.info("[tension_extractor_node] Executing tension extractor node (Earnings Call Q&A analyzer)...")
     
     config = config or {}

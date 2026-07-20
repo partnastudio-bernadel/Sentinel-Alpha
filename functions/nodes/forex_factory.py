@@ -16,7 +16,7 @@ from functions.utils.macro.mcp_helper import async_query_forexfactory_mcp
 
 # 1. Node: Forex Factory Scraper (Llama-3 model routing)
 def forex_factory_node(state: MacroState, config: RunnableConfig) -> Dict[str, Any]:
-    logger = get_pipeline_logger()
+    logger = get_pipeline_logger("macro")
     logger.info("[forex_factory_node] Fetching ForexFactory economic calendar...")
     
     scheduler = MacroScheduler()

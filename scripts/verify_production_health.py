@@ -71,22 +71,24 @@ def main():
 
     # 2. Check Log files
     print("\n[2] Checking Log Files...")
-    pipeline_log = os.path.join(sentiment_dir, "logs", "pipeline.log")
+    sentiment_log = os.path.join(sentiment_dir, "logs", "sentiment_pipeline.log")
+    macro_log = os.path.join(sentiment_dir, "logs", "macro_pipeline.log")
     orchestrator_log = os.path.join(sentiment_dir, "logs", "sentinel_orchestrator.log")
+    legacy_log = os.path.join(sentiment_dir, "logs", "pipeline.log")
     
-    print(f"Checking {pipeline_log}:")
-    exists, log_info = check_log_file(pipeline_log)
-    if exists:
-        print(f"✅ Active\n{log_info}")
-    else:
-        print(f"⚠️ Inactive ({log_info})")
-        
-    print(f"\nChecking {orchestrator_log}:")
-    exists, log_info = check_log_file(orchestrator_log)
-    if exists:
-        print(f"✅ Active\n{log_info}")
-    else:
-        print(f"ℹ️ Idle/Pending ({log_info}) - Will populate after the hourly cron runs.")
+    for log_path, label in [
+        (sentiment_log, "Sentiment Pipeline Log"),
+        (macro_log, "Macro Pipeline Log"),
+        (orchestrator_log, "Sentinel Orchestrator Log"),
+        (legacy_log, "Legacy Pipeline Log")
+    ]:
+        if os.path.exists(log_path) or label != "Legacy Pipeline Log":
+            print(f"Checking {label} ({log_path}):")
+            exists, log_info = check_log_file(log_path)
+            if exists:
+                print(f"✅ Active\n{log_info}\n")
+            else:
+                print(f"⚠️ Inactive ({log_info})\n")
 
     # 3. Check MongoDB Collection Health
     print("\n[3] Checking MongoDB Collection Counts...")

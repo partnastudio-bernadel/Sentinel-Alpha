@@ -18,7 +18,7 @@ from functions.utils.news.ingest import setup_clients_and_embeddings
 
 # 5. Node: Chief Macro Economist (Consolidation & output generation)
 def chief_economist_node(state: MacroState, config: RunnableConfig) -> Dict[str, Any]:
-    logger = get_pipeline_logger()
+    logger = get_pipeline_logger("macro")
     logger.info("[chief_economist_node] Consolidating all macroeconomic nodes into final report...")
     
     config = config or {}

@@ -53,16 +53,17 @@ def save_sentiment_report(ticker: str, report: dict) -> str:
         return None
 
 
-def save_indicator_snapshot(ticker: str, scores: dict, source: str = "cio_pipeline") -> str:
+def save_indicator_snapshot(ticker: str, scores: dict, source: str = "cio_pipeline", parent_etf: str = None) -> str:
     """
     Inserts a new textual inertia + Q&A tension snapshot into 'indicator_snapshots'.
     Always inserts (never upserts) to maintain a proper time-series per ticker.
 
     Args:
-        ticker:  The stock / ETF ticker symbol.
-        scores:  Dict with keys: textual_inertia (float|None), textual_inertia_reason (str),
-                 qa_tension (float|None), qa_tension_reason (str).
-        source:  Provenance tag — 'cio_pipeline' for live runs, 'backfill_script' for backfills.
+        ticker:      The stock / ETF constituent ticker symbol.
+        scores:      Dict with keys: textual_inertia (float|None), textual_inertia_reason (str),
+                     qa_tension (float|None), qa_tension_reason (str).
+        source:      Provenance tag — 'cio_pipeline' for live runs, 'backfill_script' for backfills.
+        parent_etf:  Optional parent ETF ticker (e.g. 'XLE') if this document is for an ETF constituent.
 
     Returns:
         Inserted document ID as a string, or None on failure.
@@ -79,10 +80,11 @@ def save_indicator_snapshot(ticker: str, scores: dict, source: str = "cio_pipeli
             "qa_tension": scores.get("qa_tension"),
             "qa_tension_reason": scores.get("qa_tension_reason", ""),
             "source": source,
+            "parent_etf": parent_etf.upper() if parent_etf else None
         }
         res = col.insert_one(doc)
         logger.info(
-            f"Saved indicator snapshot for {ticker.upper()} to 'indicator_snapshots' "
+            f"Saved indicator snapshot for {ticker.upper()} (parent_etf={doc['parent_etf']}) to 'indicator_snapshots' "
             f"(TI={doc['textual_inertia']}, QA={doc['qa_tension']}, source={source})."
         )
         return str(res.inserted_id)
@@ -327,19 +329,43 @@ def process_sentiment_state(ticker: str, state: dict):
                 cio_analysis["qa_tension_reason"] = ticker_tension_reason
             save_sentiment_report(ticker, cio_analysis)
 
-        # 4. Persist indicator snapshot independently (time-series, always insert)
-        if ticker_ti is not None or ticker_tension is not None:
-            save_indicator_snapshot(
-                ticker=ticker_upper,
-                scores={
-                    "textual_inertia": ticker_ti,
-                    "textual_inertia_reason": ticker_ti_reason,
-                    "qa_tension": ticker_tension,
-                    "qa_tension_reason": ticker_tension_reason,
-                },
-                source="cio_pipeline",
-            )
-        else:
+        # 4. Persist indicator snapshot independently (time-series, always insert per constituent and/or ETF)
+        ti_dict = indicator_scores.get("textual_inertia") or {}
+        ti_reason_dict = indicator_scores.get("textual_inertia_reason") or {}
+        tension_dict = indicator_scores.get("qa_tension") or {}
+        tension_reason_dict = indicator_scores.get("qa_tension_reason") or {}
+
+        is_etf = state.get("is_etf", False)
+        parent_etf_tag = ticker_upper if is_etf else None
+
+        all_indicator_symbols = set(list(ti_dict.keys()) + list(tension_dict.keys()))
+        if not all_indicator_symbols and (ticker_ti is not None or ticker_tension is not None):
+            all_indicator_symbols = {ticker_upper}
+
+        saved_snapshots_count = 0
+        for sym in all_indicator_symbols:
+            sym_upper = sym.upper()
+            sym_ti = ti_dict.get(sym_upper)
+            sym_ti_reason = ti_reason_dict.get(sym_upper, "")
+            sym_tension = tension_dict.get(sym_upper)
+            sym_tension_reason = tension_reason_dict.get(sym_upper, "")
+
+            if sym_ti is not None or sym_tension is not None:
+                curr_parent = parent_etf_tag if (is_etf and sym_upper != ticker_upper) else (parent_etf_tag if is_etf else None)
+                save_indicator_snapshot(
+                    ticker=sym_upper,
+                    scores={
+                        "textual_inertia": sym_ti,
+                        "textual_inertia_reason": sym_ti_reason,
+                        "qa_tension": sym_tension,
+                        "qa_tension_reason": sym_tension_reason,
+                    },
+                    source="cio_pipeline",
+                    parent_etf=curr_parent
+                )
+                saved_snapshots_count += 1
+
+        if saved_snapshots_count == 0:
             logger.info(
                 f"[db_handler] No indicator scores available for {ticker_upper} — "
                 "indicator_snapshots insert skipped."

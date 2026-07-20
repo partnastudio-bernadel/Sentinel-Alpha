@@ -15,7 +15,7 @@ from functions.utils.macro.calibration_agent import MacroSurpriseCalibrationAgen
 
 # 2. Node: Alpha Vantage Baseline Calibration (Llama-3 model routing)
 def alpha_vantage_node(state: MacroState, config: RunnableConfig) -> Dict[str, Any]:
-    logger = get_pipeline_logger()
+    logger = get_pipeline_logger("macro")
     logger.info("[alpha_vantage_node] Resolving historical baselines and rolling standard deviations...")
     
     calibration = MacroSurpriseCalibrationAgent()
