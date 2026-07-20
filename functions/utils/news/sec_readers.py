@@ -185,16 +185,28 @@ def fetch_textual_inertia_for_year(
             )
             
             res_inertia = None
-            for attempt in range(4):
+            for attempt in range(6):
                 try:
                     response = textual_inertia_agent.invoke({"input": message})
                     res_inertia = response.content
                     break
                 except Exception as invoke_err:
                     err_str = str(invoke_err).lower()
-                    if ("429" in err_str or "rate limit" in err_str or "too many requests" in err_str) and attempt < 3:
-                        wait_sec = (2 ** attempt) * 3
-                        print(f"[!] Rate limit 429 hit for {t_symbol} {target_year} (Textual Inertia). Retrying in {wait_sec}s...")
+                    if ("429" in err_str or "rate limit" in err_str or "too many requests" in err_str or "401" in err_str) and attempt < 5:
+                        wait_sec = (2 ** attempt) * 4  # 4s, 8s, 16s, 32s, 64s
+                        alt_key = os.getenv("NVIDIA_API_KEY_ALT", "").strip('"\' ')
+                        if alt_key and os.getenv("NVIDIA_API_KEY") != alt_key:
+                            print(f"[!] Rate limit hit for {t_symbol} {target_year} (Textual Inertia). Switching to NVIDIA_API_KEY_ALT...")
+                            os.environ["NVIDIA_API_KEY"] = alt_key
+                            try:
+                                from functions.agents import create_textual_inertia_agent
+                                from functions.utils.news.ingest import setup_clients_and_embeddings
+                                _, _, _, kimi_llm_config, _, _, _ = setup_clients_and_embeddings()
+                                textual_inertia_agent = create_textual_inertia_agent("textual_inertia_prompt.txt", kimi_llm_config)
+                            except Exception as re_err:
+                                print(f"[!] Warning rebuilding agent with alt key: {re_err}")
+                        else:
+                            print(f"[!] Rate limit 429 hit for {t_symbol} {target_year} (Textual Inertia). Retrying in {wait_sec}s (attempt {attempt+1}/5)...")
                         time.sleep(wait_sec)
                     else:
                         raise invoke_err
@@ -229,6 +241,7 @@ def fetch_qa_tension_for_period(
 ) -> dict:
     """Computes Q&A Tension for a specific fiscal year and quarter."""
     import time
+    import os
     res_data = {
         "fiscal_year": target_year,
         "fiscal_quarter": target_quarter,
@@ -250,16 +263,28 @@ def fetch_qa_tension_for_period(
             )
             
             res_tension = None
-            for attempt in range(4):
+            for attempt in range(6):
                 try:
                     response = tension_extractor_agent.invoke({"input": message})
                     res_tension = response.content
                     break
                 except Exception as invoke_err:
                     err_str = str(invoke_err).lower()
-                    if ("429" in err_str or "rate limit" in err_str or "too many requests" in err_str) and attempt < 3:
-                        wait_sec = (2 ** attempt) * 3
-                        print(f"[!] Rate limit 429 hit for {t_symbol} {target_year}Q{target_quarter} (QA Tension). Retrying in {wait_sec}s...")
+                    if ("429" in err_str or "rate limit" in err_str or "too many requests" in err_str or "401" in err_str) and attempt < 5:
+                        wait_sec = (2 ** attempt) * 4  # 4s, 8s, 16s, 32s, 64s
+                        alt_key = os.getenv("NVIDIA_API_KEY_ALT", "").strip('"\' ')
+                        if alt_key and os.getenv("NVIDIA_API_KEY") != alt_key:
+                            print(f"[!] Rate limit hit for {t_symbol} {target_year}Q{target_quarter} (QA Tension). Switching to NVIDIA_API_KEY_ALT...")
+                            os.environ["NVIDIA_API_KEY"] = alt_key
+                            try:
+                                from functions.agents import create_tension_extractor_agent
+                                from functions.utils.news.ingest import setup_clients_and_embeddings
+                                _, _, _, kimi_llm_config, _, _, _ = setup_clients_and_embeddings()
+                                tension_extractor_agent = create_tension_extractor_agent("tension_extractor_prompt.txt", kimi_llm_config)
+                            except Exception as re_err:
+                                print(f"[!] Warning rebuilding agent with alt key: {re_err}")
+                        else:
+                            print(f"[!] Rate limit 429 hit for {t_symbol} {target_year}Q{target_quarter} (QA Tension). Retrying in {wait_sec}s (attempt {attempt+1}/5)...")
                         time.sleep(wait_sec)
                     else:
                         raise invoke_err

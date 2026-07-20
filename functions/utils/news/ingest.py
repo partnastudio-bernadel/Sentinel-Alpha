@@ -48,6 +48,8 @@ def setup_clients_and_embeddings(env_path: str = None, csv_path: str = None) -> 
         base_url=nvidia_api_endpoint
     )
     
+    nvidia_api_key_alt = os.getenv("NVIDIA_API_KEY_ALT", "").strip('"\' ')
+    
     # Setup configs: LLM config for Scorer and base config for CIO
     nvidia_base_model = os.getenv("NVIDIA_TOOLING_MODEL", "").strip('"\' ')
     nvidia_tooling_alt = os.getenv("NVIDIA_TOOLING_MODEL_ALT", "meta/llama-3.1-70b-instruct").strip('"\' ')
@@ -55,12 +57,14 @@ def setup_clients_and_embeddings(env_path: str = None, csv_path: str = None) -> 
     llm_config = {
         "model": nvidia_tooling_alt if nvidia_tooling_alt else "meta/llama-3.1-70b-instruct",
         "base_url": nvidia_api_endpoint,
-        "api_key": nvidia_api_key
+        "api_key": nvidia_api_key,
+        "api_key_alt": nvidia_api_key_alt
     }
     base_llm_config = {
         "model": nvidia_base_model if nvidia_base_model else "deepseek-ai/deepseek-v4-flash",
         "base_url": nvidia_api_endpoint,
-        "api_key": nvidia_api_key
+        "api_key": nvidia_api_key,
+        "api_key_alt": nvidia_api_key_alt
     }
 
     # Setup Kimi configuration for the reading and compliance workers
@@ -68,7 +72,8 @@ def setup_clients_and_embeddings(env_path: str = None, csv_path: str = None) -> 
     kimi_llm_config = {
         "model": nvidia_base_model_alt,
         "base_url": nvidia_api_endpoint,
-        "api_key": nvidia_api_key
+        "api_key": nvidia_api_key,
+        "api_key_alt": nvidia_api_key_alt
     }
 
     # Use MongoDB vector store for calibration examples
