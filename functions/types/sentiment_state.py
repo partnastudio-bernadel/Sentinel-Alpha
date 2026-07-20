@@ -22,4 +22,8 @@ class SentimentState(TypedDict):
     # In-memory execution artifacts (kept lightweight)
     articles_payload: List[Dict[str, Any]]
     results: Dict[str, Any]
+    # Indicator scores returned from cio_analyst_node; keyed by ticker symbol.
+    # Shape: { "textual_inertia": {sym: float|None}, "textual_inertia_reason": {sym: str},
+    #          "qa_tension": {sym: float|None}, "qa_tension_reason": {sym: str} }
+    indicator_scores: Optional[Dict[str, Any]]
     error: Optional[str]

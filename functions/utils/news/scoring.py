@@ -27,8 +27,8 @@ def batch_score_articles(all_articles: list, scorer_agent) -> tuple:
             batch_results.append(scored_data)
         else:
             try:
-                clean_content = summary_content
-                batch_results.append(json.loads(clean_content))
+                if summary_content and summary_content.strip():
+                    batch_results.append(json.loads(summary_content))
             except Exception as e:
                 print(f"[!] Error parsing batch response: {e}. Raw content: {summary_content}")
 
@@ -54,7 +54,8 @@ async def async_score_batch_with_retry(batch, scorer_agent, max_retries=5):
                 return scored_data
             else:
                 try:
-                    return json.loads(summary_content)
+                    if summary_content and summary_content.strip():
+                        return json.loads(summary_content)
                 except Exception as e:
                     print(f"[!] Error parsing async batch response: {e}. Raw content: {summary_content}")
                     return None

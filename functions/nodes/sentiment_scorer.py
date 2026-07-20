@@ -121,16 +121,20 @@ def sentiment_scorer_node(state: SentimentState, config: RunnableConfig) -> Dict
             )
             scorer_agent = create_react_agent(llm, tools=[], prompt=system_prompt)
             
-            if is_async:
-                merged_results, _ = async_batch_score_articles(
-                    all_articles=articles_to_score,
-                    scorer_agent=scorer_agent
-                )
-            else:
-                merged_results, _ = batch_score_articles(
-                    all_articles=articles_to_score,
-                    scorer_agent=scorer_agent
-                )
+            try:
+                if is_async:
+                    merged_results, _ = async_batch_score_articles(
+                        all_articles=articles_to_score,
+                        scorer_agent=scorer_agent
+                    )
+                else:
+                    merged_results, _ = batch_score_articles(
+                        all_articles=articles_to_score,
+                        scorer_agent=scorer_agent
+                    )
+            except Exception as fallback_err:
+                logger.error(f"[sentiment_scorer_node] Fallback model scoring failed: {fallback_err}. Continuing with unscored payload.")
+                merged_results = []
         else:
             raise e
     

@@ -55,6 +55,13 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
                 textual_inertia_agent=textual_inertia_agent,
                 tension_extractor_agent=tension_extractor_agent
             )
+
+            # Capture numeric indicator scores keyed by ticker so they can be
+            # persisted to indicator_snapshots and sentiment_reports downstream.
+            ti_scores = {sym: d.get("textual_inertia") for sym, d in indicators_report_data.items()}
+            ti_reasons = {sym: d.get("textual_inertia_reason", "") for sym, d in indicators_report_data.items()}
+            tension_scores = {sym: d.get("tension") for sym, d in indicators_report_data.items()}
+            tension_reasons = {sym: d.get("tension_reason", "") for sym, d in indicators_report_data.items()}
     
             # Format the indicators context
             indicators_report_str = "--- QUALITATIVE INDICATORS (TEXTUAL INERTIA & TENSION) ---\n"
@@ -218,7 +225,15 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
                 scribe_agent=scribe_agent
             )
     
-            return {"results": final_report}
+            return {
+                "results": final_report,
+                "indicator_scores": {
+                    "textual_inertia": ti_scores,
+                    "textual_inertia_reason": ti_reasons,
+                    "qa_tension": tension_scores,
+                    "qa_tension_reason": tension_reasons,
+                }
+            }
         except Exception as e:
             error_str = str(e).lower()
             

@@ -283,7 +283,10 @@ async def run_background_loop(interval: int = 60):
             if pending_tickers:
                 logger.info(f"Worker picked up pending tickers for execution: {pending_tickers}")
                 tasks = [run_pipeline_for_ticker(t, semaphore) for t in pending_tickers]
-                await asyncio.gather(*tasks)
+                results = await asyncio.gather(*tasks, return_exceptions=True)
+                for t, res in zip(pending_tickers, results):
+                    if isinstance(res, Exception):
+                        logger.error(f"Uncaught task error for ticker {t}: {res}")
             else:
                 logger.info(f"No pending tickers due. Sleeping for {interval}s before next check...")
                 await asyncio.sleep(interval)

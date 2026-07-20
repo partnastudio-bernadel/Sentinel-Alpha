@@ -130,6 +130,28 @@ def upload_article_doc(doc: Dict[str, Any], date_str: Optional[str] = None) -> s
     logger.debug(f"[R2 Storage] Successfully uploaded '{art_id}' to R2 at '{key}' ({len(json_bytes)} bytes)")
     return key
 
+def upload_json_to_r2(r2_path: str, payload: Dict[str, Any]) -> str:
+    """
+    Uploads an arbitrary dict as JSON to Cloudflare R2 at the given key path.
+    Returns the key path on success.
+
+    Unlike upload_article_doc(), this function accepts any key path and any
+    dict payload, making it suitable for SEC filing cache entries and other
+    non-article documents.
+    """
+    client = get_r2_client()
+    bucket_name = get_r2_bucket_name()
+    json_bytes = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
+    client.put_object(
+        Bucket=bucket_name,
+        Key=r2_path,
+        Body=json_bytes,
+        ContentType="application/json",
+    )
+    logger.debug(f"[R2 Storage] Uploaded JSON to R2 at '{r2_path}' ({len(json_bytes)} bytes)")
+    return r2_path
+
+
 def download_article_doc(r2_path: str) -> Dict[str, Any]:
     """
     Downloads and parses an article JSON document from Cloudflare R2 by key path.
