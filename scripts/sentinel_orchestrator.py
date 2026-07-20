@@ -273,34 +273,38 @@ async def run_background_loop(interval: int = 60):
         semaphore = asyncio.Semaphore(MAX_CONCURRENT_TASKS)
         
         while True:
-            # Run daily log archival & 60-day R2 cleanup once every 24 hours
-            if time.time() - last_log_archive_time > 86400: # 24 hours
-                try:
-                    from scripts.archive_logs_to_r2 import archive_and_upload_logs
-                    logger.info("Triggering daily log archival & R2 60-day lifecycle purge...")
-                    await asyncio.to_thread(archive_and_upload_logs, 60, False)
-                    last_log_archive_time = time.time()
-                except Exception as archive_err:
-                    logger.error(f"Daily log archival failed: {archive_err}")
+            try:
+                # Run daily log archival & 60-day R2 cleanup once every 24 hours
+                if time.time() - last_log_archive_time > 86400: # 24 hours
+                    try:
+                        from scripts.archive_logs_to_r2 import archive_and_upload_logs
+                        logger.info("Triggering daily log archival & R2 60-day lifecycle purge...")
+                        await asyncio.to_thread(archive_and_upload_logs, 60, False)
+                        last_log_archive_time = time.time()
+                    except Exception as archive_err:
+                        logger.error(f"Daily log archival failed: {archive_err}")
 
-            client, db = get_db_client()
-            core_entities = list(db["core_entities"].find({}))
-            
-            if core_entities:
-                tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
-                requeue_due_tickers(tickers, max_age_seconds=3600)
-            
-            pending_tickers = get_next_pending_tickers(MAX_CONCURRENT_TASKS)
-            
-            if pending_tickers:
-                logger.info(f"Worker picked up pending tickers for execution: {pending_tickers}")
-                tasks = [run_pipeline_for_ticker(t, semaphore) for t in pending_tickers]
-                results = await asyncio.gather(*tasks, return_exceptions=True)
-                for t, res in zip(pending_tickers, results):
-                    if isinstance(res, Exception):
-                        logger.error(f"Uncaught task error for ticker {t}: {res}")
-            else:
-                logger.info(f"No pending tickers due. Sleeping for {interval}s before next check...")
+                client, db = get_db_client()
+                core_entities = list(db["core_entities"].find({}))
+                
+                if core_entities:
+                    tickers = [doc.get("ticker") for doc in core_entities if doc.get("ticker")]
+                    requeue_due_tickers(tickers, max_age_seconds=3600)
+                
+                pending_tickers = get_next_pending_tickers(MAX_CONCURRENT_TASKS)
+                
+                if pending_tickers:
+                    logger.info(f"Worker picked up pending tickers for execution: {pending_tickers}")
+                    tasks = [run_pipeline_for_ticker(t, semaphore) for t in pending_tickers]
+                    results = await asyncio.gather(*tasks, return_exceptions=True)
+                    for t, res in zip(pending_tickers, results):
+                        if isinstance(res, Exception):
+                            logger.error(f"Uncaught task error for ticker {t}: {res}")
+                else:
+                    logger.info(f"No pending tickers due. Sleeping for {interval}s before next check...")
+                    await asyncio.sleep(interval)
+            except Exception as loop_err:
+                logger.error(f"Error in background loop iteration: {loop_err}. Retrying in {interval}s...")
                 await asyncio.sleep(interval)
                 
     except asyncio.CancelledError:
