@@ -80,8 +80,11 @@ def scrape_motley_fool_transcript(ticker: str, year: int = None, quarter: int = 
                 selected_path = p
                 break
                 
-    # Fallback to the latest one (first in the list)
+    # Fallback to the latest transcript ONLY if year and quarter were not specified
     if not selected_path:
+        if year or quarter:
+            print(f"[!] Warning: Motley Fool has no transcript link matching year={year} quarter={quarter} for {ticker}.")
+            return None
         selected_path = unique_paths[0]
         print(f"[*] Selecting latest available transcript link: {selected_path}")
     else:
