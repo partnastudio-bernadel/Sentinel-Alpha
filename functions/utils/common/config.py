@@ -2,7 +2,7 @@ import os
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from langchain_openai import ChatOpenAI
 
-def build_chat_model(model: str, base_url: str = None, api_key: str = None):
+def build_chat_model(model: str, base_url: str = None, api_key: str = None, temperature: float = None):
     """
     Unified model factory returning appropriate LangChain chat instances
     for NVIDIA NIM or HuggingFace (OpenAI-compatible router) endpoints.
@@ -21,14 +21,20 @@ def build_chat_model(model: str, base_url: str = None, api_key: str = None):
         llm = ChatNVIDIA(
             model=model,
             api_key=api_key,
-            base_url=base_url or "https://integrate.api.nvidia.com/v1"
+            base_url=base_url or "https://integrate.api.nvidia.com/v1",
+            temperature=temperature
         )
     else:
-        llm = ChatOpenAI(
-            model=model,
-            openai_api_key=api_key,
-            openai_api_base=base_url or "https://router.huggingface.co/v1"
-        )
+        # ChatOpenAI uses temperature=None by default, but it's safe to pass if provided
+        kwargs = {
+            "model": model,
+            "openai_api_key": api_key,
+            "openai_api_base": base_url or "https://router.huggingface.co/v1"
+        }
+        if temperature is not None:
+            kwargs["temperature"] = temperature
+            
+        llm = ChatOpenAI(**kwargs)
 
     # Force single tool-calling mode for NVIDIA NIM compatibility
     try:

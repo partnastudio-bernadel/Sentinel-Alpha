@@ -53,10 +53,13 @@ def create_agent(spec: AgentSpec, tools: Optional[List[Any]] = None) -> Runnable
         base_url = spec["llm_config"].get("base_url")
         api_key = spec["llm_config"].get("api_key")
 
+    temperature = spec["llm_config"].get("temperature")
+
     llm = build_chat_model(
         model=model,
         base_url=base_url,
-        api_key=api_key
+        api_key=api_key,
+        temperature=temperature
     )
     
     if tools:
@@ -145,21 +148,27 @@ def create_decomposition_agent(prompt_id: str, schema_path: str, example_path: s
     return create_agent(spec)
 
 def create_textual_inertia_agent(prompt_id: str, llm_config: dict) -> Runnable:
+    llm_config_copy = dict(llm_config)
+    llm_config_copy["temperature"] = 0.2
+    
     spec: AgentSpec = {
         "name": "Textual_Inertia_Agent",
         "description": "Tracks text deviations between consecutive annual corporate filings (10-K).",
         "prompt_id": prompt_id,
-        "llm_config": llm_config,
+        "llm_config": llm_config_copy,
         "schema_paths": {}
     }
     return create_agent(spec)
 
 def create_tension_extractor_agent(prompt_id: str, llm_config: dict) -> Runnable:
+    llm_config_copy = dict(llm_config)
+    llm_config_copy["temperature"] = 0.2
+    
     spec: AgentSpec = {
         "name": "Tension_Extractor_Agent",
         "description": "Analyzes earnings call transcripts to trace signs of corporate tension and defensiveness.",
         "prompt_id": prompt_id,
-        "llm_config": llm_config,
+        "llm_config": llm_config_copy,
         "schema_paths": {}
     }
     return create_agent(spec)
