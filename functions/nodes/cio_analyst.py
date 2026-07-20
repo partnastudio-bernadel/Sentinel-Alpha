@@ -53,7 +53,8 @@ def cio_analyst_node(state: SentimentState, config: RunnableConfig) -> Dict[str,
             indicators_report_data = execute_reading_workers(
                 tickers_to_query=tickers_to_query,
                 textual_inertia_agent=textual_inertia_agent,
-                tension_extractor_agent=tension_extractor_agent
+                tension_extractor_agent=tension_extractor_agent,
+                db=db
             )
 
             # Capture numeric indicator scores keyed by ticker so they can be

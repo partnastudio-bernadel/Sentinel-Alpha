@@ -77,14 +77,20 @@ def get_all_transcript_links_playwright(ticker: str) -> dict:
                         if href:
                             path = href.replace("https://www.fool.com", "").strip()
                             # Parse year & quarter e.g. /earnings/call-transcripts/2024/10/31/apple-aapl-q4-2024-earnings-call-transcript/
-                            m_yr = re.search(r'/earnings/call-transcripts/(202[0-6])/', path)
-                            m_q = re.search(r'-q([1-4])-(202[0-6])-', path) or re.search(r'q([1-4])', path.lower())
-                            
-                            if m_yr and m_q:
-                                yr = int(m_yr.group(1))
-                                qtr = int(m_q.group(1))
+                            slug_match = re.search(r'-q([1-4])-(202[0-6])-', path.lower())
+                            if slug_match:
+                                qtr = int(slug_match.group(1))
+                                yr = int(slug_match.group(2))
                                 full_url = f"https://www.fool.com{path}" if path.startswith('/') else path
                                 links_map[(yr, qtr)] = full_url
+                            else:
+                                m_yr = re.search(r'/earnings/call-transcripts/(202[0-6])/', path)
+                                m_q = re.search(r'q([1-4])', path.lower())
+                                if m_yr and m_q:
+                                    yr = int(m_yr.group(1))
+                                    qtr = int(m_q.group(1))
+                                    full_url = f"https://www.fool.com{path}" if path.startswith('/') else path
+                                    links_map[(yr, qtr)] = full_url
                     except Exception:
                         pass
 

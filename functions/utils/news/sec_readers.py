@@ -7,7 +7,8 @@ from functions.constants import SEC_TEXT_MAX_CHARS
 def execute_reading_workers(
     tickers_to_query: list,
     textual_inertia_agent,
-    tension_extractor_agent
+    tension_extractor_agent,
+    db = None
 ) -> dict:
     """Runs Unstructured Reading Workers (Textual Inertia and Q&A Tension) for target tickers."""
     import concurrent.futures
@@ -24,125 +25,20 @@ def execute_reading_workers(
         print(f"[*] Analyzing qualitative indicators for asset: {t_symbol}...")
         
         # A. Item 1A (Risk Factors) Textual Inertia (Lazy Prices)
-        try:
-            current_year = 2024
-            prev_year = 2023
-            current_sec = get_sec_10k_section(t_symbol, current_year, "1A")
-            prev_sec = get_sec_10k_section(t_symbol, prev_year, "1A")
-            
-            ticker_data["fiscal_year"] = current_year
-            
-            if current_sec and prev_sec and not current_sec.startswith("Risk Factors") and len(current_sec) > 500:
-                print(f"[*] Running Textual Inertia Agent on consecutive filings for {t_symbol}...")
-                
-                # Sanitize inputs to prevent prompt injection
-                clean_current = sanitize_for_prompt(current_sec, max_chars=SEC_TEXT_MAX_CHARS)
-                clean_prev = sanitize_for_prompt(prev_sec, max_chars=SEC_TEXT_MAX_CHARS)
-                
-                message = (
-                    f"Please analyze the Risk Factors (Item 1A) text deviations for ticker: {t_symbol}\n\n"
-                    f"--- CURRENT YEAR {current_year} RISK FACTORS ---\n"
-                    f"{clean_current}\n\n"
-                    f"--- PREVIOUS YEAR {prev_year} RISK FACTORS ---\n"
-                    f"{clean_prev}\n\n"
-                )
-                
-                # Retry loop for 429 rate limits
-                import time
-                res_inertia = None
-                for attempt in range(4):
-                    try:
-                        response = textual_inertia_agent.invoke({"input": message})
-                        res_inertia = response.content
-                        break
-                    except Exception as invoke_err:
-                        err_str = str(invoke_err).lower()
-                        if ("429" in err_str or "rate limit" in err_str or "too many requests" in err_str) and attempt < 3:
-                            wait_sec = (2 ** attempt) * 3
-                            print(f"[!] Rate limit 429 hit for {t_symbol} (Textual Inertia). Retrying in {wait_sec}s (attempt {attempt+1}/3)...")
-                            time.sleep(wait_sec)
-                        else:
-                            raise invoke_err
-
-                if res_inertia:
-                    # Strip markdown JSON blocks if present
-                    if "```json" in res_inertia:
-                        res_inertia = res_inertia.split("```json")[1].split("```")[0].strip()
-                    elif "```" in res_inertia:
-                        res_inertia = res_inertia.split("```")[1].split("```")[0].strip()
-                        
-                    start_idx = res_inertia.find('{')
-                    end_idx = res_inertia.rfind('}')
-                    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-                        res_inertia = res_inertia[start_idx:end_idx+1].strip()
-                        
-                    parsed_inertia = json.loads(res_inertia)
-                    ticker_data["textual_inertia"] = float(parsed_inertia.get("modification_score", 0.0))
-                    ticker_data["textual_inertia_reason"] = parsed_inertia.get("reasoning_summary", "")
-            else:
-                ticker_data["textual_inertia_reason"] = "Risk factors filings unavailable."
-                print(f"[!] Warning: Risk factors filings unavailable for {t_symbol}. Textual inertia will be set to None. Formulas will lack this data.")
-        except Exception as e:
-            print(f"[!] Warning: failed to compute Textual Inertia for {t_symbol}: {e}. Formulas will lack this data.")
-            ticker_data["textual_inertia_reason"] = f"Extraction failed: {e}"
+        current_year = 2024
+        ti_res = fetch_textual_inertia_for_year(t_symbol, current_year, textual_inertia_agent, db=db)
+        ticker_data["fiscal_year"] = current_year
+        if ti_res.get("textual_inertia") is not None:
+            ticker_data["textual_inertia"] = ti_res["textual_inertia"]
+        ticker_data["textual_inertia_reason"] = ti_res["textual_inertia_reason"]
 
         # B. Analyst Q&A Tension Extractor
-        try:
-            transcript_data = fetch_and_split_transcript(t_symbol)
-            qa_block = transcript_data.get("qa", "")
-            
-            ticker_data["fiscal_quarter"] = 1  # Default / recent quarter
-            
-            if qa_block and len(qa_block) > 500:
-                print(f"[*] Running Q&A Tension Extractor Agent on earnings call for {t_symbol}...")
-                
-                # Sanitize inputs to prevent prompt injection
-                clean_qa = sanitize_for_prompt(qa_block, max_chars=SEC_TEXT_MAX_CHARS)
-                
-                message = (
-                    f"Please analyze corporate call Q&A tension for ticker: {t_symbol}\n\n"
-                    f"--- ANALYST Q&A BLOCK ---\n"
-                    f"{clean_qa}\n\n"
-                )
-                
-                # Retry loop for 429 rate limits
-                import time
-                res_tension = None
-                for attempt in range(4):
-                    try:
-                        response = tension_extractor_agent.invoke({"input": message})
-                        res_tension = response.content
-                        break
-                    except Exception as invoke_err:
-                        err_str = str(invoke_err).lower()
-                        if ("429" in err_str or "rate limit" in err_str or "too many requests" in err_str) and attempt < 3:
-                            wait_sec = (2 ** attempt) * 3
-                            print(f"[!] Rate limit 429 hit for {t_symbol} (QA Tension). Retrying in {wait_sec}s (attempt {attempt+1}/3)...")
-                            time.sleep(wait_sec)
-                        else:
-                            raise invoke_err
-
-                if res_tension:
-                    # Strip markdown JSON blocks if present
-                    if "```json" in res_tension:
-                        res_tension = res_tension.split("```json")[1].split("```")[0].strip()
-                    elif "```" in res_tension:
-                        res_tension = res_tension.split("```")[1].split("```")[0].strip()
-                        
-                    start_idx = res_tension.find('{')
-                    end_idx = res_tension.rfind('}')
-                    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-                        res_tension = res_tension[start_idx:end_idx+1].strip()
-                        
-                    parsed_tension = json.loads(res_tension)
-                    ticker_data["tension"] = float(parsed_tension.get("tension_score", 0.0))
-                    ticker_data["tension_reason"] = parsed_tension.get("reasoning_summary", "")
-            else:
-                ticker_data["tension_reason"] = "Earnings call Q&A transcript unavailable."
-                print(f"[!] Warning: Earnings call Q&A transcript unavailable for {t_symbol}. Tension will be set to None. Formulas will lack this data.")
-        except Exception as e:
-            print(f"[!] Warning: failed to extract Analyst Q&A tension for {t_symbol}: {e}. Formulas will lack this data.")
-            ticker_data["tension_reason"] = f"Extraction failed: {e}"
+        current_quarter = 1
+        qa_res = fetch_qa_tension_for_period(t_symbol, current_year, current_quarter, tension_extractor_agent, db=db)
+        ticker_data["fiscal_quarter"] = current_quarter
+        if qa_res.get("tension") is not None:
+            ticker_data["tension"] = qa_res["tension"]
+        ticker_data["tension_reason"] = qa_res["tension_reason"]
             
         return t_symbol, ticker_data
 
@@ -157,7 +53,8 @@ def execute_reading_workers(
 def fetch_textual_inertia_for_year(
     t_symbol: str,
     target_year: int,
-    textual_inertia_agent
+    textual_inertia_agent,
+    db = None
 ) -> dict:
     """Computes Textual Inertia for a specific fiscal year (comparing target_year vs target_year - 1)."""
     import time
@@ -167,6 +64,14 @@ def fetch_textual_inertia_for_year(
         "textual_inertia": None,
         "textual_inertia_reason": "No data available."
     }
+    
+    if db is not None:
+        existing = db["textual_inertia_snapshots"].find_one({"ticker": t_symbol, "fiscal_year": target_year})
+        if existing and existing.get("textual_inertia") is not None:
+            res_data["textual_inertia"] = existing.get("textual_inertia")
+            res_data["textual_inertia_reason"] = existing.get("textual_inertia_reason", "")
+            print(f"[*] Found existing Textual Inertia snapshot for {t_symbol} {target_year}. Skipping LLM.")
+            return res_data
     
     try:
         current_sec = get_sec_10k_section(t_symbol, target_year, "1A")
@@ -223,8 +128,29 @@ def fetch_textual_inertia_for_year(
                     res_inertia = res_inertia[start_idx:end_idx+1].strip()
                     
                 parsed_inertia = json.loads(res_inertia)
-                res_data["textual_inertia"] = float(parsed_inertia.get("modification_score", 0.0))
-                res_data["textual_inertia_reason"] = parsed_inertia.get("reasoning_summary", "")
+                score_val = (
+                    parsed_inertia.get("modification_score")
+                    if parsed_inertia.get("modification_score") is not None
+                    else (
+                        parsed_inertia.get("textual_inertia")
+                        if parsed_inertia.get("textual_inertia") is not None
+                        else (
+                            parsed_inertia.get("inertia_score")
+                            if parsed_inertia.get("inertia_score") is not None
+                            else parsed_inertia.get("score")
+                        )
+                    )
+                )
+                if score_val is not None:
+                    res_data["textual_inertia"] = float(score_val)
+
+                reason_val = (
+                    parsed_inertia.get("reasoning_summary") or
+                    parsed_inertia.get("reason") or
+                    parsed_inertia.get("summary") or
+                    parsed_inertia.get("explanation", "")
+                )
+                res_data["textual_inertia_reason"] = str(reason_val)
         else:
             res_data["textual_inertia_reason"] = f"Filing 10-K for year {target_year} or {prev_year} unavailable."
     except Exception as e:
@@ -237,7 +163,8 @@ def fetch_qa_tension_for_period(
     t_symbol: str,
     target_year: int,
     target_quarter: int,
-    tension_extractor_agent
+    tension_extractor_agent,
+    db = None
 ) -> dict:
     """Computes Q&A Tension for a specific fiscal year and quarter."""
     import time
@@ -248,6 +175,14 @@ def fetch_qa_tension_for_period(
         "tension": None,
         "tension_reason": "No transcript available."
     }
+    
+    if db is not None:
+        existing = db["qa_tension_snapshots"].find_one({"ticker": t_symbol, "fiscal_year": target_year, "fiscal_quarter": target_quarter})
+        if existing and existing.get("qa_tension") is not None:
+            res_data["tension"] = existing.get("qa_tension")
+            res_data["tension_reason"] = existing.get("qa_tension_reason", "")
+            print(f"[*] Found existing QA Tension snapshot for {t_symbol} {target_year}Q{target_quarter}. Skipping LLM.")
+            return res_data
     
     try:
         transcript_data = fetch_and_split_transcript(t_symbol, year=target_year, quarter=target_quarter)
@@ -301,8 +236,29 @@ def fetch_qa_tension_for_period(
                     res_tension = res_tension[start_idx:end_idx+1].strip()
                     
                 parsed_tension = json.loads(res_tension)
-                res_data["tension"] = float(parsed_tension.get("tension_score", 0.0))
-                res_data["tension_reason"] = parsed_tension.get("reasoning_summary", "")
+                tension_val = (
+                    parsed_tension.get("tension_score")
+                    if parsed_tension.get("tension_score") is not None
+                    else (
+                        parsed_tension.get("tension")
+                        if parsed_tension.get("tension") is not None
+                        else (
+                            parsed_tension.get("qa_tension")
+                            if parsed_tension.get("qa_tension") is not None
+                            else parsed_tension.get("score")
+                        )
+                    )
+                )
+                if tension_val is not None:
+                    res_data["tension"] = float(tension_val)
+
+                reason_val = (
+                    parsed_tension.get("reasoning_summary") or
+                    parsed_tension.get("reason") or
+                    parsed_tension.get("summary") or
+                    parsed_tension.get("explanation", "")
+                )
+                res_data["tension_reason"] = str(reason_val)
         else:
             res_data["tension_reason"] = f"Transcript for {target_year} Q{target_quarter} unavailable."
     except Exception as e:

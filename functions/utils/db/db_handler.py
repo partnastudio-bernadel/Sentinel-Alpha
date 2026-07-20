@@ -26,8 +26,11 @@ def save_sentiment_report(ticker: str, report: dict) -> str:
         
         now_iso = datetime.now(timezone.utc).isoformat()
         
+        article_ids = report.get("article_ids", [])
+        
         doc = {
             "ticker": ticker.upper(),
+            "parent_etf": report.get("parent_etf", None),
             "timestamp": report.get("metadata", {}).get("timestamp", now_iso),
             "aggregate_score": float(report.get("aggregate_score", 0.0)),
             "aggregate_label": report.get("aggregate_label", "Neutral"),
@@ -35,8 +38,8 @@ def save_sentiment_report(ticker: str, report: dict) -> str:
             "reasoning": report.get("reasoning", ""),
             "warnings": report.get("warnings", []),
             "compliance_override": report.get("compliance_override"),
-            "articles_count": len(report.get("articles", [])),
-            "articles": report.get("articles", []),
+            "articles_count": len(article_ids),
+            "article_ids": article_ids,
             # Qualitative indicators — floats in [0.0, 1.0] or None when data unavailable
             "textual_inertia": report.get("textual_inertia"),
             "textual_inertia_reason": report.get("textual_inertia_reason", ""),
@@ -435,6 +438,9 @@ def process_sentiment_state(ticker: str, state: dict):
             if ticker_tension is not None:
                 cio_analysis["qa_tension"] = ticker_tension
                 cio_analysis["qa_tension_reason"] = ticker_tension_reason
+            
+            # Use scored_article_ids for the main report
+            cio_analysis["article_ids"] = state.get("scored_article_ids", [])
             save_sentiment_report(ticker, cio_analysis)
 
         # 4. Persist indicator snapshot independently (time-series, always insert per constituent and/or ETF)
@@ -446,8 +452,14 @@ def process_sentiment_state(ticker: str, state: dict):
         is_etf = state.get("is_etf", False)
         parent_etf_tag = ticker_upper if is_etf else None
 
-        all_indicator_symbols = set(list(ti_dict.keys()) + list(tension_dict.keys()))
-        if not all_indicator_symbols and (ticker_ti is not None or ticker_tension is not None):
+        # Build list of symbols to iterate over to guarantee exactly N+1 reports
+        all_indicator_symbols = set()
+        if is_etf:
+            all_indicator_symbols.add(ticker_upper)
+            for c in state.get("constituents", []):
+                if isinstance(c, dict) and c.get("ticker"):
+                    all_indicator_symbols.add(c.get("ticker").upper())
+        else:
             all_indicator_symbols = {ticker_upper}
 
         saved_snapshots_count = 0
@@ -458,9 +470,33 @@ def process_sentiment_state(ticker: str, state: dict):
             sym_tension = tension_dict.get(sym_upper)
             sym_tension_reason = tension_reason_dict.get(sym_upper, "")
 
-            if sym_ti is not None or sym_tension is not None:
-                curr_parent = parent_etf_tag if (is_etf and sym_upper != ticker_upper) else (parent_etf_tag if is_etf else None)
+            curr_parent = parent_etf_tag if (is_etf and sym_upper != ticker_upper) else (parent_etf_tag if is_etf else None)
+            
+            # If processing an ETF, also create/upsert a per-constituent report document in sentiment_reports
+            if is_etf and sym_upper != ticker_upper:
+                const_article_ids = [
+                    str(a.get("_id") or a.get("article_id") or a.get("id") or a.get("url"))
+                    for a in articles_data
+                    if isinstance(a, dict) and sym_upper in [t.upper() for t in (a.get("tickers") or [a.get("ticker", "")])]
+                ]
+                # Filter against scored_article_ids to ensure they match scored_articles
+                valid_scored_ids = state.get("scored_article_ids", [])
+                const_article_ids = [aid for aid in const_article_ids if aid in valid_scored_ids]
                 
+                save_sentiment_report(sym_upper, {
+                    "parent_etf": parent_etf_tag,
+                    "aggregate_score": 0.0,
+                    "aggregate_label": "Neutral",
+                    "reasoning": f"Production constituent sentiment report for {sym_upper} (Parent ETF: {parent_etf_tag}).",
+                    "article_ids": const_article_ids,
+                    "textual_inertia": sym_ti,
+                    "textual_inertia_reason": sym_ti_reason,
+                    "qa_tension": sym_tension,
+                    "qa_tension_reason": sym_tension_reason
+                })
+
+            if sym_ti is not None or sym_tension is not None:
+
                 # 1. Deprecated time-series snapshot
                 save_indicator_snapshot(
                     ticker=sym_upper,
