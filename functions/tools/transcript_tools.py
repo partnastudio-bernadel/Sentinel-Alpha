@@ -11,20 +11,10 @@ if os.path.exists(env_path):
 else:
     load_dotenv()
 
+_fmp_disabled = False
+
 def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = None) -> dict:
-    """Retrieves the earnings call transcript from FMP or Motley Fool scraper and splits it into Presentation and Q&A blocks.
-    
-    Args:
-        ticker (str): Stock ticker symbol (e.g. 'AAPL').
-        year (int, optional): Fiscal year of the transcript. Defaults to None (gets latest).
-        quarter (int, optional): Fiscal quarter (1, 2, 3, or 4). Defaults to None (gets latest).
-        
-    Returns:
-        dict: A dictionary containing:
-            - 'presentation' (str): The corporate presentation block.
-            - 'qa' (str): The analyst Q&A block.
-            - 'meta' (dict): Metadata containing date, quarter, year, and symbol.
-    """
+    global _fmp_disabled
     ticker = ticker.upper().strip()
     
     # 1. Attempt to fetch from Cloudflare R2 or MongoDB cache
@@ -68,10 +58,10 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
     except Exception as e:
         print(f"[!] Warning: failed to check transcripts cache: {e}")
 
-    # 2. Try fetching from FMP API (if credentials exist)
+    # 2. Try fetching from FMP API (if credentials exist and FMP is active)
     fmp_data = None
     api_key = os.getenv("FMP_API_KEY", "").strip('"\'')
-    if api_key:
+    if api_key and not _fmp_disabled:
         try:
             if year and quarter:
                 url = f"https://financialmodelingprep.com/api/v3/earnings_call_transcript/{ticker}?quarter={quarter}&year={year}&apikey={api_key}"
@@ -81,10 +71,14 @@ def fetch_and_split_transcript(ticker: str, year: int = None, quarter: int = Non
                 print(f"[*] Fetching latest transcripts for {ticker} via FMP API...")
                 
             res = requests.get(url, timeout=10)
-            res.raise_for_status()
-            data = res.json()
-            if data and isinstance(data, list) and len(data) > 0:
-                fmp_data = data[0]
+            if res.status_code == 403:
+                print("[!] FMP API returned 403 Forbidden. Disabling FMP for remaining batch run...")
+                _fmp_disabled = True
+            else:
+                res.raise_for_status()
+                data = res.json()
+                if data and isinstance(data, list) and len(data) > 0:
+                    fmp_data = data[0]
         except Exception as e:
             print(f"[!] Warning: FMP transcript fetch failed: {e}. Falling back to Motley Fool scraper...")
     else:
