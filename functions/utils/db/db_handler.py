@@ -53,6 +53,114 @@ def save_sentiment_report(ticker: str, report: dict) -> str:
         return None
 
 
+def save_textual_inertia_snapshot(
+    ticker: str,
+    fiscal_year: int,
+    score: float,
+    reason: str = "",
+    source: str = "cio_pipeline",
+    parent_etf: str = None,
+    filing_date: str = None
+) -> str:
+    """
+    Upserts annual 10-K textual inertia analysis into 'textual_inertia_snapshots'.
+    Upserts on (ticker, fiscal_year, parent_etf) to enforce 1 entry per year per company.
+    """
+    try:
+        client, db = get_db_client()
+        col = db["textual_inertia_snapshots"]
+        now_iso = datetime.now(timezone.utc).isoformat()
+        
+        ticker_clean = ticker.upper()
+        parent_clean = parent_etf.upper() if parent_etf else None
+        fy_clean = int(fiscal_year) if fiscal_year else 2024
+        
+        filter_doc = {
+            "ticker": ticker_clean,
+            "fiscal_year": fy_clean,
+            "parent_etf": parent_clean
+        }
+        
+        update_doc = {
+            "$set": {
+                "ticker": ticker_clean,
+                "parent_etf": parent_clean,
+                "fiscal_year": fy_clean,
+                "filing_date": filing_date,
+                "textual_inertia": float(score) if score is not None else None,
+                "textual_inertia_reason": reason or "",
+                "source": source,
+                "saved_at": now_iso
+            }
+        }
+        
+        res = col.update_one(filter_doc, update_doc, upsert=True)
+        doc_id = str(res.upserted_id) if res.upserted_id else "updated"
+        logger.info(
+            f"Saved textual inertia snapshot for {ticker_clean} (FY={fy_clean}, parent_etf={parent_clean}) "
+            f"to 'textual_inertia_snapshots' (score={score})."
+        )
+        return doc_id
+    except Exception as e:
+        logger.error(f"Failed to save textual inertia snapshot for {ticker}: {e}")
+        return None
+
+def save_qa_tension_snapshot(
+    ticker: str,
+    fiscal_year: int,
+    fiscal_quarter: int,
+    score: float,
+    reason: str = "",
+    source: str = "cio_pipeline",
+    parent_etf: str = None,
+    call_date: str = None
+) -> str:
+    """
+    Upserts quarterly earnings call Q&A tension analysis into 'qa_tension_snapshots'.
+    Upserts on (ticker, fiscal_year, fiscal_quarter, parent_etf) to enforce 4 entries per year per company.
+    """
+    try:
+        client, db = get_db_client()
+        col = db["qa_tension_snapshots"]
+        now_iso = datetime.now(timezone.utc).isoformat()
+        
+        ticker_clean = ticker.upper()
+        parent_clean = parent_etf.upper() if parent_etf else None
+        fy_clean = int(fiscal_year) if fiscal_year else 2024
+        fq_clean = int(fiscal_quarter) if fiscal_quarter else 1
+        
+        filter_doc = {
+            "ticker": ticker_clean,
+            "fiscal_year": fy_clean,
+            "fiscal_quarter": fq_clean,
+            "parent_etf": parent_clean
+        }
+        
+        update_doc = {
+            "$set": {
+                "ticker": ticker_clean,
+                "parent_etf": parent_clean,
+                "fiscal_year": fy_clean,
+                "fiscal_quarter": fq_clean,
+                "call_date": call_date,
+                "qa_tension": float(score) if score is not None else None,
+                "qa_tension_reason": reason or "",
+                "source": source,
+                "saved_at": now_iso
+            }
+        }
+        
+        res = col.update_one(filter_doc, update_doc, upsert=True)
+        doc_id = str(res.upserted_id) if res.upserted_id else "updated"
+        logger.info(
+            f"Saved Q&A tension snapshot for {ticker_clean} (FY={fy_clean} Q{fq_clean}, parent_etf={parent_clean}) "
+            f"to 'qa_tension_snapshots' (score={score})."
+        )
+        return doc_id
+    except Exception as e:
+        logger.error(f"Failed to save Q&A tension snapshot for {ticker}: {e}")
+        return None
+
 def save_indicator_snapshot(ticker: str, scores: dict, source: str = "cio_pipeline", parent_etf: str = None) -> str:
     """
     Inserts a new textual inertia + Q&A tension snapshot into 'indicator_snapshots'.
@@ -352,6 +460,8 @@ def process_sentiment_state(ticker: str, state: dict):
 
             if sym_ti is not None or sym_tension is not None:
                 curr_parent = parent_etf_tag if (is_etf and sym_upper != ticker_upper) else (parent_etf_tag if is_etf else None)
+                
+                # 1. Deprecated time-series snapshot
                 save_indicator_snapshot(
                     ticker=sym_upper,
                     scores={
@@ -363,6 +473,30 @@ def process_sentiment_state(ticker: str, state: dict):
                     source="cio_pipeline",
                     parent_etf=curr_parent
                 )
+                
+                # 2. Decoupled Annual 10-K Textual Inertia collection (textual_inertia_snapshots)
+                if sym_ti is not None:
+                    save_textual_inertia_snapshot(
+                        ticker=sym_upper,
+                        fiscal_year=2024,
+                        score=sym_ti,
+                        reason=sym_ti_reason,
+                        source="cio_pipeline",
+                        parent_etf=curr_parent
+                    )
+                    
+                # 3. Decoupled Quarterly Earnings Q&A Tension collection (qa_tension_snapshots)
+                if sym_tension is not None:
+                    save_qa_tension_snapshot(
+                        ticker=sym_upper,
+                        fiscal_year=2024,
+                        fiscal_quarter=1,
+                        score=sym_tension,
+                        reason=sym_tension_reason,
+                        source="cio_pipeline",
+                        parent_etf=curr_parent
+                    )
+                    
                 saved_snapshots_count += 1
 
         if saved_snapshots_count == 0:
