@@ -143,64 +143,37 @@ def chief_economist_node(state: MacroState, config: RunnableConfig) -> Dict[str,
                     continue
             raise e
     
-    # Goal 4: Enforce Pydantic schema generation with LangChain's with_structured_output
-    from functions.types.macro import MacroReport
-    from langchain_core.prompts import ChatPromptTemplate
+    # Goal 4: Robust MacroReport schema parsing without triggering NIM guided_json endpoint incompatibility
+    from functions.tools.custom_reply import extract_json_array
 
-    parse_attempts = 0
-    max_parse_retries = 3
-    parse_llm_config = dict(base_llm_config)
-    final_report = None
-
-    while parse_attempts < max_parse_retries:
-        parse_attempts += 1
+    final_report = {}
+    if final_report_msg and isinstance(final_report_msg, str) and final_report_msg.strip():
         try:
-            parse_llm = build_chat_model(
-                model=parse_llm_config.get("model"),
-                base_url=parse_llm_config.get("base_url"),
-                api_key=parse_llm_config.get("api_key")
-            )
-            structured_llm = parse_llm.with_structured_output(MacroReport)
-            prompt = ChatPromptTemplate.from_messages([
-                ("system", "You are an expert JSON structured parser. Extract the exact values into the strict MacroReport schema."),
-                ("human", "{raw_report}")
-            ])
-            chain = prompt | structured_llm
-            final_report_pydantic = chain.invoke({"raw_report": final_report_msg})
-            final_report = final_report_pydantic.model_dump()
-            break
-        except Exception as parse_err:
-            parse_err_str = str(parse_err).lower()
-            logger.warning(f"[chief_economist_node] Pydantic parsing attempt {parse_attempts}/{max_parse_retries} failed: {parse_err}")
+            # 1. Direct JSON loads
+            final_report = json.loads(final_report_msg)
+        except Exception:
+            # 2. Extract JSON block / regex fallback
+            clean_msg = final_report_msg
+            if "```json" in clean_msg:
+                clean_msg = clean_msg.split("```json")[1].split("```")[0].strip()
+            elif "```" in clean_msg:
+                clean_msg = clean_msg.split("```")[1].split("```")[0].strip()
+            start_idx = clean_msg.find('{')
+            end_idx = clean_msg.rfind('}')
+            if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+                clean_msg = clean_msg[start_idx:end_idx+1].strip()
             
-            if ("429" in parse_err_str or "rate limit" in parse_err_str or "too many requests" in parse_err_str) and parse_attempts < max_parse_retries:
-                if alt_api_key and parse_llm_config.get("api_key") != alt_api_key:
-                    logger.info("[chief_economist_node] 429 on Pydantic parsing. Switching to alternate API key...")
-                    parse_llm_config["api_key"] = alt_api_key
+            try:
+                final_report = json.loads(clean_msg)
+            except Exception:
+                parsed = extract_json_array(final_report_msg)
+                if isinstance(parsed, dict):
+                    final_report = parsed
+                elif isinstance(parsed, list) and len(parsed) > 0:
+                    final_report = parsed[0]
                 else:
-                    backoff_seconds = parse_attempts * 5
-                    logger.info(f"[chief_economist_node] Rate limit hit during Pydantic parsing. Sleeping for {backoff_seconds}s before retrying...")
-                    time.sleep(backoff_seconds)
-                continue
-            elif parse_attempts < max_parse_retries:
-                time.sleep(2)
-                continue
-            else:
-                logger.error(f"Error parsing Macro CIO response with Pydantic after retries: {parse_err}")
-                try:
-                    # Strip markdown braces if raw fallback needed
-                    clean_msg = final_report_msg
-                    if "```json" in clean_msg:
-                        clean_msg = clean_msg.split("```json")[1].split("```")[0].strip()
-                    elif "```" in clean_msg:
-                        clean_msg = clean_msg.split("```")[1].split("```")[0].strip()
-                    start_idx = clean_msg.find('{')
-                    end_idx = clean_msg.rfind('}')
-                    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-                        clean_msg = clean_msg[start_idx:end_idx+1].strip()
-                    final_report = json.loads(clean_msg)
-                except Exception:
                     final_report = {"error": "JSON parse error", "raw": final_report_msg}
-                break
+    else:
+        final_report = {"error": "Empty response from Chief Economist LLM", "raw": str(final_report_msg)}
         
     return {"results": final_report}
