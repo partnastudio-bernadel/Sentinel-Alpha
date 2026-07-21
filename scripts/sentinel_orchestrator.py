@@ -300,6 +300,8 @@ async def run_background_loop(interval: int = 60):
                     for t, res in zip(pending_tickers, results):
                         if isinstance(res, Exception):
                             logger.error(f"Uncaught task error for ticker {t}: {res}")
+                    # Brief pause between batch runs to yield CPU and maintain break pacing
+                    await asyncio.sleep(2)
                 else:
                     logger.info(f"No pending tickers due. Sleeping for {interval}s before next check...")
                     await asyncio.sleep(interval)
@@ -347,7 +349,8 @@ def main():
         asyncio.run(run_background_loop(interval=args.interval))
         
     else:
-        parser.print_help()
+        logger.info("No specific mode flag provided. Defaulting to CONTINUOUS BACKGROUND mode...")
+        asyncio.run(run_background_loop(interval=args.interval))
 
 if __name__ == "__main__":
     main()
