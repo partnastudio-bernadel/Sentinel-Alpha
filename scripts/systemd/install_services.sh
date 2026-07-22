@@ -3,8 +3,11 @@ set -e
 
 echo "[+] Installing Sentinel systemd services..."
 
-# Ensure target directory exists
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SENTIMENT_DIR="$( cd "$SCRIPT_DIR/../.." && pwd )"
+
+# Ensure logs directory exists
+mkdir -p "$SENTIMENT_DIR/logs"
 
 # Copy service unit files to /etc/systemd/system/
 sudo cp "$SCRIPT_DIR/sentinel-scheduler.service" /etc/systemd/system/
@@ -28,8 +31,3 @@ sudo systemctl restart sentinel-orchestrator.service
 sudo systemctl restart sentinel-api.service
 
 echo "🎉 All Sentinel services successfully installed, enabled, and started!"
-echo ""
-echo "Check status:"
-echo "  sudo systemctl status sentinel-scheduler"
-echo "  sudo systemctl status sentinel-orchestrator"
-echo "  sudo systemctl status sentinel-api"

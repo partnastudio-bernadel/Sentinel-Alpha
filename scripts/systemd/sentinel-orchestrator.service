@@ -9,8 +9,8 @@ WorkingDirectory=/home/ubuntu/sentinel/sentiment
 ExecStart=/home/ubuntu/sentinel/sentiment/venv/bin/python scripts/sentinel_orchestrator.py --background
 Restart=always
 RestartSec=10
-StandardOutput=append:/home/ubuntu/sentinel/sentiment/logs/sentinel_orchestrator.log
-StandardError=append:/home/ubuntu/sentinel/sentiment/logs/sentinel_orchestrator.log
+StandardOutput=journal
+StandardError=journal
 Environment=PYTHONUNBUFFERED=1
 
 [Install]
