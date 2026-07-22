@@ -1,0 +1,17 @@
+[Unit]
+Description=Sentinel IntentCore FastAPI Webhook Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/sentinel/sentiment
+ExecStart=/home/ubuntu/sentinel/sentiment/venv/bin/uvicorn functions.api.server:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/ubuntu/sentinel/sentiment/logs/sentinel_api.log
+StandardError=append:/home/ubuntu/sentinel/sentiment/logs/sentinel_api.log
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

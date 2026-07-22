@@ -100,6 +100,13 @@ def check_system_memory():
         except Exception as e:
             print(f"  ⚠️ Could not query memory info: {e}")
 
+def check_systemd_service_status(service_name):
+    try:
+        output = subprocess.check_output(["systemctl", "is-active", service_name], text=True).strip()
+        return output == "active", output
+    except Exception:
+        return False, "inactive"
+
 def main():
     print("================ SENTINEL PRODUCTION DIAGNOSTIC CHECK ================")
     
@@ -107,19 +114,23 @@ def main():
     env_path = os.path.join(sentiment_dir, ".env.local")
     load_dotenv(env_path)
     
-    # 1. Check Background Daemons
-    print("\n[1] Checking System Processes...")
-    scheduler_running, scheduler_cmd = check_process_running("macro_scheduler_cli.py")
-    if scheduler_running:
-        print(f"✅ Macro Scheduler Daemon is RUNNING (PID/Cmd: {scheduler_cmd})")
-    else:
-        print("❌ Macro Scheduler Daemon is NOT running (check tmux session!)")
-
-    orchestrator_running, orchestrator_cmd = check_process_running("sentinel_orchestrator.py")
-    if orchestrator_running:
-        print(f"✅ Sentinel Orchestrator Daemon is RUNNING (PID/Cmd: {orchestrator_cmd})")
-    else:
-        print("❌ Sentinel Orchestrator Daemon is NOT running (check tmux session!)")
+    # 1. Check Background Daemons & systemd Services
+    print("\n[1] Checking System Processes & Services...")
+    for proc_name, service_name, label in [
+        ("macro_scheduler_cli.py", "sentinel-scheduler.service", "Macro Scheduler Daemon"),
+        ("sentinel_orchestrator.py", "sentinel-orchestrator.service", "Sentinel Orchestrator Daemon"),
+        ("uvicorn", "sentinel-api.service", "IntentCore FastAPI Server")
+    ]:
+        proc_running, proc_cmd = check_process_running(proc_name)
+        svc_active, svc_state = check_systemd_service_status(service_name)
+        
+        status_str = "RUNNING" if proc_running else "NOT RUNNING"
+        svc_str = f"systemd: {svc_state}"
+        
+        if proc_running or svc_active:
+            print(f"✅ {label:<30} | Status: {status_str:<12} | ({svc_str})")
+        else:
+            print(f"❌ {label:<30} | Status: {status_str:<12} | ({svc_str} - check systemctl or tmux!)")
 
     # 2. Check System Memory & Swap
     check_system_memory()
