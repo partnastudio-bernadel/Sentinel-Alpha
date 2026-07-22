@@ -1,17 +1,5 @@
-[Unit]
-Description=Sentinel Macro Scheduler Daemon
-After=network.target
-
-[Service]
-Type=simple
-User=ubuntu
-WorkingDirectory=/home/ubuntu/sentinel/sentiment
-ExecStart=/home/ubuntu/sentinel/sentiment/venv/bin/python scripts/macro_scheduler_cli.py
-Restart=always
-RestartSec=10
-StandardOutput=journal
-StandardError=journal
-Environment=PYTHONUNBUFFERED=1
-
-[Install]
-WantedBy=multi-user.target
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
