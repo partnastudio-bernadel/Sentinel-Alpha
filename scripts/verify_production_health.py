@@ -48,6 +48,58 @@ def parse_iso_datetime(dt_str):
     except Exception:
         return None
 
+def check_system_memory():
+    print("\n[2] Checking System Memory & Swap Usage...")
+    try:
+        import psutil
+        vm = psutil.virtual_memory()
+        swap = psutil.swap_memory()
+        
+        total_gb = vm.total / (1024 ** 3)
+        used_gb = vm.used / (1024 ** 3)
+        avail_gb = vm.available / (1024 ** 3)
+        print(f"  RAM Usage:  {used_gb:.2f} GB / {total_gb:.2f} GB ({vm.percent}%) | Available: {avail_gb:.2f} GB")
+        
+        if vm.percent > 85.0:
+            print("  🚨 WARNING: High system memory usage detected (>85%)!")
+        else:
+            print("  ✅ RAM usage within normal parameters.")
+
+        swap_total_mb = swap.total / (1024 ** 2)
+        swap_used_mb = swap.used / (1024 ** 2)
+        if swap.total > 0:
+            print(f"  Swap Space: {swap_used_mb:.1f} MB / {swap_total_mb:.1f} MB ({swap.percent}%)")
+            print("  ✅ Swap space is ACTIVE.")
+        else:
+            print("  ⚠️ WARNING: No Swap Space configured on system (0 MB). Risk of OOM killer on memory spikes!")
+
+        print("\n  Top Python Processes Memory Footprint:")
+        python_procs = []
+        for p in psutil.process_iter(['pid', 'name', 'cmdline', 'memory_info', 'memory_percent']):
+            try:
+                cmdline = " ".join(p.info['cmdline'] or [])
+                if "python" in p.info['name'].lower() or "python" in cmdline.lower():
+                    rss_mb = p.info['memory_info'].rss / (1024 ** 2) if p.info['memory_info'] else 0
+                    mem_pct = p.info['memory_percent'] or 0.0
+                    python_procs.append((p.info['pid'], rss_mb, mem_pct, cmdline))
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+
+        python_procs.sort(key=lambda x: x[1], reverse=True)
+        if python_procs:
+            for pid, rss_mb, mem_pct, cmd in python_procs[:5]:
+                short_cmd = cmd if len(cmd) <= 70 else cmd[:67] + "..."
+                print(f"    - PID {pid:<6} | RSS: {rss_mb:6.1f} MB ({mem_pct:4.1f}%) | {short_cmd}")
+        else:
+            print("    - No active Python processes detected.")
+
+    except ImportError:
+        try:
+            free_out = subprocess.check_output(["free", "-h"], text=True)
+            print("  System Memory (via free -h):\n" + free_out.strip())
+        except Exception as e:
+            print(f"  ⚠️ Could not query memory info: {e}")
+
 def main():
     print("================ SENTINEL PRODUCTION DIAGNOSTIC CHECK ================")
     
@@ -69,8 +121,11 @@ def main():
     else:
         print("❌ Sentinel Orchestrator Daemon is NOT running (check tmux session!)")
 
-    # 2. Check Log files
-    print("\n[2] Checking Log Files...")
+    # 2. Check System Memory & Swap
+    check_system_memory()
+
+    # 3. Check Log files
+    print("\n[3] Checking Log Files...")
     sentiment_log = os.path.join(sentiment_dir, "logs", "sentiment_pipeline.log")
     macro_log = os.path.join(sentiment_dir, "logs", "macro_pipeline.log")
     orchestrator_log = os.path.join(sentiment_dir, "logs", "sentinel_orchestrator.log")
@@ -90,8 +145,8 @@ def main():
             else:
                 print(f"⚠️ Inactive ({log_info})\n")
 
-    # 3. Check MongoDB Collection Health
-    print("\n[3] Checking MongoDB Collection Counts...")
+    # 4. Check MongoDB Collection Health
+    print("\n[4] Checking MongoDB Collection Counts...")
     try:
         client, db = get_db_client()
         print("✅ Connected to MongoDB Atlas cluster.")
@@ -117,8 +172,8 @@ def main():
         pending_macro = db["macro_calendar"].count_documents({"status": "pending"})
         print(f"\nMacro Calendar Stats: Completed={completed_macro}, Pending={pending_macro}")
         
-        # 4. Check Hourly Job Run Status (Last 60 Minutes)
-        print("\n[4] Checking Hourly Job Status (Last 60 Minutes)...")
+        # 5. Check Hourly Job Run Status (Last 60 Minutes)
+        print("\n[5] Checking Hourly Job Status (Last 60 Minutes)...")
         now_utc = datetime.now(timezone.utc)
         one_hour_ago = now_utc - timedelta(hours=1)
         

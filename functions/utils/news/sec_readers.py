@@ -42,7 +42,8 @@ def execute_reading_workers(
             
         return t_symbol, ticker_data
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=len(tickers_to_query)) as executor:
+    workers_limit = min(5, len(tickers_to_query)) if tickers_to_query else 1
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers_limit) as executor:
         results = executor.map(process_ticker, tickers_to_query)
         for t_symbol, ticker_data in results:
             indicators_report_data[t_symbol] = ticker_data

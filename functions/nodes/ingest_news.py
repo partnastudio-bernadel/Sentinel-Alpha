@@ -144,7 +144,7 @@ def ingest_news_node(state: SentimentState, config: RunnableConfig, store: BaseS
             return symbol, []
 
     # Submit tasks
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         # ETF top-level news
         fetch_tasks.append(executor.submit(fetch_news_wrapper, ticker, True))
         # Constituent news via Google RSS

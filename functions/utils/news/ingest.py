@@ -163,7 +163,8 @@ def fetch_and_decompose_holdings(ticker: str, holdings: int, limit: int, db) -> 
                 print(f"[-] Error processing constituent {c_ticker}: {ex}. Skipping.")
                 return []
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=len(constituents)) as executor:
+        workers_limit = min(5, len(constituents)) if constituents else 1
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers_limit) as executor:
             results = executor.map(process_constituent, constituents)
             for res in results:
                 all_articles.extend(res)

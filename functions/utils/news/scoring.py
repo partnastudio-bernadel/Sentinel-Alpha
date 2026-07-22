@@ -70,14 +70,20 @@ async def async_score_batch_with_retry(batch, scorer_agent, max_retries=5):
     print("[!] Max retries exceeded for async batch.")
     return None
 
-async def async_batch_score_articles_runner(all_articles: list, scorer_agent) -> tuple:
+async def async_batch_score_articles_runner(all_articles: list, scorer_agent, max_concurrency: int = 5) -> tuple:
     batch_size = 5
+    semaphore = asyncio.Semaphore(max_concurrency)
+    
+    async def bounded_score_batch(batch):
+        async with semaphore:
+            return await async_score_batch_with_retry(batch, scorer_agent)
+
     tasks = []
     
     for i in range(0, len(all_articles), batch_size):
         batch = all_articles[i:i + batch_size]
         print(f"[*] Async Batching scoring pipeline: scheduling articles {i+1} to {min(i+batch_size, len(all_articles))} of {len(all_articles)}")
-        tasks.append(async_score_batch_with_retry(batch, scorer_agent))
+        tasks.append(bounded_score_batch(batch))
         
     results = await asyncio.gather(*tasks)
     
